@@ -1,4 +1,4 @@
-package com.alexsei.beltamozhservisproject;
+package by.btslogistics.beltamozhservisproject;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

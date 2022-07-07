@@ -1,4 +1,4 @@
-package com.alexsei.beltamozhservisproject;
+package by.btslogistics.beltamozhservisproject;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
