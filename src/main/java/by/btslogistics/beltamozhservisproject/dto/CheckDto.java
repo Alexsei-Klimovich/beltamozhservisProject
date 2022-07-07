@@ -15,7 +15,7 @@ public class CheckDto {
     private Long toTagDocId;
     private String checkCode;
     private String checkDescription;
-    private String errorDesctription;
+    private String errorDescription;
     private LocalDateTime startCheckTime;
     private LocalDateTime endCheckTime;
 
