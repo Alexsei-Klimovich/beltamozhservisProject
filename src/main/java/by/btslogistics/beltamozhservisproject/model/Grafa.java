@@ -30,12 +30,15 @@ public class Grafa {
     /** Код типа документа, к которму относиться схема*/
     @Column(name = "id_form")
     private Long formId;
+
     /** Описание графы*/
     @Column(name = "name_grafa")
     private String nameGrafa;
+
     /** Описание поля*/
     @Column(name = "name_pole")
     private String namePole;
+
     /** Путь к полю*/
     @Column(name = "path_xml")
     private String pathXML;
