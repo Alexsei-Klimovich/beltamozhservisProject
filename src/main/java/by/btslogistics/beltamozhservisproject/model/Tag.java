@@ -28,7 +28,7 @@ public class Tag {
     private Long id;
 
     /** Уникальный идентификатор структуры*/
-    @Column(name = "to_strdoc_id")
+    @Column(name = "to_strdoc_id", insertable = false, updatable = false)
     private Long toStrdocId;
 
     /** Описание поля*/
