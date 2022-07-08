@@ -12,7 +12,7 @@ import javax.persistence.*;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "TAG_DOCUMENT")
+@Table(name = "tag_document")
 public class Tag {
 
     @Id
@@ -38,6 +38,6 @@ public class Tag {
     @Column(name = "pattern")
     private String pattern;
 
-    @Column(name = "pattern_id")
-    private Long patternId;
+    @Column(name = "parent_id")
+    private Long parentId;
 }
