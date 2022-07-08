@@ -5,6 +5,7 @@ import by.btslogistics.beltamozhservisproject.repository.TagRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.util.List;
 import java.util.Optional;
 
@@ -22,11 +23,11 @@ public class TagService {
     public Tag getTagById(Long tagId){
         return tagRepository.getById(tagId);
     }
-
+    @Transactional
     public void saveTag(Tag tag){
         tagRepository.save(tag);
     }
-
+    @Transactional
     public void updateTag(Tag tag){
         tagRepository.save(tag);
     }

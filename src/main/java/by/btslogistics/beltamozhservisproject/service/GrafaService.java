@@ -8,6 +8,7 @@ import by.btslogistics.beltamozhservisproject.repository.GrafaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.util.List;
 
 @Service
@@ -22,11 +23,11 @@ public class GrafaService {
     public Grafa getGrafaById (Long grafaId) {
         return grafaRepository.getById(grafaId);
     }
-
+    @Transactional
     public void saveGrafa(Grafa grafa) {
         grafaRepository.save(grafa);
     }
-
+    @Transactional
     public void updateGrafa(Grafa grafa) {
         grafaRepository.save(grafa);
     }

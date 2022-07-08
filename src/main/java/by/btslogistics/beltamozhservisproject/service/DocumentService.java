@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.print.Doc;
+import javax.transaction.Transactional;
 import java.util.List;
 
 @Service
@@ -21,11 +22,11 @@ public class DocumentService {
     public Document getDocumentById (Long documentId) {
         return documentRepository.getById(documentId);
     }
-
+    @Transactional
     public void saveDocument(Document document) {
         documentRepository.save(document);
     }
-
+    @Transactional
     public void updateDocument(Document document) {
         documentRepository.save(document);
     }

@@ -5,6 +5,7 @@ import by.btslogistics.beltamozhservisproject.repository.CheckRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.util.List;
 
 @Service
@@ -19,11 +20,11 @@ public class CheckService {
     public Check getCheckById (Long checkId) {
         return checkRepository.getById(checkId);
     }
-
+    @Transactional
     public void saveCheck(Check check) {
         checkRepository.save(check);
     }
-
+    @Transactional
     public void updateCheck(Check check) {
         checkRepository.save(check);
     }
