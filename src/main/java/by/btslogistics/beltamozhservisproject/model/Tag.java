@@ -6,7 +6,6 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
-import javax.print.Doc;
 import java.util.Set;
 
 @Getter
@@ -14,7 +13,7 @@ import java.util.Set;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "TAG_DOCUMENT")
+@Table(name = "tag_document")
 public class Tag {
 
     @Id
@@ -40,8 +39,8 @@ public class Tag {
     @Column(name = "pattern")
     private String pattern;
 
-    @Column(name = "pattern_id")
-    private Long patternId;
+    @Column(name = "parent_id")
+    private Long parentId;
 
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "tag", cascade = CascadeType.ALL)
     private Set<Check> checks;
