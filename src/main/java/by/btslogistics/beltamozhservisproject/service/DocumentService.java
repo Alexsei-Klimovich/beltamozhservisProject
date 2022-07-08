@@ -1,5 +1,6 @@
 package by.btslogistics.beltamozhservisproject.service;
 
+import by.btslogistics.beltamozhservisproject.exception.NotFoundException;
 import by.btslogistics.beltamozhservisproject.model.Check;
 import by.btslogistics.beltamozhservisproject.model.Document;
 import by.btslogistics.beltamozhservisproject.repository.DocumentRepository;
@@ -20,7 +21,7 @@ public class DocumentService {
     }
 
     public Document getDocumentById (Long documentId) {
-        return documentRepository.getById(documentId);
+        return documentRepository.findById(documentId).orElseThrow(NotFoundException::new);
     }
     @Transactional
     public void saveDocument(Document document) {

@@ -1,5 +1,6 @@
 package by.btslogistics.beltamozhservisproject.service;
 
+import by.btslogistics.beltamozhservisproject.exception.NotFoundException;
 import by.btslogistics.beltamozhservisproject.model.Tag;
 import by.btslogistics.beltamozhservisproject.repository.TagRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,7 +22,7 @@ public class TagService {
 
 
     public Tag getTagById(Long tagId){
-        return tagRepository.getById(tagId);
+        return tagRepository.findById(tagId).orElseThrow(NotFoundException::new);
     }
     @Transactional
     public void saveTag(Tag tag){
