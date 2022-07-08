@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.Set;
 
 @Getter
 @Setter
@@ -31,5 +32,17 @@ public class Grafa {
 
     @Column(name = "path_xml")
     private String pathXML;
+
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "check", cascade = CascadeType.ALL)
+    private Set<Check> checks = new java.util.LinkedHashSet<>();
+
+    public Set<Check> getChecks() {
+        return checks;
+    }
+
+    public void setChecks(Set<Check> checks) {
+        this.checks = checks;
+    }
+
 
 }

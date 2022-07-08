@@ -7,6 +7,7 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.Set;
 
 @Getter
 @Setter
@@ -42,4 +43,15 @@ public class Check {
     @Column(name = "d_off")
     private LocalDateTime endCheckTime;
 
+    @ManyToOne(cascade = CascadeType.ALL, optional = false)
+    @JoinColumn(name = "id", nullable = false)
+    private Check check;
+
+    public Check getCheck() {
+        return check;
+    }
+
+    public void setCheck(Check check) {
+        this.check = check;
+    }
 }
