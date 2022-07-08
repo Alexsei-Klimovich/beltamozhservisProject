@@ -6,6 +6,8 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import javax.print.Doc;
+import java.util.Set;
 
 @Getter
 @Setter
@@ -40,4 +42,11 @@ public class Tag {
 
     @Column(name = "pattern_id")
     private Long patternId;
+
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "tag", cascade = CascadeType.ALL)
+    private Set<Check> checks;
+
+    @ManyToOne(cascade = CascadeType.ALL, optional = false)
+    @JoinColumn(name = "to_strdoc_id", nullable = false)
+    private Document document;
 }

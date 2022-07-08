@@ -44,14 +44,12 @@ public class Check {
     private LocalDateTime endCheckTime;
 
     @ManyToOne(cascade = CascadeType.ALL, optional = false)
-    @JoinColumn(name = "id", nullable = false)
-    private Check check;
+    @JoinColumn(name = "id_grafa", nullable = false)
+    private Grafa grafa;
 
-    public Check getCheck() {
-        return check;
-    }
+    @ManyToOne(cascade = CascadeType.ALL, optional = false)
+    @JoinColumn(name = "to_tag_doc_id", nullable = false)
+    private Tag tag;
 
-    public void setCheck(Check check) {
-        this.check = check;
-    }
+
 }

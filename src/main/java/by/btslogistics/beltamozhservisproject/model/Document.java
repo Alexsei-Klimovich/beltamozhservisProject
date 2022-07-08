@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.Set;
 
 @Getter
 @Setter
@@ -31,4 +32,7 @@ public class Document {
 
     @Column(name = "schema_name")
     private String schemaName;
+
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "document", cascade = CascadeType.ALL)
+    private Set<Tag> tags;
 }

@@ -33,8 +33,8 @@ public class Grafa {
     @Column(name = "path_xml")
     private String pathXML;
 
-    @OneToMany(fetch = FetchType.EAGER, mappedBy = "check", cascade = CascadeType.ALL)
-    private Set<Check> checks = new java.util.LinkedHashSet<>();
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "grafa", cascade = CascadeType.ALL)
+    private Set<Check> checks;
 
     public Set<Check> getChecks() {
         return checks;
