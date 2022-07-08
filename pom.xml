@@ -47,6 +47,12 @@
             <artifactId>modelmapper</artifactId>
             <version>3.1.0</version>
         </dependency>
+        <!-- https://mvnrepository.com/artifact/org.apache.xmlbeans/xmlbeans -->
+        <dependency>
+            <groupId>org.apache.xmlbeans</groupId>
+            <artifactId>xmlbeans</artifactId>
+            <version>5.1.0</version>
+        </dependency>
 
     </dependencies>
 
