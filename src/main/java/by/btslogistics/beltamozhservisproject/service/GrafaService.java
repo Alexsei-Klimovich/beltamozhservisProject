@@ -1,5 +1,6 @@
 package by.btslogistics.beltamozhservisproject.service;
 
+import by.btslogistics.beltamozhservisproject.exception.NotFoundException;
 import by.btslogistics.beltamozhservisproject.model.Check;
 import by.btslogistics.beltamozhservisproject.model.Document;
 import by.btslogistics.beltamozhservisproject.model.Grafa;
@@ -21,7 +22,7 @@ public class GrafaService {
     }
 
     public Grafa getGrafaById (Long grafaId) {
-        return grafaRepository.getById(grafaId);
+        return grafaRepository.findById(grafaId).orElseThrow(NotFoundException::new);
     }
     @Transactional
     public void saveGrafa(Grafa grafa) {
