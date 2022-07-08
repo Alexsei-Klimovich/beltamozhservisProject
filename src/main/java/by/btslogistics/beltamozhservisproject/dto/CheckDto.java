@@ -6,7 +6,12 @@ import lombok.NoArgsConstructor;
 
 
 import java.time.LocalDateTime;
-
+/**
+ *
+ * @author Alexsei
+ * @author Yaroslav
+ *
+ */
 @Data
 @NoArgsConstructor
 @AllArgsConstructor

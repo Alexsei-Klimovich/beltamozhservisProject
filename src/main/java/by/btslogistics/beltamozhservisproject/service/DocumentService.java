@@ -10,7 +10,12 @@ import org.springframework.stereotype.Service;
 import javax.print.Doc;
 import javax.transaction.Transactional;
 import java.util.List;
-
+/**
+ *
+ * @author Alexsei
+ * @author Yaroslav
+ *
+ */
 @Service
 public class DocumentService {
     @Autowired

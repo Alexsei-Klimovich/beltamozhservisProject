@@ -9,9 +9,16 @@ import org.springframework.context.annotation.Bean;
 
 import static org.modelmapper.config.Configuration.AccessLevel.PRIVATE;
 
-
+/**
+ *
+ * @author Alexsei
+ * @author Yaroslav
+ *
+ */
 @SpringBootApplication
 public class BeltamozhservisProjectApplication {
+
+    //TODO: REPLACE THIS
     @Bean
     public ModelMapper modelMapper() {
         ModelMapper mapper = new ModelMapper();
