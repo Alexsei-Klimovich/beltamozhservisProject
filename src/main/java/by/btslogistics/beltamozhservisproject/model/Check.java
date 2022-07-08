@@ -53,7 +53,7 @@ public class Check {
     @Column(name = "d_off")
     private LocalDateTime endCheckTime;
 
-/**    Связь с таблицей "TAG_DOCUMENT" */
+/**    Связь с таблицей "FLK_GRAFA" */
     @ManyToOne(cascade = CascadeType.ALL, optional = false)
     @JoinColumn(name = "id_grafa", nullable = false)
     private Grafa grafa;
