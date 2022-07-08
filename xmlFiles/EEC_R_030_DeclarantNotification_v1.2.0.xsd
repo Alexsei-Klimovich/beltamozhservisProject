@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:cdf="urn:EEC:R:030:DeclarantNotification:v1.2.0"
+           xmlns:cat_ru="urn:EEC:M:CommonAggregateTypes:vbts3" xmlns:cacdo="urn:EEC:M:CA:ComplexDataObjects:vbts1"
+           xmlns:casdo="urn:EEC:M:CA:SimpleDataObjects:vbts2" xmlns:ccdo="urn:EEC:M:ComplexDataObjects:vbts4"
+           xmlns:csdo="urn:EEC:M:SimpleDataObjects:vbts5" targetNamespace="urn:EEC:R:030:DeclarantNotification:v1.2.0"
+           elementFormDefault="qualified" version="1.2.0">
+    <xs:import namespace="urn:EEC:M:CA:ComplexDataObjects:vbts1"
+               schemaLocation="EEC_M_CA_ComplexDataObjects_vbts1.xsd"/>
+    <xs:import namespace="urn:EEC:M:CA:SimpleDataObjects:vbts2" schemaLocation="EEC_M_CA_SimpleDataObjects_vbts2.xsd"/>
+    <xs:import namespace="urn:EEC:M:ComplexDataObjects:vbts4" schemaLocation="EEC_M_ComplexDataObjects_vbts4.xsd"/>
+    <xs:import namespace="urn:EEC:M:SimpleDataObjects:vbts5" schemaLocation="EEC_M_SimpleDataObjects_vbts5.xsd"/>
+    <xs:import namespace="urn:EEC:M:CommonAggregateTypes:vbts3" schemaLocation="EEC_M_CommonAggregateTypes_vbts3.xsd"/>
+    <!-- Декларация на товары и транзитная декларация -->
+    <!-- R.036: Декларация на товары и транзитная декларация (Декларация на товары и транзитная декларация) -->
+    <xs:element name="DeclarantNotification" type="cdf:DeclarantNotificationType">
+        <xs:annotation>
+            <xs:documentation>Сведения из уведомления об отсутствии необходимости внесения изменений (дополнений) в
+                сведения, заявленные в таможенной декларации, поданной при предварительном таможенном декларировании
+                товаров
+            </xs:documentation>
+        </xs:annotation>
+    </xs:element>
+    <!-- R.036.CDT: Декларация на товары и транзитная декларация (Декларация на товары и транзитная декларация_ Детали. Тип) -->
+    <xs:complexType name="DeclarantNotificationType">
+        <xs:annotation>
+            <xs:documentation>Сведения из уведомления об отсутствии необходимости внесения изменений (дополнений) в
+                сведения, заявленные в таможенной декларации, поданной при предварительном таможенном декларировании
+                товаров
+            </xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element ref="cat_ru:DocumentID"/>
+            <xs:element ref="csdo:EDocDateTime"/>
+            <xs:element ref="csdo:EDocRefId" minOccurs="0"/>
+            <xs:element ref="cacdo:CustomsDeclarationIdDetails"/>
+            <xs:element ref="cacdo:CustomsUVRIdDetails" maxOccurs="unbounded"/>
+            <xs:element ref="cacdo:DeclarantDetails"/>
+            <xs:element ref="cacdo:SignatoryPersonV2Details"/>
+        </xs:sequence>
+        <xs:attribute name="ID">
+            <xs:simpleType>
+                <xs:restriction base="xs:string">
+                    <xs:length value="36"/>
+                </xs:restriction>
+            </xs:simpleType>
+        </xs:attribute>
+    </xs:complexType>
+</xs:schema>

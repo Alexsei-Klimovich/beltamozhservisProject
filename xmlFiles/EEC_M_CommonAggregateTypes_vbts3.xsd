@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:cat_ru="urn:EEC:M:CommonAggregateTypes:vbts3"
+           xmlns:bdt="urn:EEC:M:BaseDataTypes:vbts6" targetNamespace="urn:EEC:M:CommonAggregateTypes:vbts3"
+           elementFormDefault="qualified" version="0.4.11">
+    <xs:import namespace="urn:EEC:M:BaseDataTypes:vbts6" schemaLocation="EEC_M_BaseDataTypes_vbts6.xsd"/>
+    <!-- M.SDE.00278: Аббревиатура (Аббревиатура. Имя) -->
+    <xs:element name="DocumentID" type="xs:string">
+        <xs:annotation>
+            <xs:documentation>Идентификатор электронного документа (сведений)</xs:documentation>
+        </xs:annotation>
+    </xs:element>
+</xs:schema>
