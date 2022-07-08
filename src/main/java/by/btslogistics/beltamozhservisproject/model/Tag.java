@@ -27,24 +27,31 @@ public class Tag {
     @Column(name = "id")
     private Long id;
 
+    /** Уникальный идентификатор структуры*/
     @Column(name = "to_strdoc_id")
     private Long toStrdocId;
 
+    /** Описание поля*/
     @Column(name = "node_name")
     private Long nodeName;
 
+    /** Путь к полю*/
     @Column(name = "node_path")
     private String nodePath;
 
+    /** Описание поля родительского тега*/
     @Column(name = "parent_name")
     private String parentName;
 
+    /** Путь к родительскому полю*/
     @Column(name = "parent_path")
     private String parentPath;
 
+    /** Паттерн*/
     @Column(name = "pattern")
     private String pattern;
 
+    /** Id родительского поля*/
     @Column(name = "parent_id")
     private Long parentId;
 
