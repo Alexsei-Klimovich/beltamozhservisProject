@@ -20,7 +20,6 @@ create table FLK_GRAFA (
                            NAME_GRAFA varchar(300) not null,
                            NAME_POLE varchar(300) not null,
                            PATH_XML varchar(500) not null,
-                           foreign key (ID) references FLK_CHECKS(ID_GRAFA) on DELETE cascade
 );
 
 create table TAG_DOCUMENT (
@@ -32,7 +31,6 @@ create table TAG_DOCUMENT (
                               PARENT_PATH varchar(700),
                               PATTERN varchar(255),
                               PARENT_ID numeric(19),
-                              foreign key (ID) references FLK_CHECKS(TO_TAG_DOC_ID) on delete cascade
 );
 
 create table STRUCTURE_DOCUMENT (
@@ -41,5 +39,16 @@ create table STRUCTURE_DOCUMENT (
                                     ROOT_ELEMENT varchar(700) not null,
                                     SCHEMA_VERSION varchar(50) not null,
                                     SCHEMA_NAME varchar(50) not null,
-                                    foreign key (ID) references TAG_DOCUMENT(TO_STRDOC_ID) on delete cascade
 );
+
+ALTER table FLK_CHECKS  ADD constraint FK_CHECKS_GRAFA_ID foreign key (ID_GRAFA)
+      references FLK_GRAFA (ID)
+ on DELETE cascade;
+
+ALTER table FLK_CHECKS  ADD constraint FK_CHECKS_TAG_ID foreign key (TO_TAG_DOC_ID)
+      references TAG_DOCUMENT (ID)
+ on DELETE cascade;
+
+ALTER table TAG_DOCUMENT  ADD constraint FK_TO_STRDOC_ID foreign key (TO_STRDOC_ID)
+      references STRUCTURE_DOCUMENT (ID)
+ on DELETE cascade;
