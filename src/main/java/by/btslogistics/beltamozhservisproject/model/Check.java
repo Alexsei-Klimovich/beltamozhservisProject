@@ -27,10 +27,10 @@ public class Check {
     @Column(name = "id")
     private Long id;
 
-    @Column(name = "id_grafa")
+    @Column(name = "id_grafa", insertable = false, updatable = false)
     private Long grafaId;
 
-    @Column(name = "to_tag_doc_id")
+    @Column(name = "to_tag_doc_id", insertable = false, updatable = false)
     private Long toTagDocId;
 
 /**    Код проверки */
