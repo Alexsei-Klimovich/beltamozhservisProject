@@ -1,6 +1,10 @@
 package by.btslogistics.beltamozhservisproject.parser.excel;
 
+import by.btslogistics.beltamozhservisproject.model.Check;
+import by.btslogistics.beltamozhservisproject.model.Grafa;
+import by.btslogistics.beltamozhservisproject.service.CheckService;
 import by.btslogistics.beltamozhservisproject.service.ExcelService;
+import by.btslogistics.beltamozhservisproject.service.GrafaService;
 import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.ss.usermodel.Cell;
@@ -11,8 +15,6 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.IOException;
 import java.util.Iterator;
 
 public class ExcelParse {
@@ -30,10 +32,10 @@ public class ExcelParse {
                 Row row = rowIterator.next();
 
                 Iterator<Cell> cellIterator = row.cellIterator();
-
+                ExcelService excelService = new ExcelService();
                 while (cellIterator.hasNext()) {
                     Cell cell = cellIterator.next();
-                    ExcelService excelService = new ExcelService();
+
                     if (cell.getRowIndex() > 0) {
                         excelService.setToBase(cell, cell.getColumnIndex());
                     }
