@@ -13,28 +13,28 @@ create table FLK_CHECKS (
                             ID numeric(19) PRIMARY KEY,
                             ID_GRAFA numeric(19) not null,
                             TO_TAG_DOC_ID numeric(19) not null,
-                            CODE_CHECK varchar(25) not null,
-                            DESCRIPTION_CHECK varchar(700) not null,
-                            DESCRIPTION_ERROR varchar(600) not null,
-                            D_ON date not null,
-                            D_OFF date not null
+                            CODE_CHECK varchar(25) ,
+                            DESCRIPTION_CHECK varchar(700) ,
+                            DESCRIPTION_ERROR varchar(600) ,
+                            D_ON date ,
+                            D_OFF date
 );
 
 create sequence if not exists seq_flk_grafa start 100000;
 create table FLK_GRAFA (
                            ID numeric(19) primary key,
-                           ID_FORM numeric(20) not null,
-                           NAME_GRAFA varchar(300) not null,
-                           NAME_POLE varchar(300) not null,
-                           PATH_XML varchar(500) not null
+                           ID_FORM numeric(20),
+                           NAME_GRAFA varchar(300) ,
+                           NAME_POLE varchar(300) ,
+                           PATH_XML varchar(500)
 );
 
 create sequence if not exists seq_tag_document start 100000;
 create table TAG_DOCUMENT (
                               ID numeric(19) primary key,
                               TO_STRDOC_ID numeric(19) not null,
-                              NODE_NAME varchar(700) not null,
-                              NODE_PATH varchar(700) not null,
+                              NODE_NAME varchar(700) ,
+                              NODE_PATH varchar(700) ,
                               PARENT_NAME varchar(700),
                               PARENT_PATH varchar(700),
                               PATTERN varchar(255),
@@ -44,10 +44,10 @@ create table TAG_DOCUMENT (
 create sequence if not exists seq_structure_document start 100000;
 create table STRUCTURE_DOCUMENT (
                                     ID numeric(19) primary key,
-                                    SCHEMA_LOCATION varchar(700) not null,
-                                    ROOT_ELEMENT varchar(700) not null,
-                                    SCHEMA_VERSION varchar(50) not null,
-                                    SCHEMA_NAME varchar(50) not null
+                                    SCHEMA_LOCATION varchar(700) ,
+                                    ROOT_ELEMENT varchar(700) ,
+                                    SCHEMA_VERSION varchar(50) ,
+                                    SCHEMA_NAME varchar(50)
 );
 
 ALTER TABLE FLK_CHECKS ALTER COLUMN ID SET DEFAULT nextval('seq_flk_checks');
