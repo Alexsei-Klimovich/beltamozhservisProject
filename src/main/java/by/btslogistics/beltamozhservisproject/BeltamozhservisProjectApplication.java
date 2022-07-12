@@ -1,5 +1,6 @@
 package by.btslogistics.beltamozhservisproject;
 
+import by.btslogistics.beltamozhservisproject.excelParse.ExcelParse;
 import by.btslogistics.beltamozhservisproject.parser.xsd.XsdParser;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.convention.MatchingStrategies;
@@ -33,6 +34,8 @@ public class BeltamozhservisProjectApplication {
 
     public static void main(String[] args) {
         SpringApplication.run(BeltamozhservisProjectApplication.class, args);
+        ExcelParse excelParse = new ExcelParse();
+        excelParse.excelParse();
         XsdParser.parseXsd();
     }
 
