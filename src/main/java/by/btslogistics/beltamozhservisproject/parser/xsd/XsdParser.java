@@ -13,13 +13,13 @@ import java.io.IOException;
 
 public class XsdParser {
 
-    private static final String FILE_NAME = "EEC_M_CA_SimpleDataObjects_vbts2.xsd";
 
-    public static void parseXsd(){
+
+    public static void parseXsd(File file){
         try {
             DocumentBuilderFactory docBuilderFactory = DocumentBuilderFactory.newInstance();
             DocumentBuilder docBuilder = docBuilderFactory.newDocumentBuilder();
-            Document doc = docBuilder.parse (new File(FILE_NAME));
+            Document doc = docBuilder.parse(file);
             printXsdInfo(doc);
 
         }
