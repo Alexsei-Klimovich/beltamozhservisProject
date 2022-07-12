@@ -1,5 +1,6 @@
 package by.btslogistics.beltamozhservisproject.excelParse;
 
+import by.btslogistics.beltamozhservisproject.service.ExcelService;
 import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.ss.usermodel.Cell;
@@ -16,21 +17,12 @@ import java.util.Iterator;
 
 public class ExcelParse {
 
-    public static void excelParse() {
-        FileInputStream inputStream;
-        XSSFSheet sheet;
-        {
-            try {
-                inputStream = new FileInputStream(
-                        new File("excelFiles/Справочник_ФЛК_УПДТ.xlsx"));
-                XSSFWorkbook workbook = new XSSFWorkbook(inputStream);
-                sheet = workbook.getSheetAt(0);
-
-            } catch (FileNotFoundException e) {
-                throw new RuntimeException(e);
-            } catch (IOException e) {
-                throw new RuntimeException(e);
-            }
+    public void excelParse() {
+         try {
+            FileInputStream inputStream = new FileInputStream(
+                   new File("excelFiles/Справочник_ФЛК_УПДТ.xlsx"));
+            XSSFWorkbook workbook = new XSSFWorkbook(inputStream);
+            XSSFSheet sheet = workbook.getSheetAt(0);
 
             Iterator<Row> rowIterator = sheet.iterator();
 
@@ -41,9 +33,11 @@ public class ExcelParse {
 
                 while (cellIterator.hasNext()) {
                     Cell cell = cellIterator.next();
-
+                    ExcelService excelService = new ExcelService();
+                    if (cell.getRowIndex() > 0) {
+                        excelService.setToBase(cell, cell.getColumnIndex());
+                    }
                     CellType cellType = cell.getCellType();
-
                     switch (cellType) {
                         case _NONE:
                             System.out.print("" + "\t");
@@ -69,9 +63,8 @@ public class ExcelParse {
                 }
                 System.out.println("");
             }
-        }
+        } catch (Exception e) {
+             e.printStackTrace();
+         }
     }
-
-
-
 }
