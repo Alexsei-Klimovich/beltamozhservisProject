@@ -32,8 +32,6 @@ public class ExcelParse {
                 Row row = rowIterator.next();
 
                 Iterator<Cell> cellIterator = row.cellIterator();
-                CheckService checkService = new CheckService();
-                GrafaService grafaService = new GrafaService();
                 ExcelService excelService = new ExcelService();
                 while (cellIterator.hasNext()) {
                     Cell cell = cellIterator.next();
