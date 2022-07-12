@@ -1,4 +1,4 @@
-package by.btslogistics.beltamozhservisproject.excelParser;
+package by.btslogistics.beltamozhservisproject.parser.excel;
 
 import by.btslogistics.beltamozhservisproject.model.Check;
 import by.btslogistics.beltamozhservisproject.model.Grafa;
