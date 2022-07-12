@@ -1,6 +1,6 @@
 package by.btslogistics.beltamozhservisproject;
 
-import by.btslogistics.beltamozhservisproject.excelParse.ExcelParse;
+import by.btslogistics.beltamozhservisproject.excelParser.ExcelParse;
 import by.btslogistics.beltamozhservisproject.parser.xsd.XsdParser;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.convention.MatchingStrategies;

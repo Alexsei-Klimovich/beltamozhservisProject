@@ -1,4 +1,4 @@
-package by.btslogistics.beltamozhservisproject.excelParse;
+package by.btslogistics.beltamozhservisproject.excelParser;
 
 import by.btslogistics.beltamozhservisproject.service.ExcelService;
 import org.apache.poi.hssf.usermodel.HSSFSheet;
@@ -11,8 +11,6 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.IOException;
 import java.util.Iterator;
 
 public class ExcelParse {
