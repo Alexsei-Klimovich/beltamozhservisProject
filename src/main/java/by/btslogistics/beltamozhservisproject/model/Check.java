@@ -35,7 +35,7 @@ public class Check {
 
 /**    Код проверки */
     @Column(name = "code_check")
-    private String checkCode;
+    private String checkCode ;
 
 /**    Описание проверки */
     @Column(name = "description_check")
@@ -56,12 +56,12 @@ public class Check {
 /**    Связь с таблицей "FLK_GRAFA" */
     @ManyToOne(cascade = CascadeType.ALL, optional = false)
     @JoinColumn(name = "id_grafa", nullable = false)
-    private Grafa grafa;
+    private Grafa grafa = new Grafa();
 
 /**   Связь с таблицей "TAG_DOCUMENT" */
     @ManyToOne(cascade = CascadeType.ALL, optional = false)
     @JoinColumn(name = "to_tag_doc_id", nullable = false)
-    private Tag tag;
+    private Tag tag = new Tag();
 
 
 }

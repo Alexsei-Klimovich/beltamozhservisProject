@@ -6,6 +6,8 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Set;
 /**
  *
@@ -33,15 +35,15 @@ public class Tag {
 
     /** Описание поля*/
     @Column(name = "node_name")
-    private Long nodeName;
+    private String nodeName;
 
     /** Путь к полю*/
     @Column(name = "node_path")
-    private String nodePath;
+    private String nodePath ;
 
     /** Описание поля родительского тега*/
     @Column(name = "parent_name")
-    private String parentName;
+    private String parentName ;
 
     /** Путь к родительскому полю*/
     @Column(name = "parent_path")
@@ -56,9 +58,14 @@ public class Tag {
     private Long parentId;
 
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "tag", cascade = CascadeType.ALL)
-    private Set<Check> checks;
+    private List<Check> checks = new ArrayList<>();
+
+    public void addCheck(Check check){
+        checks.add(check);
+        check.setTag(this);
+    }
 
     @ManyToOne(cascade = CascadeType.ALL, optional = false)
     @JoinColumn(name = "to_strdoc_id", nullable = false)
-    private Document document;
+    private Document document = new Document();
 }

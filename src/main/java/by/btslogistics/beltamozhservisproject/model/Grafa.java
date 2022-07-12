@@ -6,6 +6,8 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Set;
 /**
  *
@@ -33,7 +35,7 @@ public class Grafa {
 
     /** Описание графы*/
     @Column(name = "name_grafa")
-    private String nameGrafa;
+    private String nameGrafa ;
 
     /** Описание поля*/
     @Column(name = "name_pole")
@@ -44,6 +46,12 @@ public class Grafa {
     private String pathXML;
 
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "grafa", cascade = CascadeType.ALL)
-    private Set<Check> checks;
+    private List<Check> checks = new ArrayList<>();
+
+    public void addCheck(Check check){
+        checks.add(check);
+        check.setGrafa(this);
+        check.setGrafaId(this.id);
+    }
 
 }
