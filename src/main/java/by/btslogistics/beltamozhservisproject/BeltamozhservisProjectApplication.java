@@ -33,7 +33,8 @@ public class BeltamozhservisProjectApplication {
 
     public static void main(String[] args) {
         SpringApplication.run(BeltamozhservisProjectApplication.class, args);
-        ExcelParse.excelParse();
+        ExcelParse excelParse = new ExcelParse();
+        excelParse.excelParse();
     }
 
 }
