@@ -46,8 +46,9 @@ public class BeltamozhservisProjectApplication {
     public static void main(String[] args) {
         SpringApplication.run(BeltamozhservisProjectApplication.class, args);
         ExcelParse excelParse = new ExcelParse();
-        excelParse.excelParse();
-        XsdParser.parseXsd();
+        //
+        // excelParse.parseExcelFile();
+        //XsdParser.parseXsd();
     }
 
 }

@@ -17,7 +17,7 @@ import java.util.List;
 @Service
 public class CheckService {
     @Autowired
-    private CheckRepository checkRepository;
+    CheckRepository checkRepository;
 
     public void deleteCheckById(Long checkId) {
         checkRepository.deleteById(checkId);
