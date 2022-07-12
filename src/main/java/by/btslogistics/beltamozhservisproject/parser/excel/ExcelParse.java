@@ -1,4 +1,4 @@
-package by.btslogistics.beltamozhservisproject.excelParser;
+package by.btslogistics.beltamozhservisproject.parser.excel;
 
 import by.btslogistics.beltamozhservisproject.service.ExcelService;
 import org.apache.poi.hssf.usermodel.HSSFSheet;
