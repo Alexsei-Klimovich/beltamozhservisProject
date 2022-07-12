@@ -4,10 +4,15 @@ import by.btslogistics.beltamozhservisproject.model.Check;
 import by.btslogistics.beltamozhservisproject.model.Grafa;
 import org.apache.poi.ss.usermodel.Cell;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class ExcelService {
     public void setToBase(Cell cell, int row) {
         Check check = new Check();
         Grafa grafa = new Grafa();
+        CheckService checkService = new CheckService();
+        GrafaService grafaService = new GrafaService();
         switch (row) {
             case 0:
                 check.setId((long) cell.getNumericCellValue());
@@ -33,6 +38,8 @@ public class ExcelService {
                 grafa.setId((long) cell.getNumericCellValue());
                 break;
             case 8:
+                checkService.saveCheck(check);
+                grafaService.saveGrafa(grafa);
                 break;
         }
     }
