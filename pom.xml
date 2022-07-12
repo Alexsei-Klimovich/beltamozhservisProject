@@ -47,7 +47,6 @@
             <artifactId>modelmapper</artifactId>
             <version>3.1.0</version>
         </dependency>
- excel_parser
         <!-- https://mvnrepository.com/artifact/org.apache.xmlbeans/xmlbeans -->
         <dependency>
             <groupId>org.apache.xmlbeans</groupId>
