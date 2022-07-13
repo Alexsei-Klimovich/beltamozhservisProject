@@ -32,7 +32,7 @@ ExcelService excelParse;
         for (String l : splitedOriginalName) {
             System.out.println(l);
         }
-        String fileType = splitedOriginalName.get(1);
+        String fileType = splitedOriginalName.get(0);
         if (fileType.equals("xlsx")) {
             File newFile = File.createTempFile("data1-",".xlsx");
             multipartFile.transferTo(newFile);
