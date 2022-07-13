@@ -13,15 +13,14 @@ import org.springframework.web.multipart.MultipartFile;
 import javax.persistence.criteria.CriteriaBuilder;
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 
 import static by.btslogistics.beltamozhservisproject.service.ExcelService.excelParse;
 
 @RestController
 public class FileUploadController {
-@Autowired
-ExcelService excelParse;
+    @Autowired
+    ExcelService excelParse;
 
 
     @PostMapping("/upload")

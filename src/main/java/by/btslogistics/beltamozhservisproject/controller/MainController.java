@@ -2,7 +2,7 @@ package by.btslogistics.beltamozhservisproject.controller;
 
 import by.btslogistics.beltamozhservisproject.model.Check;
 import by.btslogistics.beltamozhservisproject.model.Grafa;
-import by.btslogistics.beltamozhservisproject.parser.excel.ExcelParse;
+
 import by.btslogistics.beltamozhservisproject.service.CheckService;
 import by.btslogistics.beltamozhservisproject.service.ExcelService;
 import by.btslogistics.beltamozhservisproject.service.GrafaService;
@@ -24,7 +24,7 @@ public class MainController {
     @GetMapping("/")
     public String test(){
 
-       excelService.saveParsedRows(ExcelParse.excelParse());
+
 
 
         return "hello";
