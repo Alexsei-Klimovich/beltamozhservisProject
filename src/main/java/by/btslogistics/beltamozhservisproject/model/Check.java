@@ -23,7 +23,10 @@ import java.util.Set;
 public class Check {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @SequenceGenerator(name = "seq_flk_checks",
+            sequenceName = "seq_flk_checks",
+            initialValue = 1, allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seq_flk_checks")
     @Column(name = "id")
     private Long id;
 

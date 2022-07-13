@@ -25,7 +25,10 @@ import java.util.Set;
 public class Tag {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @SequenceGenerator(name = "seq_tag_document",
+            sequenceName = "seq_tag_document",
+            initialValue = 1, allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seq_tag_document")
     @Column(name = "id")
     private Long id;
 

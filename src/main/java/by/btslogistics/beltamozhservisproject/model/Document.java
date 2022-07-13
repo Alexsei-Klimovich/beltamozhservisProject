@@ -24,7 +24,10 @@ import java.util.Set;
 public class Document {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @SequenceGenerator(name = "seq_structure_document",
+            sequenceName = "seq_structure_document",
+            initialValue = 1, allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seq_structure_document")
     @Column(name = "id")
     private Long id;
 
