@@ -1,24 +1,21 @@
 package by.btslogistics.beltamozhservisproject.parser.excel;
 
-import by.btslogistics.beltamozhservisproject.service.ExcelService;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.CellType;
 import org.apache.poi.ss.usermodel.Row;
-import org.apache.poi.xssf.usermodel.XSSFRow;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.springframework.stereotype.Component;
 
 import java.io.File;
 import java.io.FileInputStream;
+import java.util.ArrayList;
 import java.util.Iterator;
-import java.util.Map;
-import java.util.stream.Stream;
+import java.util.List;
 
 @Component
 public class ExcelParse {
-    Map<Integer, String> excelMap;
-
+    List<Cell> list = new ArrayList<>();
     public void parseExcelFile() {
         try {
             FileInputStream inputStream = new FileInputStream(
@@ -28,30 +25,34 @@ public class ExcelParse {
             Iterator<Row> rowIterator = sheet.iterator();
             System.out.println("Physical: " + sheet.getPhysicalNumberOfRows());
             System.out.println("Just last: " + sheet.getLastRowNum());
-                while (rowIterator.hasNext()) {
-                    Row row = rowIterator.next();
-                    Iterator<Cell> cellIterator = row.cellIterator();
-                    Cell cell;
-                    while (cellIterator.hasNext()) {
-                        cell = cellIterator.next();
-                        CellType cellType = cell.getCellType();
-                        switch (cellType) {
-                            case _NONE:
-                                System.out.print("" + "\t");
-                                break;
-                            case NUMERIC:
-                                System.out.print(cell.getNumericCellValue() + "\t");
-                                break;
-                            case STRING:
-                                System.out.print(cell.getStringCellValue() + "\t");
-                                break;
-                            }
-                        }
-                    System.out.println("");
+            while (rowIterator.hasNext()) {
+                Row row = rowIterator.next();
+                Iterator<Cell> cellIterator = row.cellIterator();
+                Cell cell;
+
+                while (cellIterator.hasNext()) {
+                    cell = cellIterator.next();
+                    CellType cellType = cell.getCellType();
+                    list.add(cell);
+                    switch (cellType) {
+                        case _NONE:
+                            break;
+                        case NUMERIC:
+                            System.out.print(cell.getNumericCellValue() + "\t");
+                            break;
+                        case STRING:
+                            System.out.print(cell.getStringCellValue() + "\t");
+                            break;
+
                     }
+                }
+                System.out.println("");
+            }
+            for (Cell ls : list) {
+                System.out.println(ls);
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
-
 }
