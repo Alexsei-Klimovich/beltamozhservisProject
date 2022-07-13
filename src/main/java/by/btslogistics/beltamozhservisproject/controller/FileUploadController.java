@@ -33,7 +33,7 @@ public class FileUploadController {
         }
         String fileType = splitedOriginalName.get(0);
         if (fileType.equals("xlsx")) {
-            File newFile = File.createTempFile("data1-",".xlsx");
+            File newFile = File.createTempFile("data-",".xlsx");
             multipartFile.transferTo(newFile);
             excelParse.saveParsedRows(excelParse(newFile)); // parsing xlsx file and saving to BD
             newFile.deleteOnExit();
