@@ -25,7 +25,10 @@ import java.util.Set;
 public class Grafa {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @SequenceGenerator(name = "seq_flk_grafa",
+            sequenceName = "seq_flk_grafa",
+            initialValue = 1, allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator ="seq_flk_grafa" )
     @Column(name = "id")
     private Long id;
 
