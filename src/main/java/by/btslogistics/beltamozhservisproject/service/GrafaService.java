@@ -22,6 +22,10 @@ public class GrafaService {
     @Autowired
     private GrafaRepository grafaRepository;
 
+    public Grafa getGrafaByPathXml(String pathXml){
+        return grafaRepository.getGrafaByPathXML(pathXml);
+    }
+
     public void deleteGrafaById(Long grafaId) {
         grafaRepository.deleteById(grafaId);
     }

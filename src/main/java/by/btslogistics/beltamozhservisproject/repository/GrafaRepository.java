@@ -11,5 +11,5 @@ import org.springframework.stereotype.Repository;
  */
 @Repository
 public interface GrafaRepository extends JpaRepository<Grafa, Long> {
-
+    Grafa getGrafaByPathXML(String pathXml);
 }

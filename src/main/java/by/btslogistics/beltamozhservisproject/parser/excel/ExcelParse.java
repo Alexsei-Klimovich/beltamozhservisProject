@@ -15,58 +15,45 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 import java.io.File;
 import java.io.FileInputStream;
+import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.List;
 
 public class ExcelParse {
 
-    public void excelParse() {
+    public static List<String> excelParse() {
+        List<String> parsedRows = new ArrayList<>();
+
          try {
             FileInputStream inputStream = new FileInputStream(
-                   new File("excelFiles/Справочник_ФЛК_УПДТ.xlsx"));
+                    "excelFiles/Справочник_ФЛК_УПДТ.xlsx");
             XSSFWorkbook workbook = new XSSFWorkbook(inputStream);
             XSSFSheet sheet = workbook.getSheetAt(0);
 
-            Iterator<Row> rowIterator = sheet.iterator();
+             for (Row row : sheet) {
+                 StringBuilder result = new StringBuilder();
+                 Iterator<Cell> cellIterator = row.cellIterator();
+                 while (cellIterator.hasNext()) {
+                     Cell cell = cellIterator.next();
+                     CellType cellType = cell.getCellType();
+                     switch (cellType) {
+                         case NUMERIC:
+                             result.append(cell.getNumericCellValue()).append("/split/");
+                             break;
+                         case STRING:
+                             result.append(cell.getStringCellValue()).append("/split/");
+                             break;
+                     }
+                 }
+                 if(result.toString().length()>0){
+                     parsedRows.add(result.toString());
+                 }
+             }
 
-            while (rowIterator.hasNext()) {
-                Row row = rowIterator.next();
-
-                Iterator<Cell> cellIterator = row.cellIterator();
-                ExcelService excelService = new ExcelService();
-                while (cellIterator.hasNext()) {
-                    Cell cell = cellIterator.next();
-
-                    if (cell.getRowIndex() > 0) {
-                        excelService.setToBase(cell, cell.getColumnIndex());
-                    }
-                    CellType cellType = cell.getCellType();
-                    switch (cellType) {
-                        case _NONE:
-                            System.out.print("" + "\t");
-                            break;
-                        case BLANK:
-                            System.out.print("" + "\t");
-                            break;
-                        case BOOLEAN:
-                            System.out.print(cell.getBooleanCellValue() + "\t");
-                            break;
-                        case  ERROR:
-                            System.out.print("error" + "\t");
-                            break;
-                        case FORMULA:
-                            System.out.print(cell.getCellFormula() + "\t");
-                            break;
-                        case NUMERIC:
-                            System.out.print(cell.getNumericCellValue() + "\t");
-                            break;
-                        case STRING:
-                            System.out.print(cell.getStringCellValue() + "\t");
-                    }
-                }
-                System.out.println("");
-            }
         } catch (Exception e) {
              e.printStackTrace();
          }
+         return parsedRows;
     }
+
 }

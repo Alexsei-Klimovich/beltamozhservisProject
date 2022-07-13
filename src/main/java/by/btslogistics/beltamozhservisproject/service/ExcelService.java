@@ -3,44 +3,38 @@ package by.btslogistics.beltamozhservisproject.service;
 import by.btslogistics.beltamozhservisproject.model.Check;
 import by.btslogistics.beltamozhservisproject.model.Grafa;
 import org.apache.poi.ss.usermodel.Cell;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
-
+@Service
 public class ExcelService {
-    public void setToBase(Cell cell, int row) {
-        Check check = new Check();
-        Grafa grafa = new Grafa();
-        CheckService checkService = new CheckService();
-        GrafaService grafaService = new GrafaService();
-        switch (row) {
-            case 0:
-                check.setId((long) cell.getNumericCellValue());
-                break;
-            case 1:
-                grafa.setPathXML(cell.getStringCellValue());
-                break;
-            case 2:
-                check.setCheckCode(cell.getStringCellValue());
-                break;
-            case 3:
-                check.setCheckDescription(cell.getStringCellValue());
-                break;
-            case 4:
-                check.setErrorDescription(cell.getStringCellValue());
-                break;
-            case 5:
-                break;
-            case 6:
-                break;
-            case 7:
-                check.setGrafaId((long) cell.getNumericCellValue());
-                grafa.setId((long) cell.getNumericCellValue());
-                break;
-            case 8:
-                checkService.saveCheck(check);
-                grafaService.saveGrafa(grafa);
-                break;
-        }
-    }
+
+    @Autowired
+    CheckService checkService;
+
+    @Autowired
+    GrafaService grafaService;
+
+   public void saveParsedRows(List<String> parsedRows){
+
+       for (int i = 1; i<parsedRows.size()-1;i++){
+           List<String> splitString = List.of(parsedRows.get(i).split("/split/"));
+
+           Check check = new Check();
+           Grafa grafa = new Grafa();
+           grafa.setPathXML(splitString.get(1));
+           check.setGrafa(grafa);
+           //Grafa grafa = new Grafa();
+           //
+           //grafaService.saveGrafa(grafa);
+           check.setCheckCode(splitString.get(2));
+           check.setCheckDescription(splitString.get(3));
+           check.setErrorDescription(splitString.get(4));
+           //check.setGrafaId(grafaService.getGrafaByPathXml(grafa.getPathXML()).getId());
+           checkService.saveCheck(check);
+       }
+
+   }
 }
