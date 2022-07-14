@@ -29,7 +29,7 @@ public class FileUploadController {
             System.out.println("File is NULL");
         } else {
             fileUploadService.fileUpload(multipartFile);
-        };
+        }
         return String.format("File %s file uploaded", multipartFile.getOriginalFilename());
     }
 }
