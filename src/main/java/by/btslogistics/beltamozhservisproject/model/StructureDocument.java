@@ -8,7 +8,7 @@ import lombok.Setter;
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
+
 /**
  *
  * @author Alexsei
@@ -21,7 +21,7 @@ import java.util.Set;
 @AllArgsConstructor
 @Table(name = "STRUCTURE_DOCUMENT")
 @Entity
-public class Document {
+public class StructureDocument {
 
     @Id
     @SequenceGenerator(name = "seq_structure_document",
@@ -48,11 +48,11 @@ public class Document {
     private String schemaName;
 
 /**    Связь с таблицей "TAG_DOCUMENT" */
-    @OneToMany(fetch = FetchType.EAGER, mappedBy = "document", cascade = CascadeType.ALL)
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "structureDocument", cascade = CascadeType.ALL)
     private List<Tag> tags = new ArrayList<>();
 
     public void addTag(Tag tag){
         tags.add(tag);
-        tag.setDocument(this);
+        tag.setStructureDocument(this);
     }
 }

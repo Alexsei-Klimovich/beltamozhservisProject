@@ -22,7 +22,6 @@ public class FileUploadController {
     @Autowired
     ExcelService excelParse;
 
-
     @PostMapping("/upload")
     public String fileUpload(@RequestParam("file")MultipartFile multipartFile) throws IOException {
         String fileName = FileNameUtils.getExtension(multipartFile.getOriginalFilename());
@@ -40,7 +39,7 @@ public class FileUploadController {
         } else if (fileType.equals("xlm")||fileType.equals("xsd")) {
             File newFile = File.createTempFile("data-",".xsd");
             multipartFile.transferTo(newFile);
-            XsdParser.parseXsd(newFile); // print xsd File to console
+//            XsdParser.parseXsd(newFile); // print xsd File to console
             newFile.deleteOnExit();
         } else {
             throw new InvalidFileTypeException();

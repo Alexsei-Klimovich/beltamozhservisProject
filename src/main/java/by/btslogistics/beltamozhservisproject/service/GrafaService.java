@@ -1,10 +1,7 @@
 package by.btslogistics.beltamozhservisproject.service;
 
 import by.btslogistics.beltamozhservisproject.exception.NotFoundException;
-import by.btslogistics.beltamozhservisproject.model.Check;
-import by.btslogistics.beltamozhservisproject.model.Document;
 import by.btslogistics.beltamozhservisproject.model.Grafa;
-import by.btslogistics.beltamozhservisproject.repository.DocumentRepository;
 import by.btslogistics.beltamozhservisproject.repository.GrafaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

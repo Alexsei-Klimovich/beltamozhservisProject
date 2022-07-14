@@ -8,7 +8,7 @@ import lombok.Setter;
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
+
 /**
  *
  * @author Alexsei
@@ -70,5 +70,5 @@ public class Tag {
 
     @ManyToOne(cascade = CascadeType.ALL, optional = false)
     @JoinColumn(name = "to_strdoc_id", nullable = false)
-    private Document document = new Document();
+    private StructureDocument structureDocument = new StructureDocument();
 }

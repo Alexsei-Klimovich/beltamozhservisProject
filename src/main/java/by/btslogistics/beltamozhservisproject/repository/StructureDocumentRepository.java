@@ -1,6 +1,6 @@
 package by.btslogistics.beltamozhservisproject.repository;
 
-import by.btslogistics.beltamozhservisproject.model.Document;
+import by.btslogistics.beltamozhservisproject.model.StructureDocument;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 /**
@@ -10,6 +10,6 @@ import org.springframework.stereotype.Repository;
  *
  */
 @Repository
-public interface DocumentRepository extends JpaRepository<Document, Long> {
+public interface StructureDocumentRepository extends JpaRepository<StructureDocument, Long> {
 
 }

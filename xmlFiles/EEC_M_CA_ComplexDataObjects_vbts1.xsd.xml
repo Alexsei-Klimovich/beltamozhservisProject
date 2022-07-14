@@ -1,0 +1,10 @@
+<urn:WorkTimeDetails xmlns:urn="urn:EEC:M:CA:ComplexDataObjects:vbts1" xmlns:urn1="urn:EEC:M:SimpleDataObjects:vbts5" xmlns:urn2="urn:EEC:M:CA:SimpleDataObjects:vbts2">
+  <!--0 to 7 repetitions:-->
+  <urn1:WeekDayCode>token</urn1:WeekDayCode>
+  <urn:WorkTimeHourDetails>
+    <urn1:StartTime>05:49:45</urn1:StartTime>
+    <urn1:EndTime>03:18:33</urn1:EndTime>
+  </urn:WorkTimeHourDetails>
+  <!--Zero or more repetitions:-->
+  <urn2:WorkTimeHourDescriptionText>string</urn2:WorkTimeHourDescriptionText>
+</urn:WorkTimeDetails>
