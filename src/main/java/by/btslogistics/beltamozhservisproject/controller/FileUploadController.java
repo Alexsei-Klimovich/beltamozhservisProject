@@ -3,6 +3,7 @@ package by.btslogistics.beltamozhservisproject.controller;
 import by.btslogistics.beltamozhservisproject.exception.InvalidFileTypeException;
 import by.btslogistics.beltamozhservisproject.parser.xsd.XsdParser;
 import by.btslogistics.beltamozhservisproject.service.ExcelService;
+import by.btslogistics.beltamozhservisproject.service.FileUploadService;
 import org.apache.commons.compress.utils.FileNameUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -19,32 +20,16 @@ import static by.btslogistics.beltamozhservisproject.service.ExcelService.excelP
 
 @RestController
 public class FileUploadController {
+
     @Autowired
-    ExcelService excelParse;
-
-
+    FileUploadService fileUploadService;
     @PostMapping("/upload")
     public String fileUpload(@RequestParam("file")MultipartFile multipartFile) throws IOException {
-        String fileName = FileNameUtils.getExtension(multipartFile.getOriginalFilename());
-        List<String> splitedOriginalName =
-                List.of(fileName);
-        for (String l : splitedOriginalName) {
-            System.out.println(l);
-        }
-        String fileType = splitedOriginalName.get(0);
-        if (fileType.equals("xlsx")) {
-            File newFile = File.createTempFile("data-",".xlsx");
-            multipartFile.transferTo(newFile);
-            excelParse.saveParsedRows(excelParse(newFile)); // parsing xlsx file and saving to BD
-            newFile.deleteOnExit();
-        } else if (fileType.equals("xlm")||fileType.equals("xsd")) {
-            File newFile = File.createTempFile("data-",".xsd");
-            multipartFile.transferTo(newFile);
-            XsdParser.parseXsd(newFile); // print xsd File to console
-            newFile.deleteOnExit();
+        if (multipartFile == null) {
+            System.out.println("File is NULL");
         } else {
-            throw new InvalidFileTypeException();
-        }
+            fileUploadService.fileUpload(multipartFile);
+        };
         return String.format("File %s file uploaded", multipartFile.getOriginalFilename());
     }
 }
