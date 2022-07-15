@@ -51,6 +51,7 @@ public class XsdService {
         getChildElementNames(childElement);
         String element = "" + xsdElements.entrySet().stream().map(e -> e.getKey() + " -- " + String.join(", ", e.getValue().stream().map(v -> v
                 .getQName().toString()).collect(Collectors.toList()))).collect(Collectors.toList());
+        System.out.println(element);
     }
 
     private void getChildElementNames(XmlSchemaElement element) {
