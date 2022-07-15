@@ -4,7 +4,6 @@ import org.apache.ws.commons.schema.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import javax.xml.bind.annotation.XmlSchema;
 import javax.xml.namespace.QName;
 import javax.xml.transform.stream.StreamSource;
 import java.io.FileInputStream;
@@ -42,8 +41,8 @@ public class XsdService {
         InputStream inputStream = new FileInputStream(filePath);
         xmlSchemaCollection = new XmlSchemaCollection();
 
-        XmlSchema schema = (XmlSchema) new XmlSchemaCollection().read(new StreamSource(inputStream));
-        Map.Entry<QName, XmlSchemaElement> entry = (Map.Entry<QName, XmlSchemaElement>) schema;
+        XmlSchema schema = xmlSchemaCollection.read(new StreamSource(inputStream));
+        Map.Entry<QName, XmlSchemaElement> entry = schema.getElements().entrySet().iterator().next();
         QName rootElement = entry.getKey();
 
         XmlSchemaElement childElement = xmlSchemaCollection.getElementByQName(rootElement);
