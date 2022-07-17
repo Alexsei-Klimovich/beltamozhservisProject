@@ -6,15 +6,16 @@ import by.btslogistics.beltamozhservisproject.model.StructureDocument;
 import by.btslogistics.beltamozhservisproject.parser.xsd.XsdParser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.w3c.dom.Document;
-import org.w3c.dom.Element;
-import org.w3c.dom.NamedNodeMap;
-import org.w3c.dom.NodeList;
+import org.w3c.dom.*;
 import org.xml.sax.SAXException;
 
 import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.xpath.XPath;
+import javax.xml.xpath.XPathFactory;
 import java.io.File;
 import java.io.IOException;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 import static by.btslogistics.beltamozhservisproject.parser.xsd.XsdParser.buildDocumentFromFile;
@@ -42,7 +43,6 @@ public class XsdService {
                 String rootElement = element.getAttribute("type").replace("Type","");
                 String schemaName = element.getAttribute("name");
                 String schemaLocation = file.getPath();
-                System.out.println();
                 structureDocument.setRootElement(rootElement);
                 structureDocument.setSchemaLocation(schemaLocation);
                 structureDocument.setSchemaVersion(version);
@@ -102,6 +102,11 @@ public class XsdService {
         }
     }
 
+
+
+
+
+
     public void printFlkGrafaInfo(File file) throws IOException, ParserConfigurationException, SAXException {
         Document document = XsdParser.buildDocumentFromFile(file);
         NodeList documentations = document.getElementsByTagName("xs:documentation");
@@ -117,14 +122,14 @@ public class XsdService {
         /////
 
 
-        String prefixPathXml  = "/";
-        prefixPathXml+= prefixAttribute;
-        prefixPathXml+=":";
+        String prefixPathXml  = getPathPrefixFromFile(file);
+//        prefixPathXml+= prefixAttribute;
+//        prefixPathXml+=":";
 
 
 
         for (int i = 0; i < documentations.getLength(); i++) {
-            String pathXml = "";
+            String pathXml = getPathPrefixFromFile(file);
 
             Element element = (Element) documentations.item(i);
             Element parentElement = (Element) element.getParentNode().getParentNode();
@@ -139,7 +144,6 @@ public class XsdService {
             } else if(parentAttributeRef.isEmpty())
             {
                     pathXml = prefixPathXml+attributeName;
-
             }else {
                 pathXml = "/"+parentAttributeRef;
             }
@@ -154,48 +158,27 @@ public class XsdService {
             System.out.println("PATH_XML:"+pathXml);
         }
     }
-    public void printRootXsdInfo(File file) throws IOException, ParserConfigurationException, SAXException {
-        Document document = buildDocumentFromFile(file);
-        NodeList elements = document.getElementsByTagName("xs:element");
+
+    public String getPathPrefixFromFile(File file) throws IOException, ParserConfigurationException, SAXException {
+        Document document = XsdParser.buildDocumentFromFile(file);
         NodeList schemas = document.getElementsByTagName("xs:schema");
         Element schema =(Element) schemas.item(0);
-        String version = schema.getAttribute("version");
-        for (int i = 0; i < elements.getLength(); i++) {
-            Element element = (Element) elements.item(i);
-            if(element.hasAttribute("type")){
-                String rootElement = element.getAttribute("type").replace("Type","");
-                String schemaName = element.getAttribute("name");
-                String schemaLocation = file.getPath();
-                System.out.println();
-                System.out.println("SCHEMA_LOCATION:"+schemaLocation);
-                System.out.println("ROOT_ELEMENT:"+rootElement);
-                System.out.println("SCHEMA_VERSION:"+ version);
-                System.out.println("SCHEMA_NAME:"+ schemaName);
+        NamedNodeMap tags = schema.getAttributes();
+        for (int i = 0; i<tags.getLength();i++){
+            if(tags.item(i).toString().contains("xmlns")){
+                List<String> compareStrings = List.of(tags.item(i).toString().split(":"));
+                String compareString = (compareStrings.get(compareStrings.size()-1).replace("\"",""));
+                if (file.getName().contains(compareString)){
+                    List<String> firstSplit = List.of(tags.item(i).toString().split("="));
+                    List<String> result = List.of(firstSplit.get(0).split(":"));
+                    return "/"+result.get(1)+":";
+                }
             }
         }
+        return null;
     }
 
 
 
-    public static void printXsdInfo(Document document) {
-        NodeList documentations = document.getElementsByTagName("xs:documentation");
-        System.out.println("__________________________________");
-        for (int i = 0; i < documentations.getLength(); i++) {
-            Element element = (Element) documentations.item(i);
-            Element parentElement = (Element) element.getParentNode().getParentNode();
-            if (parentElement.getAttribute("name").isEmpty()) {
-                Element doubleParentNode = (Element) parentElement.getParentNode().getParentNode();
-                System.out.println("name: " + doubleParentNode.getAttribute("name"));
-                System.out.println("type: " + doubleParentNode.getAttribute("type"));
-                System.out.println("parent: " + parentElement.getParentNode().getParentNode().getNodeName());
-            } else {
-                System.out.println("name: " + parentElement.getAttribute("name"));
-                System.out.println("type: " + parentElement.getAttribute("type"));
-                System.out.println("parent: " + element.getParentNode().getParentNode().getNodeName());
-            }
-            System.out.println("documentation: " + element.getTextContent());
-            System.out.println("__________________________________");
-        }
-    }
 
 }
