@@ -6,13 +6,13 @@ import by.btslogistics.beltamozhservisproject.repository.StructureDocumentReposi
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+
 import javax.transaction.Transactional;
 import java.util.List;
+
 /**
- *
  * @author Alexsei
  * @author Yaroslav
- *
  */
 @Service
 public class StructureDocumentService {
@@ -23,16 +23,22 @@ public class StructureDocumentService {
         structureDocumentRepository.deleteById(documentId);
     }
 
-    public StructureDocument getDocumentById (Long documentId) {
+    public StructureDocument getDocumentById(Long documentId) {
         return structureDocumentRepository.findById(documentId).orElseThrow(NotFoundException::new);
     }
+
     @Transactional
     public void saveStructureDocument(StructureDocument structureDocument) {
         structureDocumentRepository.save(structureDocument);
     }
+
     @Transactional
     public void updateStructureDocument(StructureDocument structureDocument) {
         structureDocumentRepository.save(structureDocument);
+    }
+
+    public StructureDocument getDocumentBySchemaName(String schemaName) {
+       return structureDocumentRepository.getStructureDocumentBySchemaName(schemaName);
     }
 
     public List<StructureDocument> getAllStructureDocuments() {

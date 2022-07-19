@@ -26,11 +26,12 @@ public class MainController {
     StructureDocumentService structureDocumentService;
     @Autowired
     XsdService xsdService;
+
+    @Autowired
+    XmlService xmlService;
     @GetMapping("/")
     public String hello() throws IOException, ParserConfigurationException, SAXException {
-        //xsdService.saveRootXsd(new File("EEC_R_030_DeclarantNotification_v1.2.0.xsd"));
-        xsdService.saveFlkGrafa(new File("EEC_M_ComplexDataObjects_vbts4.xsd"));
-//        xsdService.printFlkGrafaInfo(new File("EEC_M_ComplexDataObjects_vbts4.xsd"));
+        xmlService.saveDocumentInfo(new File("EEC_R_030_DeclarantNotification_v1.2.0.xsd.xml"));
         return "hello";
     }
 

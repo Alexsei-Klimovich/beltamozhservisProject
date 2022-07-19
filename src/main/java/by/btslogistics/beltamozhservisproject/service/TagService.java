@@ -33,8 +33,18 @@ public class TagService {
     public void updateTag(Tag tag){
         tagRepository.save(tag);
     }
+
     public List<Tag> getAllTags(){
         return tagRepository.findAll();
     }
+
+    public Tag getTagByNodePath(String nodePath){
+        return tagRepository.getTagByNodePath(nodePath);
+    }
+
+    public Tag getTagByParentPath(String parentPath){
+        return tagRepository.getTagByParentPath(parentPath);
+    }
+
 
 }

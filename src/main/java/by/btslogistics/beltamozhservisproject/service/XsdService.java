@@ -118,13 +118,9 @@ public class XsdService {
         String attr = String.valueOf(preTag.item(4));
         List<String> atrr = List.of(attr.split("="));
         List<String> splitedAttr = List.of(atrr.get(0).split(":"));
-        String prefixAttribute = splitedAttr.get(1);
-        /////
 
 
         String prefixPathXml  = getPathPrefixFromFile(file);
-//        prefixPathXml+= prefixAttribute;
-//        prefixPathXml+=":";
 
 
 
@@ -159,7 +155,7 @@ public class XsdService {
         }
     }
 
-    public String getPathPrefixFromFile(File file) throws IOException, ParserConfigurationException, SAXException {
+    public static String getPathPrefixFromFile(File file) throws IOException, ParserConfigurationException, SAXException {
         Document document = XsdParser.buildDocumentFromFile(file);
         NodeList schemas = document.getElementsByTagName("xs:schema");
         Element schema =(Element) schemas.item(0);
@@ -177,8 +173,6 @@ public class XsdService {
         }
         return null;
     }
-
-
 
 
 }
