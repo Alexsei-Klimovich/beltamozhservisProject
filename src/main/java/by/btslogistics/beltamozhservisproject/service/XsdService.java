@@ -28,8 +28,6 @@ public class XsdService {
     @Autowired
     GrafaService grafaService;
 
-
-
     public void saveRootXsd(File file) throws IOException, ParserConfigurationException, SAXException {
         StructureDocument structureDocument = new StructureDocument();
         Document document = buildDocumentFromFile(file);
@@ -51,109 +49,6 @@ public class XsdService {
             }
         }
     }
-    //TODO CREATE CHECK FOR FIELD EXISTS IN DB ADD PREFIX /SOMETHING  TO XML PATH
-    public void saveFlkGrafa(File file) throws IOException, ParserConfigurationException, SAXException {
-        Document document = XsdParser.buildDocumentFromFile(file);
-        NodeList documentations = document.getElementsByTagName("xs:documentation");
-        NodeList schemas = document.getElementsByTagName("xs:schema");
-        Element schema =(Element) schemas.item(0);
-        ///TODO CREATE METHOD TO SLIT ATTR PREFIX
-        NamedNodeMap preTag = schema.getAttributes();
-        String attr = String.valueOf(preTag.item(4));
-        List<String> atrr = List.of(attr.split("="));
-        List<String> splitedAttr = List.of(atrr.get(0).split(":"));
-        String prefixAttribute = splitedAttr.get(1);
-        /////
-        String prefixPathXml  = "/";
-        prefixPathXml+= prefixAttribute;
-        prefixPathXml+=":";
-
-        for (int i = 0; i < documentations.getLength(); i++) {
-            Grafa grafa = new Grafa();
-            String pathXml = "";
-
-            Element element = (Element) documentations.item(i);
-            Element parentElement = (Element) element.getParentNode().getParentNode();
-            String attributeName = parentElement.getAttribute("name");
-            String parentAttributeRef = parentElement.getAttribute("ref");
-
-            if(attributeName.isEmpty()&& parentAttributeRef.isEmpty()){
-                Element doubleParent = (Element) parentElement.getParentNode().getParentNode();
-                String attributeRef = doubleParent.getAttribute("ref");
-                pathXml = prefixPathXml+attributeRef;
-
-            } else if(parentAttributeRef.isEmpty())
-            {
-                pathXml = prefixPathXml+attributeName;
-
-            }else {
-                pathXml = "/"+parentAttributeRef;
-            }
-            String formId = "UPDT";
-            String nameGrafa=element.getTextContent();
-            String namePole=element.getTextContent();
-
-            System.out.println();
-            grafa.setFormId(0L);//TODO String to Long parameter in entity
-            grafa.setPathXML(pathXml);
-            grafa.setNameGrafa(nameGrafa);
-            grafa.setNamePole(namePole);
-            grafaService.saveGrafa(grafa);
-        }
-    }
-
-
-
-
-
-
-    public void printFlkGrafaInfo(File file) throws IOException, ParserConfigurationException, SAXException {
-        Document document = XsdParser.buildDocumentFromFile(file);
-        NodeList documentations = document.getElementsByTagName("xs:documentation");
-        NodeList schemas = document.getElementsByTagName("xs:schema");
-        Element schema =(Element) schemas.item(0);
-
-        ///TODO CREATE METHOD TO SLIT ATTR PREFIX
-        NamedNodeMap preTag = schema.getAttributes();
-        String attr = String.valueOf(preTag.item(4));
-        List<String> atrr = List.of(attr.split("="));
-        List<String> splitedAttr = List.of(atrr.get(0).split(":"));
-
-
-        String prefixPathXml  = getPathPrefixFromFile(file);
-
-
-
-        for (int i = 0; i < documentations.getLength(); i++) {
-            String pathXml = getPathPrefixFromFile(file);
-
-            Element element = (Element) documentations.item(i);
-            Element parentElement = (Element) element.getParentNode().getParentNode();
-            String attributeName = parentElement.getAttribute("name");
-            String parentAttributeRef = parentElement.getAttribute("ref");
-
-            if(attributeName.isEmpty()&& parentAttributeRef.isEmpty()){
-                Element doubleParent = (Element) parentElement.getParentNode().getParentNode();
-                String attributeRef = doubleParent.getAttribute("ref");
-                pathXml = prefixPathXml+attributeRef;
-
-            } else if(parentAttributeRef.isEmpty())
-            {
-                pathXml = prefixPathXml+attributeName;
-            }else {
-                pathXml = "/"+parentAttributeRef;
-            }
-            String formId = "UPDT";
-            String nameGrafa=element.getTextContent();
-            String namePole=element.getTextContent();
-
-            System.out.println();
-            System.out.println("ID_FORM:"+formId);
-            System.out.println("NAME_GRAFA:"+nameGrafa);
-            System.out.println("NAME_POLE:"+namePole);
-            System.out.println("PATH_XML:"+pathXml);
-        }
-    }
 
     public static String getPathPrefixFromFile(File file) throws IOException, ParserConfigurationException, SAXException {
         Document document = XsdParser.buildDocumentFromFile(file);
@@ -173,6 +68,4 @@ public class XsdService {
         }
         return null;
     }
-
-
 }
