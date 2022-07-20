@@ -1,5 +1,6 @@
 package by.btslogistics.beltamozhservisproject.service;
 
+import by.btslogistics.beltamozhservisproject.exception.StructureDocumentAlreadyParsedException;
 import by.btslogistics.beltamozhservisproject.model.Grafa;
 import by.btslogistics.beltamozhservisproject.model.StructureDocument;
 import by.btslogistics.beltamozhservisproject.model.Tag;
@@ -25,19 +26,23 @@ public class XmlService {
     XsdService xsdService;
 
     public void saveDocumentInfo(File rootXml) throws IOException, ParserConfigurationException, SAXException {
+        String schemaLocation = rootXml.getPath().replace(".xml","");
+        if(isStructureDocumentExists(schemaLocation)){
+           throw new StructureDocumentAlreadyParsedException();
+        }
         XmlParser xmlParser = new XmlParser(rootXml);
         Map<String, String> pathMap = xmlParser.getElementsPathMap(xmlParser.getElementsName(xmlParser.getChildrenPath()), xmlParser.getChildrenPath());
         pathMap.put(xmlParser.getRootElementName(), xmlParser.getRootElementPath());
         Map<String, String> documentationMap = xmlParser.getElementsDocumentationMap(xmlParser.getElementsName(xmlParser.getChildrenPath()));
         xsdService.saveRootXsd(new File(rootXml.getName().replace(".xml", "")));
+        StructureDocument structureDocument = structureDocumentService.getDocumentBySchemaLocation(schemaLocation);
         for (Map.Entry<String, String> entry : documentationMap.entrySet()) {
             Grafa grafa = new Grafa();
             grafa.setPathXML(pathMap.get(entry.getKey()));
             grafa.setNameGrafa(entry.getValue());
             grafa.setNamePole(entry.getValue());
             grafaService.saveGrafa(grafa);
-            String schemaLocation = rootXml.getPath().replace(".xml","");
-            StructureDocument structureDocument = structureDocumentService.getDocumentBySchemaLocation(schemaLocation);
+
             Tag tag = new Tag();
             tag.setPattern(xmlParser.getPatternForElement(entry.getKey()));
             tag.setStructureDocument(structureDocument);
@@ -56,6 +61,11 @@ public class XmlService {
                 tagService.updateTag(child);
             }
         }
+    }
+
+    public boolean isStructureDocumentExists(String schemaLocation){
+        StructureDocument document = structureDocumentService.getDocumentBySchemaLocation(schemaLocation);
+        return document != null;
     }
 }
 
