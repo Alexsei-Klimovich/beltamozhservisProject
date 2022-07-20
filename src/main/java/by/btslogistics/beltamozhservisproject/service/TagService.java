@@ -17,15 +17,11 @@ import java.util.Optional;
  */
 @Service
 public class TagService {
-
     @Autowired
     private TagRepository tagRepository;
-
     public void deleteTagById(Long tagId){
         tagRepository.deleteById(tagId);
     }
-
-
     public Tag getTagById(Long tagId){
         return tagRepository.findById(tagId).orElseThrow(NotFoundException::new);
     }
@@ -41,5 +37,14 @@ public class TagService {
     public List<Tag> getAllTags(){
         return tagRepository.findAll();
     }
+
+    public Tag getTagByNodePath(String nodePath){
+        return tagRepository.getTagByNodePath(nodePath);
+    }
+
+    public Tag getTagByParentPath(String parentPath){
+        return tagRepository.getTagByParentPath(parentPath);
+    }
+
 
 }
