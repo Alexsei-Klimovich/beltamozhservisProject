@@ -137,7 +137,7 @@ public class XmlParser {
     }
 
     public String getRootElementPath() throws IOException, ParserConfigurationException, SAXException {
-        return XsdService.getPathPrefixFromFile(new File(rootXml.getName().replace(".xml","")))+getRootElementName();
+        return XsdService.getPathPrefixFromFile(new File(rootXml.getName().replace(".xml", ""))) + getRootElementName();
     }
 
     public Map<String, String> getElementsDocumentationMap(List<String> elements) throws IOException, ParserConfigurationException, SAXException {
@@ -175,15 +175,44 @@ public class XmlParser {
         return fileNames;
     }
 
-    public String getParentElementPath(String elementPath){
-        String parentElementPath="";
-        List<String> splitedPath= List.of(elementPath.split("/"));
-        for(int i = 0; i<splitedPath.size()-1;i++){
-            parentElementPath=parentElementPath+splitedPath.get(i)+"/";
+    public String getParentElementPath(String elementPath) {
+        String parentElementPath = "";
+        List<String> splitedPath = List.of(elementPath.split("/"));
+        for (int i = 0; i < splitedPath.size() - 1; i++) {
+            parentElementPath = parentElementPath + splitedPath.get(i) + "/";
         }
-        parentElementPath = parentElementPath.substring(0,parentElementPath.length()-1);
+        parentElementPath = parentElementPath.substring(0, parentElementPath.length() - 1);
         return parentElementPath;
     }
+
+    public Map<String, String> getAllPatternsMap() throws IOException, ParserConfigurationException, SAXException {
+        Map<String, String> patternsMap = new HashMap<>();
+        List<String> fileNames = getFileNames();
+        for (String fileName : fileNames) {
+            Document document = XsdParser.buildDocumentFromFile(new File(fileName));
+            NodeList patterns = document.getElementsByTagName("xs:pattern");
+            for (int i = 0; i < patterns.getLength(); i++) {
+                Element element = (Element) patterns.item(i);
+                String pattern = element.getAttribute("value");
+                Element parentElement = (Element) element.getParentNode().getParentNode();
+                String attributeName = parentElement.getAttribute("name").replace("Type", "");
+                if (attributeName.isEmpty()) {
+                    Element doubleParent = (Element) parentElement.getParentNode();
+                    attributeName = doubleParent.getAttribute("name").replace("Type", "");
+                }
+                patternsMap.put(attributeName, pattern);
+            }
+        }
+        return patternsMap;
+    }
+
+    public String getPatternForElement(String elementName) throws IOException, ParserConfigurationException, SAXException {
+        Map<String, String> patterns = getAllPatternsMap();
+        String pattern = null;
+        pattern = patterns.get(elementName);
+        return pattern;
+    }
+
 
 }
 
