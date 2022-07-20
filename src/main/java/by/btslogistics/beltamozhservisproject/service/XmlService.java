@@ -36,10 +36,8 @@ public class XmlService {
             grafa.setNameGrafa(entry.getValue());
             grafa.setNamePole(entry.getValue());
             grafaService.saveGrafa(grafa);
-
-            //TODO CREATE FIND  DOCUMENT METHOD HERE
-            StructureDocument structureDocument = structureDocumentService.getDocumentBySchemaName("DeclarantNotification");
-
+            String schemaLocation = rootXml.getPath().replace(".xml","");
+            StructureDocument structureDocument = structureDocumentService.getDocumentBySchemaLocation(schemaLocation);
             Tag tag = new Tag();
             tag.setPattern(xmlParser.getPatternForElement(entry.getKey()));
             tag.setStructureDocument(structureDocument);

@@ -41,6 +41,10 @@ public class StructureDocumentService {
         return structureDocumentRepository.getStructureDocumentBySchemaName(schemaName);
     }
 
+    public StructureDocument getDocumentBySchemaLocation(String schemaLocation){
+        return structureDocumentRepository.getStructureDocumentBySchemaLocation(schemaLocation);
+    }
+
     public List<StructureDocument> getAllStructureDocuments() {
         return structureDocumentRepository.findAll();
     }
