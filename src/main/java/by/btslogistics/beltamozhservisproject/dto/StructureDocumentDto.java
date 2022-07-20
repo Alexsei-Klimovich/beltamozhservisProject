@@ -12,7 +12,7 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class DocumentDto {
+public class StructureDocumentDto {
     private String schemaLocation;
     private String rootElement;
     private String schemaVersion;
