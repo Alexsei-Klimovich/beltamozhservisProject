@@ -65,6 +65,14 @@
             <version>5.2.2</version>
         </dependency>
 
+
+        <!-- https://mvnrepository.com/artifact/org.apache.ws.xmlschema/xmlschema-core -->
+        <dependency>
+            <groupId>org.apache.ws.xmlschema</groupId>
+            <artifactId>xmlschema-core</artifactId>
+            <version>2.3.0</version>
+        </dependency>
+
     </dependencies>
 
     <build>
