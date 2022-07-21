@@ -61,7 +61,7 @@ public class XsdService {
 
 
                 String compareString = compareStrings.get(compareStrings.size()-2);// replace("\"", ""));
-                System.out.println("COMPARESTRING"+compareString);
+
                 if (file.getName().contains(compareString)) {
                     List<String> firstSplit = List.of(tags.item(i).toString().split("="));
                     List<String> result = List.of(firstSplit.get(0).split(":"));

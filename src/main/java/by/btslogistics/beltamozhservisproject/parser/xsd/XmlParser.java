@@ -146,14 +146,14 @@ public class XmlParser {
                 }
             }
         }
-        System.out.println("CHILDRENPATH:"+paths.size());
+        System.out.println("CHILDRENPATH:" + paths.size());
         return changePathsPrefix(paths);
     }
 
     //TODO: REFACTOR THIS
     public List<String> changePathsPrefix(List<String> paths) throws IOException, ParserConfigurationException, SAXException {
-        for(String s:paths){
-            System.out.println("LIST1:"+s);
+        for (String s : paths) {
+            System.out.println("LIST1:" + s);
         }
         Document document = XsdParser.buildDocumentFromFile(rootXml);
         Node node = document.getDocumentElement();
@@ -173,18 +173,16 @@ public class XmlParser {
 //            System.out.println("PREFIX:"+ entry.getKey()+" FILENAME:"+entry.getValue());
 //        }
 
-        prefixMap.remove("urn");
+//        prefixMap.remove("urn");
         Map<String, String> newPrefixMap = new HashMap<>();
         List<String> keys = new ArrayList<>();
         for (Map.Entry<String, String> entry : prefixMap.entrySet()) {
             keys.add(entry.getKey());
             newPrefixMap.put(entry.getKey(), XsdService.getPathPrefixFromFile(new File(entry.getValue())));
         }
-//        for (Map.Entry<String,String> entry:newPrefixMap.entrySet() ){
-//            System.out.println("NEWPREFIX:"+ entry.getKey()+" FILENAME:"+entry.getValue());
-//        }
-
-
+        for (Map.Entry<String, String> entry : newPrefixMap.entrySet()) {
+            System.out.println("NEWPREFIX:" + entry.getKey() + " FILENAME:" + entry.getValue());
+        }
 
 
         List<String> changesPrefixPaths = new ArrayList<>();
@@ -192,25 +190,42 @@ public class XmlParser {
             List<String> splitedPath = List.of(path.split("/"));
             String result = "";
             for (String split : splitedPath) {
+//                System.out.println("SPLIT:"+split);
                 for (String key : keys) {
                     if (split.contains(key)) {
-                        result = result + split.replace(key, newPrefixMap.get(key));
+                        String replace = split.replace(key, newPrefixMap.get(key));
+                        if(!replace.contains(":1")){
+                            result = result + replace;
+                        }
                     }
                 }
-                if(split.contains("@")){
-                    result=result+"/"+split;
+                if (split.contains("@")) {
+                    result = result + "/" + split;
                 }
             }
+//            String finallyResult="";
+//            List<String> splitedResult = List.of((result.split("/")));
+//            for(String res:splitedResult){
+//                if (!res.contains(":1:")){
+//                    f
+//                }
+//            }
+
+
+
+
             String rootNodeName = List.of(node.getNodeName().split(":")).get(1);
             String rootPrefix = XsdService.getPathPrefixFromFile(new File(rootXml.getName().replace(".xml", "")));
             changesPrefixPaths.add(rootPrefix + rootNodeName + result.replace("::", ":"));
-
+            System.out.println("ROOT PREFIX:"+rootPrefix);
+            System.out.println("ROOTNODENAME"+rootNodeName);
+            System.out.println("RESULT"+result);
         }
         System.out.println("SIZE2:" + changesPrefixPaths.size());
 
 
-        for(String s :changesPrefixPaths){
-            System.out.println("2:"+ s);
+        for (String s : changesPrefixPaths) {
+            System.out.println("2:" + s);
         }
         return changesPrefixPaths;
     }
@@ -230,17 +245,17 @@ public class XmlParser {
         return elementsPathMap;
     }
 
-    public Map<String,String> getElementsPathAndNameMap(List<String> elementsPaths) throws IOException, ParserConfigurationException, SAXException {
-        Map<String,String> pathAndNameMap = new HashMap<>();
+    public Map<String, String> getElementsPathAndNameMap(List<String> elementsPaths) throws IOException, ParserConfigurationException, SAXException {
+        Map<String, String> pathAndNameMap = new HashMap<>();
         for (String elementPath : elementsPaths) {
             List<String> splitedElementPath = List.of(elementPath.split("/"));
-            if (!(splitedElementPath.get(splitedElementPath.size() - 1).contains("@"))){
-                pathAndNameMap.put(elementPath,List.of(splitedElementPath.get(splitedElementPath.size() - 1).split(":")).get(1));
+            if (!(splitedElementPath.get(splitedElementPath.size() - 1).contains("@"))) {
+                pathAndNameMap.put(elementPath, List.of(splitedElementPath.get(splitedElementPath.size() - 1).split(":")).get(1));
             } else {
-                pathAndNameMap.put(elementPath,splitedElementPath.get(splitedElementPath.size() - 1).replace("@",""));
+                pathAndNameMap.put(elementPath, splitedElementPath.get(splitedElementPath.size() - 1).replace("@", ""));
             }
         }
-        pathAndNameMap.put(getRootElementPath(),getRootElementName());
+        pathAndNameMap.put(getRootElementPath(), getRootElementName());
         return pathAndNameMap;
     }
 
@@ -264,11 +279,11 @@ public class XmlParser {
                 Element element = (Element) documentations.item(i);
                 Element parentElement = (Element) element.getParentNode().getParentNode();
                 String attributeName = parentElement.getAttribute("name");
-                if(!attributeName.isEmpty()){
-                    for(Map.Entry<String,String> entry:elementsPathAndNameMap.entrySet()){
+                if (!attributeName.isEmpty()) {
+                    for (Map.Entry<String, String> entry : elementsPathAndNameMap.entrySet()) {
                         String entryName = entry.getValue();
-                        if(entryName.equals(attributeName)){
-                            pathAndDocumentationMap.put(entry.getKey(),element.getTextContent());
+                        if (entryName.equals(attributeName)) {
+                            pathAndDocumentationMap.put(entry.getKey(), element.getTextContent());
                         }
                     }
                 }
