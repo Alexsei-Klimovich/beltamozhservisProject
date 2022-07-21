@@ -1,0 +1,1001 @@
+<urn:ExpressCargoDeclaration xmlns:urn="urn:EEC:R:043:ExpressCargoDeclaration:v2.0.0" xmlns:urn1="urn:EEC:M:SimpleDataObjects:v0.4.10" xmlns:urn2="urn:EEC:M:CA:SimpleDataObjects:v1.5.1" xmlns:urn3="urn:EEC:M:CA:ComplexDataObjects:v1.5.1" xmlns:urn4="urn:EEC:M:ComplexDataObjects:v0.4.10">
+  <urn1:EDocCode>token</urn1:EDocCode>
+  <urn1:EDocId>token</urn1:EDocId>
+  <!--Optional:-->
+  <urn1:EDocRefId>token</urn1:EDocRefId>
+  <urn1:EDocDateTime>2008-09-29T05:49:45</urn1:EDocDateTime>
+  <urn2:ExpressRegistryKindCode>token</urn2:ExpressRegistryKindCode>
+  <!--Optional:-->
+  <urn1:ObjectOrdinal>201</urn1:ObjectOrdinal>
+  <!--Optional:-->
+  <urn3:ExpressCargoDeclarationIdDetails>
+    <urn1:CustomsOfficeCode>token</urn1:CustomsOfficeCode>
+    <urn1:DocCreationDate>2014-09-19</urn1:DocCreationDate>
+    <urn2:CustomsDocumentId>token</urn2:CustomsDocumentId>
+  </urn3:ExpressCargoDeclarationIdDetails>
+  <!--Optional:-->
+  <urn2:DeclarationKindCode>to</urn2:DeclarationKindCode>
+  <!--Optional:-->
+  <urn2:CustomsProcedureCode codeListId="token">to</urn2:CustomsProcedureCode>
+  <!--Optional:-->
+  <urn2:PreviousCustomsProcedureModeCode codeListId="token">to</urn2:PreviousCustomsProcedureModeCode>
+  <!--Optional:-->
+  <urn2:DeclarationFeatureCode codeListId="token">tok</urn2:DeclarationFeatureCode>
+  <urn2:EDocIndicatorCode>token</urn2:EDocIndicatorCode>
+  <!--Optional:-->
+  <urn1:PageQuantity>200</urn1:PageQuantity>
+  <!--Optional:-->
+  <urn3:ECGoodsShipmentDetails>
+    <!--Optional:-->
+    <urn3:ConsignorDetails>
+      <!--Optional:-->
+      <urn1:UnifiedCountryCode codeListId="token">token</urn1:UnifiedCountryCode>
+      <!--Optional:-->
+      <urn1:SubjectName>token</urn1:SubjectName>
+      <!--Optional:-->
+      <urn1:SubjectBriefName>token</urn1:SubjectBriefName>
+      <!--Optional:-->
+      <urn1:BusinessEntityTypeCode codeListId="token">token</urn1:BusinessEntityTypeCode>
+      <!--Optional:-->
+      <urn1:BusinessEntityTypeName>token</urn1:BusinessEntityTypeName>
+      <!--Optional:-->
+      <urn1:BusinessEntityId kindId="token">token</urn1:BusinessEntityId>
+      <!--Optional:-->
+      <urn2:CAUniqueCustomsNumberId countryCode="token" countryCodeListId="token">token</urn2:CAUniqueCustomsNumberId>
+      <!--Optional:-->
+      <urn1:TaxpayerId>token</urn1:TaxpayerId>
+      <!--Optional:-->
+      <urn1:TaxRegistrationReasonCode>token</urn1:TaxRegistrationReasonCode>
+      <!--Optional:-->
+      <urn2:PersonId>token</urn2:PersonId>
+      <!--Optional:-->
+      <urn4:IdentityDocV3Details>
+        <urn1:UnifiedCountryCode codeListId="token">token</urn1:UnifiedCountryCode>
+        <!--Optional:-->
+        <urn1:IdentityDocKindCode codeListId="token">token</urn1:IdentityDocKindCode>
+        <!--Optional:-->
+        <urn1:DocKindName>token</urn1:DocKindName>
+        <!--Optional:-->
+        <urn1:DocSeriesId>token</urn1:DocSeriesId>
+        <urn1:DocId>token</urn1:DocId>
+        <!--Optional:-->
+        <urn1:DocCreationDate>2006-08-19+04:00</urn1:DocCreationDate>
+        <!--Optional:-->
+        <urn1:DocValidityDate>2009-05-16</urn1:DocValidityDate>
+        <!--Optional:-->
+        <urn1:AuthorityId>token</urn1:AuthorityId>
+        <!--Optional:-->
+        <urn1:AuthorityName>token</urn1:AuthorityName>
+      </urn4:IdentityDocV3Details>
+      <!--Zero or more repetitions:-->
+      <urn4:SubjectAddressDetails>
+        <!--Optional:-->
+        <urn1:AddressKindCode>token</urn1:AddressKindCode>
+        <!--Optional:-->
+        <urn1:UnifiedCountryCode codeListId="token">token</urn1:UnifiedCountryCode>
+        <!--Optional:-->
+        <urn1:TerritoryCode>token</urn1:TerritoryCode>
+        <!--Optional:-->
+        <urn1:RegionName>token</urn1:RegionName>
+        <!--Optional:-->
+        <urn1:DistrictName>token</urn1:DistrictName>
+        <!--Optional:-->
+        <urn1:CityName>token</urn1:CityName>
+        <!--Optional:-->
+        <urn1:SettlementName>token</urn1:SettlementName>
+        <!--Optional:-->
+        <urn1:StreetName>token</urn1:StreetName>
+        <!--Optional:-->
+        <urn1:BuildingNumberId>token</urn1:BuildingNumberId>
+        <!--Optional:-->
+        <urn1:RoomNumberId>token</urn1:RoomNumberId>
+        <!--Optional:-->
+        <urn1:PostCode>token</urn1:PostCode>
+        <!--Optional:-->
+        <urn1:PostOfficeBoxId>token</urn1:PostOfficeBoxId>
+      </urn4:SubjectAddressDetails>
+      <!--Zero or more repetitions:-->
+      <urn4:CommunicationDetails>
+        <!--Optional:-->
+        <urn1:CommunicationChannelCode>token</urn1:CommunicationChannelCode>
+        <!--Optional:-->
+        <urn1:CommunicationChannelName>token</urn1:CommunicationChannelName>
+        <!--1 or more repetitions:-->
+        <urn1:CommunicationChannelId>token</urn1:CommunicationChannelId>
+      </urn4:CommunicationDetails>
+      <!--Optional:-->
+      <urn3:SubjectBranchDetails>
+        <!--Optional:-->
+        <urn1:UnifiedCountryCode codeListId="token">token</urn1:UnifiedCountryCode>
+        <!--Optional:-->
+        <urn1:SubjectName>token</urn1:SubjectName>
+        <!--Optional:-->
+        <urn1:SubjectBriefName>token</urn1:SubjectBriefName>
+        <!--Optional:-->
+        <urn1:BusinessEntityTypeCode codeListId="token">token</urn1:BusinessEntityTypeCode>
+        <!--Optional:-->
+        <urn1:BusinessEntityTypeName>token</urn1:BusinessEntityTypeName>
+        <!--Optional:-->
+        <urn1:BusinessEntityId kindId="token">token</urn1:BusinessEntityId>
+        <!--Optional:-->
+        <urn2:CAUniqueCustomsNumberId countryCode="token" countryCodeListId="token">token</urn2:CAUniqueCustomsNumberId>
+        <!--Optional:-->
+        <urn1:TaxpayerId>token</urn1:TaxpayerId>
+        <!--Optional:-->
+        <urn1:TaxRegistrationReasonCode>token</urn1:TaxRegistrationReasonCode>
+        <!--Optional:-->
+        <urn4:SubjectAddressDetails>
+          <!--Optional:-->
+          <urn1:AddressKindCode>token</urn1:AddressKindCode>
+          <!--Optional:-->
+          <urn1:UnifiedCountryCode codeListId="token">token</urn1:UnifiedCountryCode>
+          <!--Optional:-->
+          <urn1:TerritoryCode>token</urn1:TerritoryCode>
+          <!--Optional:-->
+          <urn1:RegionName>token</urn1:RegionName>
+          <!--Optional:-->
+          <urn1:DistrictName>token</urn1:DistrictName>
+          <!--Optional:-->
+          <urn1:CityName>token</urn1:CityName>
+          <!--Optional:-->
+          <urn1:SettlementName>token</urn1:SettlementName>
+          <!--Optional:-->
+          <urn1:StreetName>token</urn1:StreetName>
+          <!--Optional:-->
+          <urn1:BuildingNumberId>token</urn1:BuildingNumberId>
+          <!--Optional:-->
+          <urn1:RoomNumberId>token</urn1:RoomNumberId>
+          <!--Optional:-->
+          <urn1:PostCode>token</urn1:PostCode>
+          <!--Optional:-->
+          <urn1:PostOfficeBoxId>token</urn1:PostOfficeBoxId>
+        </urn4:SubjectAddressDetails>
+        <!--Zero or more repetitions:-->
+        <urn4:CommunicationDetails>
+          <!--Optional:-->
+          <urn1:CommunicationChannelCode>token</urn1:CommunicationChannelCode>
+          <!--Optional:-->
+          <urn1:CommunicationChannelName>token</urn1:CommunicationChannelName>
+          <!--1 or more repetitions:-->
+          <urn1:CommunicationChannelId>token</urn1:CommunicationChannelId>
+        </urn4:CommunicationDetails>
+      </urn3:SubjectBranchDetails>
+      <!--Optional:-->
+      <urn2:EqualIndicator>false</urn2:EqualIndicator>
+      <!--Optional:-->
+      <urn2:ExchangePostOfficeCode>tokent</urn2:ExchangePostOfficeCode>
+      <!--Optional:-->
+      <urn2:SubjectAdditionalCode>t</urn2:SubjectAdditionalCode>
+    </urn3:ConsignorDetails>
+    <!--Optional:-->
+    <urn3:ConsigneeDetails>
+      <!--Optional:-->
+      <urn1:UnifiedCountryCode codeListId="token">token</urn1:UnifiedCountryCode>
+      <!--Optional:-->
+      <urn1:SubjectName>token</urn1:SubjectName>
+      <!--Optional:-->
+      <urn1:SubjectBriefName>token</urn1:SubjectBriefName>
+      <!--Optional:-->
+      <urn1:BusinessEntityTypeCode codeListId="token">token</urn1:BusinessEntityTypeCode>
+      <!--Optional:-->
+      <urn1:BusinessEntityTypeName>token</urn1:BusinessEntityTypeName>
+      <!--Optional:-->
+      <urn1:BusinessEntityId kindId="token">token</urn1:BusinessEntityId>
+      <!--Optional:-->
+      <urn2:CAUniqueCustomsNumberId countryCode="token" countryCodeListId="token">token</urn2:CAUniqueCustomsNumberId>
+      <!--Optional:-->
+      <urn1:TaxpayerId>token</urn1:TaxpayerId>
+      <!--Optional:-->
+      <urn1:TaxRegistrationReasonCode>token</urn1:TaxRegistrationReasonCode>
+      <!--Optional:-->
+      <urn2:PersonId>token</urn2:PersonId>
+      <!--Optional:-->
+      <urn4:IdentityDocV3Details>
+        <urn1:UnifiedCountryCode codeListId="token">token</urn1:UnifiedCountryCode>
+        <!--Optional:-->
+        <urn1:IdentityDocKindCode codeListId="token">token</urn1:IdentityDocKindCode>
+        <!--Optional:-->
+        <urn1:DocKindName>token</urn1:DocKindName>
+        <!--Optional:-->
+        <urn1:DocSeriesId>token</urn1:DocSeriesId>
+        <urn1:DocId>token</urn1:DocId>
+        <!--Optional:-->
+        <urn1:DocCreationDate>2002-11-05+03:00</urn1:DocCreationDate>
+        <!--Optional:-->
+        <urn1:DocValidityDate>2002-06-24+04:00</urn1:DocValidityDate>
+        <!--Optional:-->
+        <urn1:AuthorityId>token</urn1:AuthorityId>
+        <!--Optional:-->
+        <urn1:AuthorityName>token</urn1:AuthorityName>
+      </urn4:IdentityDocV3Details>
+      <!--Zero or more repetitions:-->
+      <urn4:SubjectAddressDetails>
+        <!--Optional:-->
+        <urn1:AddressKindCode>token</urn1:AddressKindCode>
+        <!--Optional:-->
+        <urn1:UnifiedCountryCode codeListId="token">token</urn1:UnifiedCountryCode>
+        <!--Optional:-->
+        <urn1:TerritoryCode>token</urn1:TerritoryCode>
+        <!--Optional:-->
+        <urn1:RegionName>token</urn1:RegionName>
+        <!--Optional:-->
+        <urn1:DistrictName>token</urn1:DistrictName>
+        <!--Optional:-->
+        <urn1:CityName>token</urn1:CityName>
+        <!--Optional:-->
+        <urn1:SettlementName>token</urn1:SettlementName>
+        <!--Optional:-->
+        <urn1:StreetName>token</urn1:StreetName>
+        <!--Optional:-->
+        <urn1:BuildingNumberId>token</urn1:BuildingNumberId>
+        <!--Optional:-->
+        <urn1:RoomNumberId>token</urn1:RoomNumberId>
+        <!--Optional:-->
+        <urn1:PostCode>token</urn1:PostCode>
+        <!--Optional:-->
+        <urn1:PostOfficeBoxId>token</urn1:PostOfficeBoxId>
+      </urn4:SubjectAddressDetails>
+      <!--Zero or more repetitions:-->
+      <urn4:CommunicationDetails>
+        <!--Optional:-->
+        <urn1:CommunicationChannelCode>token</urn1:CommunicationChannelCode>
+        <!--Optional:-->
+        <urn1:CommunicationChannelName>token</urn1:CommunicationChannelName>
+        <!--1 or more repetitions:-->
+        <urn1:CommunicationChannelId>token</urn1:CommunicationChannelId>
+      </urn4:CommunicationDetails>
+      <!--Optional:-->
+      <urn3:SubjectBranchDetails>
+        <!--Optional:-->
+        <urn1:UnifiedCountryCode codeListId="token">token</urn1:UnifiedCountryCode>
+        <!--Optional:-->
+        <urn1:SubjectName>token</urn1:SubjectName>
+        <!--Optional:-->
+        <urn1:SubjectBriefName>token</urn1:SubjectBriefName>
+        <!--Optional:-->
+        <urn1:BusinessEntityTypeCode codeListId="token">token</urn1:BusinessEntityTypeCode>
+        <!--Optional:-->
+        <urn1:BusinessEntityTypeName>token</urn1:BusinessEntityTypeName>
+        <!--Optional:-->
+        <urn1:BusinessEntityId kindId="token">token</urn1:BusinessEntityId>
+        <!--Optional:-->
+        <urn2:CAUniqueCustomsNumberId countryCode="token" countryCodeListId="token">token</urn2:CAUniqueCustomsNumberId>
+        <!--Optional:-->
+        <urn1:TaxpayerId>token</urn1:TaxpayerId>
+        <!--Optional:-->
+        <urn1:TaxRegistrationReasonCode>token</urn1:TaxRegistrationReasonCode>
+        <!--Optional:-->
+        <urn4:SubjectAddressDetails>
+          <!--Optional:-->
+          <urn1:AddressKindCode>token</urn1:AddressKindCode>
+          <!--Optional:-->
+          <urn1:UnifiedCountryCode codeListId="token">token</urn1:UnifiedCountryCode>
+          <!--Optional:-->
+          <urn1:TerritoryCode>token</urn1:TerritoryCode>
+          <!--Optional:-->
+          <urn1:RegionName>token</urn1:RegionName>
+          <!--Optional:-->
+          <urn1:DistrictName>token</urn1:DistrictName>
+          <!--Optional:-->
+          <urn1:CityName>token</urn1:CityName>
+          <!--Optional:-->
+          <urn1:SettlementName>token</urn1:SettlementName>
+          <!--Optional:-->
+          <urn1:StreetName>token</urn1:StreetName>
+          <!--Optional:-->
+          <urn1:BuildingNumberId>token</urn1:BuildingNumberId>
+          <!--Optional:-->
+          <urn1:RoomNumberId>token</urn1:RoomNumberId>
+          <!--Optional:-->
+          <urn1:PostCode>token</urn1:PostCode>
+          <!--Optional:-->
+          <urn1:PostOfficeBoxId>token</urn1:PostOfficeBoxId>
+        </urn4:SubjectAddressDetails>
+        <!--Zero or more repetitions:-->
+        <urn4:CommunicationDetails>
+          <!--Optional:-->
+          <urn1:CommunicationChannelCode>token</urn1:CommunicationChannelCode>
+          <!--Optional:-->
+          <urn1:CommunicationChannelName>token</urn1:CommunicationChannelName>
+          <!--1 or more repetitions:-->
+          <urn1:CommunicationChannelId>token</urn1:CommunicationChannelId>
+        </urn4:CommunicationDetails>
+      </urn3:SubjectBranchDetails>
+      <!--Optional:-->
+      <urn2:EqualIndicator>true</urn2:EqualIndicator>
+      <!--Optional:-->
+      <urn2:ExchangePostOfficeCode>tokent</urn2:ExchangePostOfficeCode>
+      <!--Optional:-->
+      <urn2:SubjectAdditionalCode>t</urn2:SubjectAdditionalCode>
+    </urn3:ConsigneeDetails>
+    <!--Zero or more repetitions:-->
+    <urn3:ECHouseShipmentDetails>
+      <urn1:ObjectOrdinal>201</urn1:ObjectOrdinal>
+      <!--Optional:-->
+      <urn3:TransportDocumentDetails>
+        <!--Optional:-->
+        <urn1:DocKindCode codeListId="token">token</urn1:DocKindCode>
+        <!--Optional:-->
+        <urn1:DocName>token</urn1:DocName>
+        <!--Optional:-->
+        <urn1:DocId>token</urn1:DocId>
+        <!--Optional:-->
+        <urn1:DocCreationDate>2012-01-07</urn1:DocCreationDate>
+      </urn3:TransportDocumentDetails>
+      <!--Optional:-->
+      <urn3:HouseWaybillDetails>
+        <!--Optional:-->
+        <urn1:DocKindCode codeListId="token">token</urn1:DocKindCode>
+        <!--Optional:-->
+        <urn1:DocName>token</urn1:DocName>
+        <!--Optional:-->
+        <urn1:DocId>token</urn1:DocId>
+        <!--Optional:-->
+        <urn1:DocCreationDate>2014-10-27</urn1:DocCreationDate>
+      </urn3:HouseWaybillDetails>
+      <!--Optional:-->
+      <urn3:ConsignorDetails>
+        <!--Optional:-->
+        <urn1:UnifiedCountryCode codeListId="token">token</urn1:UnifiedCountryCode>
+        <!--Optional:-->
+        <urn1:SubjectName>token</urn1:SubjectName>
+        <!--Optional:-->
+        <urn1:SubjectBriefName>token</urn1:SubjectBriefName>
+        <!--Optional:-->
+        <urn1:BusinessEntityTypeCode codeListId="token">token</urn1:BusinessEntityTypeCode>
+        <!--Optional:-->
+        <urn1:BusinessEntityTypeName>token</urn1:BusinessEntityTypeName>
+        <!--Optional:-->
+        <urn1:BusinessEntityId kindId="token">token</urn1:BusinessEntityId>
+        <!--Optional:-->
+        <urn2:CAUniqueCustomsNumberId countryCode="token" countryCodeListId="token">token</urn2:CAUniqueCustomsNumberId>
+        <!--Optional:-->
+        <urn1:TaxpayerId>token</urn1:TaxpayerId>
+        <!--Optional:-->
+        <urn1:TaxRegistrationReasonCode>token</urn1:TaxRegistrationReasonCode>
+        <!--Optional:-->
+        <urn2:PersonId>token</urn2:PersonId>
+        <!--Optional:-->
+        <urn4:IdentityDocV3Details>
+          <urn1:UnifiedCountryCode codeListId="token">token</urn1:UnifiedCountryCode>
+          <!--Optional:-->
+          <urn1:IdentityDocKindCode codeListId="token">token</urn1:IdentityDocKindCode>
+          <!--Optional:-->
+          <urn1:DocKindName>token</urn1:DocKindName>
+          <!--Optional:-->
+          <urn1:DocSeriesId>token</urn1:DocSeriesId>
+          <urn1:DocId>token</urn1:DocId>
+          <!--Optional:-->
+          <urn1:DocCreationDate>2013-06-17</urn1:DocCreationDate>
+          <!--Optional:-->
+          <urn1:DocValidityDate>2005-09-12+04:00</urn1:DocValidityDate>
+          <!--Optional:-->
+          <urn1:AuthorityId>token</urn1:AuthorityId>
+          <!--Optional:-->
+          <urn1:AuthorityName>token</urn1:AuthorityName>
+        </urn4:IdentityDocV3Details>
+        <!--Zero or more repetitions:-->
+        <urn4:SubjectAddressDetails>
+          <!--Optional:-->
+          <urn1:AddressKindCode>token</urn1:AddressKindCode>
+          <!--Optional:-->
+          <urn1:UnifiedCountryCode codeListId="token">token</urn1:UnifiedCountryCode>
+          <!--Optional:-->
+          <urn1:TerritoryCode>token</urn1:TerritoryCode>
+          <!--Optional:-->
+          <urn1:RegionName>token</urn1:RegionName>
+          <!--Optional:-->
+          <urn1:DistrictName>token</urn1:DistrictName>
+          <!--Optional:-->
+          <urn1:CityName>token</urn1:CityName>
+          <!--Optional:-->
+          <urn1:SettlementName>token</urn1:SettlementName>
+          <!--Optional:-->
+          <urn1:StreetName>token</urn1:StreetName>
+          <!--Optional:-->
+          <urn1:BuildingNumberId>token</urn1:BuildingNumberId>
+          <!--Optional:-->
+          <urn1:RoomNumberId>token</urn1:RoomNumberId>
+          <!--Optional:-->
+          <urn1:PostCode>token</urn1:PostCode>
+          <!--Optional:-->
+          <urn1:PostOfficeBoxId>token</urn1:PostOfficeBoxId>
+        </urn4:SubjectAddressDetails>
+        <!--Zero or more repetitions:-->
+        <urn4:CommunicationDetails>
+          <!--Optional:-->
+          <urn1:CommunicationChannelCode>token</urn1:CommunicationChannelCode>
+          <!--Optional:-->
+          <urn1:CommunicationChannelName>token</urn1:CommunicationChannelName>
+          <!--1 or more repetitions:-->
+          <urn1:CommunicationChannelId>token</urn1:CommunicationChannelId>
+        </urn4:CommunicationDetails>
+        <!--Optional:-->
+        <urn3:SubjectBranchDetails>
+          <!--Optional:-->
+          <urn1:UnifiedCountryCode codeListId="token">token</urn1:UnifiedCountryCode>
+          <!--Optional:-->
+          <urn1:SubjectName>token</urn1:SubjectName>
+          <!--Optional:-->
+          <urn1:SubjectBriefName>token</urn1:SubjectBriefName>
+          <!--Optional:-->
+          <urn1:BusinessEntityTypeCode codeListId="token">token</urn1:BusinessEntityTypeCode>
+          <!--Optional:-->
+          <urn1:BusinessEntityTypeName>token</urn1:BusinessEntityTypeName>
+          <!--Optional:-->
+          <urn1:BusinessEntityId kindId="token">token</urn1:BusinessEntityId>
+          <!--Optional:-->
+          <urn2:CAUniqueCustomsNumberId countryCode="token" countryCodeListId="token">token</urn2:CAUniqueCustomsNumberId>
+          <!--Optional:-->
+          <urn1:TaxpayerId>token</urn1:TaxpayerId>
+          <!--Optional:-->
+          <urn1:TaxRegistrationReasonCode>token</urn1:TaxRegistrationReasonCode>
+          <!--Optional:-->
+          <urn4:SubjectAddressDetails>
+            <!--Optional:-->
+            <urn1:AddressKindCode>token</urn1:AddressKindCode>
+            <!--Optional:-->
+            <urn1:UnifiedCountryCode codeListId="token">token</urn1:UnifiedCountryCode>
+            <!--Optional:-->
+            <urn1:TerritoryCode>token</urn1:TerritoryCode>
+            <!--Optional:-->
+            <urn1:RegionName>token</urn1:RegionName>
+            <!--Optional:-->
+            <urn1:DistrictName>token</urn1:DistrictName>
+            <!--Optional:-->
+            <urn1:CityName>token</urn1:CityName>
+            <!--Optional:-->
+            <urn1:SettlementName>token</urn1:SettlementName>
+            <!--Optional:-->
+            <urn1:StreetName>token</urn1:StreetName>
+            <!--Optional:-->
+            <urn1:BuildingNumberId>token</urn1:BuildingNumberId>
+            <!--Optional:-->
+            <urn1:RoomNumberId>token</urn1:RoomNumberId>
+            <!--Optional:-->
+            <urn1:PostCode>token</urn1:PostCode>
+            <!--Optional:-->
+            <urn1:PostOfficeBoxId>token</urn1:PostOfficeBoxId>
+          </urn4:SubjectAddressDetails>
+          <!--Zero or more repetitions:-->
+          <urn4:CommunicationDetails>
+            <!--Optional:-->
+            <urn1:CommunicationChannelCode>token</urn1:CommunicationChannelCode>
+            <!--Optional:-->
+            <urn1:CommunicationChannelName>token</urn1:CommunicationChannelName>
+            <!--1 or more repetitions:-->
+            <urn1:CommunicationChannelId>token</urn1:CommunicationChannelId>
+          </urn4:CommunicationDetails>
+        </urn3:SubjectBranchDetails>
+        <!--Optional:-->
+        <urn2:EqualIndicator>false</urn2:EqualIndicator>
+        <!--Optional:-->
+        <urn2:ExchangePostOfficeCode>tokent</urn2:ExchangePostOfficeCode>
+        <!--Optional:-->
+        <urn2:SubjectAdditionalCode>t</urn2:SubjectAdditionalCode>
+      </urn3:ConsignorDetails>
+      <!--Optional:-->
+      <urn3:ConsigneeDetails>
+        <!--Optional:-->
+        <urn1:UnifiedCountryCode codeListId="token">token</urn1:UnifiedCountryCode>
+        <!--Optional:-->
+        <urn1:SubjectName>token</urn1:SubjectName>
+        <!--Optional:-->
+        <urn1:SubjectBriefName>token</urn1:SubjectBriefName>
+        <!--Optional:-->
+        <urn1:BusinessEntityTypeCode codeListId="token">token</urn1:BusinessEntityTypeCode>
+        <!--Optional:-->
+        <urn1:BusinessEntityTypeName>token</urn1:BusinessEntityTypeName>
+        <!--Optional:-->
+        <urn1:BusinessEntityId kindId="token">token</urn1:BusinessEntityId>
+        <!--Optional:-->
+        <urn2:CAUniqueCustomsNumberId countryCode="token" countryCodeListId="token">token</urn2:CAUniqueCustomsNumberId>
+        <!--Optional:-->
+        <urn1:TaxpayerId>token</urn1:TaxpayerId>
+        <!--Optional:-->
+        <urn1:TaxRegistrationReasonCode>token</urn1:TaxRegistrationReasonCode>
+        <!--Optional:-->
+        <urn2:PersonId>token</urn2:PersonId>
+        <!--Optional:-->
+        <urn4:IdentityDocV3Details>
+          <urn1:UnifiedCountryCode codeListId="token">token</urn1:UnifiedCountryCode>
+          <!--Optional:-->
+          <urn1:IdentityDocKindCode codeListId="token">token</urn1:IdentityDocKindCode>
+          <!--Optional:-->
+          <urn1:DocKindName>token</urn1:DocKindName>
+          <!--Optional:-->
+          <urn1:DocSeriesId>token</urn1:DocSeriesId>
+          <urn1:DocId>token</urn1:DocId>
+          <!--Optional:-->
+          <urn1:DocCreationDate>2003-11-10+03:00</urn1:DocCreationDate>
+          <!--Optional:-->
+          <urn1:DocValidityDate>2000-09-25</urn1:DocValidityDate>
+          <!--Optional:-->
+          <urn1:AuthorityId>token</urn1:AuthorityId>
+          <!--Optional:-->
+          <urn1:AuthorityName>token</urn1:AuthorityName>
+        </urn4:IdentityDocV3Details>
+        <!--Zero or more repetitions:-->
+        <urn4:SubjectAddressDetails>
+          <!--Optional:-->
+          <urn1:AddressKindCode>token</urn1:AddressKindCode>
+          <!--Optional:-->
+          <urn1:UnifiedCountryCode codeListId="token">token</urn1:UnifiedCountryCode>
+          <!--Optional:-->
+          <urn1:TerritoryCode>token</urn1:TerritoryCode>
+          <!--Optional:-->
+          <urn1:RegionName>token</urn1:RegionName>
+          <!--Optional:-->
+          <urn1:DistrictName>token</urn1:DistrictName>
+          <!--Optional:-->
+          <urn1:CityName>token</urn1:CityName>
+          <!--Optional:-->
+          <urn1:SettlementName>token</urn1:SettlementName>
+          <!--Optional:-->
+          <urn1:StreetName>token</urn1:StreetName>
+          <!--Optional:-->
+          <urn1:BuildingNumberId>token</urn1:BuildingNumberId>
+          <!--Optional:-->
+          <urn1:RoomNumberId>token</urn1:RoomNumberId>
+          <!--Optional:-->
+          <urn1:PostCode>token</urn1:PostCode>
+          <!--Optional:-->
+          <urn1:PostOfficeBoxId>token</urn1:PostOfficeBoxId>
+        </urn4:SubjectAddressDetails>
+        <!--Zero or more repetitions:-->
+        <urn4:CommunicationDetails>
+          <!--Optional:-->
+          <urn1:CommunicationChannelCode>token</urn1:CommunicationChannelCode>
+          <!--Optional:-->
+          <urn1:CommunicationChannelName>token</urn1:CommunicationChannelName>
+          <!--1 or more repetitions:-->
+          <urn1:CommunicationChannelId>token</urn1:CommunicationChannelId>
+        </urn4:CommunicationDetails>
+        <!--Optional:-->
+        <urn3:SubjectBranchDetails>
+          <!--Optional:-->
+          <urn1:UnifiedCountryCode codeListId="token">token</urn1:UnifiedCountryCode>
+          <!--Optional:-->
+          <urn1:SubjectName>token</urn1:SubjectName>
+          <!--Optional:-->
+          <urn1:SubjectBriefName>token</urn1:SubjectBriefName>
+          <!--Optional:-->
+          <urn1:BusinessEntityTypeCode codeListId="token">token</urn1:BusinessEntityTypeCode>
+          <!--Optional:-->
+          <urn1:BusinessEntityTypeName>token</urn1:BusinessEntityTypeName>
+          <!--Optional:-->
+          <urn1:BusinessEntityId kindId="token">token</urn1:BusinessEntityId>
+          <!--Optional:-->
+          <urn2:CAUniqueCustomsNumberId countryCode="token" countryCodeListId="token">token</urn2:CAUniqueCustomsNumberId>
+          <!--Optional:-->
+          <urn1:TaxpayerId>token</urn1:TaxpayerId>
+          <!--Optional:-->
+          <urn1:TaxRegistrationReasonCode>token</urn1:TaxRegistrationReasonCode>
+          <!--Optional:-->
+          <urn4:SubjectAddressDetails>
+            <!--Optional:-->
+            <urn1:AddressKindCode>token</urn1:AddressKindCode>
+            <!--Optional:-->
+            <urn1:UnifiedCountryCode codeListId="token">token</urn1:UnifiedCountryCode>
+            <!--Optional:-->
+            <urn1:TerritoryCode>token</urn1:TerritoryCode>
+            <!--Optional:-->
+            <urn1:RegionName>token</urn1:RegionName>
+            <!--Optional:-->
+            <urn1:DistrictName>token</urn1:DistrictName>
+            <!--Optional:-->
+            <urn1:CityName>token</urn1:CityName>
+            <!--Optional:-->
+            <urn1:SettlementName>token</urn1:SettlementName>
+            <!--Optional:-->
+            <urn1:StreetName>token</urn1:StreetName>
+            <!--Optional:-->
+            <urn1:BuildingNumberId>token</urn1:BuildingNumberId>
+            <!--Optional:-->
+            <urn1:RoomNumberId>token</urn1:RoomNumberId>
+            <!--Optional:-->
+            <urn1:PostCode>token</urn1:PostCode>
+            <!--Optional:-->
+            <urn1:PostOfficeBoxId>token</urn1:PostOfficeBoxId>
+          </urn4:SubjectAddressDetails>
+          <!--Zero or more repetitions:-->
+          <urn4:CommunicationDetails>
+            <!--Optional:-->
+            <urn1:CommunicationChannelCode>token</urn1:CommunicationChannelCode>
+            <!--Optional:-->
+            <urn1:CommunicationChannelName>token</urn1:CommunicationChannelName>
+            <!--1 or more repetitions:-->
+            <urn1:CommunicationChannelId>token</urn1:CommunicationChannelId>
+          </urn4:CommunicationDetails>
+        </urn3:SubjectBranchDetails>
+        <!--Optional:-->
+        <urn2:EqualIndicator>false</urn2:EqualIndicator>
+        <!--Optional:-->
+        <urn2:ExchangePostOfficeCode>tokent</urn2:ExchangePostOfficeCode>
+        <!--Optional:-->
+        <urn2:SubjectAdditionalCode>t</urn2:SubjectAdditionalCode>
+      </urn3:ConsigneeDetails>
+      <!--Zero or more repetitions:-->
+      <urn3:ECGoodsItemDetails>
+        <urn2:ConsignmentItemOrdinal>201</urn2:ConsignmentItemOrdinal>
+        <!--Optional:-->
+        <urn1:CommodityCode>token</urn1:CommodityCode>
+        <!--0 to 4 repetitions:-->
+        <urn2:GoodsDescriptionText>string</urn2:GoodsDescriptionText>
+        <!--Optional:-->
+        <urn1:UnifiedGrossMassMeasure measurementUnitCode="token" measurementUnitCodeListId="token">1000.00000000000000000000</urn1:UnifiedGrossMassMeasure>
+        <!--Optional:-->
+        <urn1:UnifiedNetMassMeasure measurementUnitCode="token" measurementUnitCodeListId="token">1000.00000000000000000000</urn1:UnifiedNetMassMeasure>
+        <!--Optional:-->
+        <urn3:GoodsMeasureDetails>
+          <urn2:GoodsMeasure measurementUnitCode="token" measurementUnitCodeListId="token">1000.00000000000000000000</urn2:GoodsMeasure>
+          <!--Optional:-->
+          <urn2:MeasureUnitAbbreviationCode>token</urn2:MeasureUnitAbbreviationCode>
+        </urn3:GoodsMeasureDetails>
+        <urn2:HMConsignmentItemNumber>1000.00</urn2:HMConsignmentItemNumber>
+        <!--Optional:-->
+        <urn2:TradeMarkName>token</urn2:TradeMarkName>
+        <!--Optional:-->
+        <urn2:ProductionPlaceName>token</urn2:ProductionPlaceName>
+        <!--Zero or more repetitions:-->
+        <urn3:IPObjectRegistryIdDetails>
+          <urn2:RegistryOwnerCode>t</urn2:RegistryOwnerCode>
+          <!--Optional:-->
+          <urn1:UnifiedCountryCode codeListId="token">token</urn1:UnifiedCountryCode>
+          <urn2:IPObjectId>token</urn2:IPObjectId>
+        </urn3:IPObjectRegistryIdDetails>
+        <!--0 to 2 repetitions:-->
+        <urn2:CAValueAmount currencyCode="token" currencyCodeListId="token">1000.0000000000000000</urn2:CAValueAmount>
+        <!--Optional:-->
+        <urn2:CustomsValueAmount currencyCode="token" currencyCodeListId="token">1000.0000000000000000</urn2:CustomsValueAmount>
+        <!--Zero or more repetitions:-->
+        <urn3:ECPrecedingDocDetails>
+          <!--Optional:-->
+          <urn1:DocKindCode codeListId="token">token</urn1:DocKindCode>
+          <!--Optional:-->
+          <urn3:CustomsDocIdDetails>
+            <urn1:CustomsOfficeCode>token</urn1:CustomsOfficeCode>
+            <urn1:DocCreationDate>2000-04-21+04:00</urn1:DocCreationDate>
+            <urn2:CustomsDocumentId>token</urn2:CustomsDocumentId>
+            <!--Optional:-->
+            <urn2:CustomsDocumentOrdinalId>to</urn2:CustomsDocumentOrdinalId>
+          </urn3:CustomsDocIdDetails>
+          <!--Optional:-->
+          <urn3:TIRIdDetails>
+            <urn2:TIRSeriesId>token</urn2:TIRSeriesId>
+            <urn2:TIRId>token</urn2:TIRId>
+          </urn3:TIRIdDetails>
+          <!--Optional:-->
+          <urn1:DocId>token</urn1:DocId>
+          <!--Optional:-->
+          <urn1:DocCreationDate>2017-04-19+03:00</urn1:DocCreationDate>
+          <!--Optional:-->
+          <urn2:ConsignmentItemOrdinal>201</urn2:ConsignmentItemOrdinal>
+        </urn3:ECPrecedingDocDetails>
+        <!--Zero or more repetitions:-->
+        <urn3:ECPresentedDocDetails>
+          <!--Optional:-->
+          <urn1:DocKindCode codeListId="token">token</urn1:DocKindCode>
+          <!--Optional:-->
+          <urn1:DocName>token</urn1:DocName>
+          <!--Optional:-->
+          <urn1:DocId>token</urn1:DocId>
+          <!--Optional:-->
+          <urn1:DocCreationDate>2008-08-06+04:00</urn1:DocCreationDate>
+          <!--Optional:-->
+          <urn1:DocStartDate>2011-12-25</urn1:DocStartDate>
+          <!--Optional:-->
+          <urn1:DocValidityDate>2015-10-10+03:00</urn1:DocValidityDate>
+          <!--Optional:-->
+          <urn1:UnifiedCountryCode codeListId="token">token</urn1:UnifiedCountryCode>
+          <!--Optional:-->
+          <urn1:AuthorityName>token</urn1:AuthorityName>
+          <!--Optional:-->
+          <urn1:AuthorityId>token</urn1:AuthorityId>
+          <!--Optional:-->
+          <urn3:InformationSourceDetails>
+            <!--Optional:-->
+            <urn2:InformationSourceName>token</urn2:InformationSourceName>
+            <urn1:DetailsResourceId>token</urn1:DetailsResourceId>
+            <!--Optional:-->
+            <urn1:EventDate>2018-07-19+03:00</urn1:EventDate>
+          </urn3:InformationSourceDetails>
+          <!--Optional:-->
+          <urn2:LineId>token</urn2:LineId>
+          <!--Optional:-->
+          <urn2:EDocCode>token</urn2:EDocCode>
+          <!--Optional:-->
+          <urn3:DocArchIdDetails>
+            <!--Optional:-->
+            <urn2:EArchId>token</urn2:EArchId>
+            <urn2:EDocArchId>token</urn2:EDocArchId>
+          </urn3:DocArchIdDetails>
+          <!--Optional:-->
+          <urn3:DocumentPresentingDetails>
+            <!--Optional:-->
+            <urn2:DocPresentKindCode>t</urn2:DocPresentKindCode>
+            <!--Optional:-->
+            <urn1:DocKindCode codeListId="token">token</urn1:DocKindCode>
+            <!--Optional:-->
+            <urn2:DocPresentDate>2004-12-06+03:00</urn2:DocPresentDate>
+            <!--Optional:-->
+            <urn3:CustomsDocIdDetails>
+              <urn1:CustomsOfficeCode>token</urn1:CustomsOfficeCode>
+              <urn1:DocCreationDate>2006-12-05</urn1:DocCreationDate>
+              <urn2:CustomsDocumentId>token</urn2:CustomsDocumentId>
+              <!--Optional:-->
+              <urn2:CustomsDocumentOrdinalId>to</urn2:CustomsDocumentOrdinalId>
+            </urn3:CustomsDocIdDetails>
+            <!--Optional:-->
+            <urn3:DTMDocDetails>
+              <urn1:CustomsOfficeCode>token</urn1:CustomsOfficeCode>
+              <urn1:DocCreationDate>2016-09-11</urn1:DocCreationDate>
+              <urn2:CustomsDocumentId>token</urn2:CustomsDocumentId>
+              <urn1:UnifiedTransportModeCode codeListId="token">token</urn1:UnifiedTransportModeCode>
+            </urn3:DTMDocDetails>
+            <!--Optional:-->
+            <urn3:TIRIdDetails>
+              <urn2:TIRSeriesId>token</urn2:TIRSeriesId>
+              <urn2:TIRId>token</urn2:TIRId>
+            </urn3:TIRIdDetails>
+            <!--Optional:-->
+            <urn2:PrecedingDocId>token</urn2:PrecedingDocId>
+            <!--Optional:-->
+            <urn1:DocCreationDate>2005-02-02</urn1:DocCreationDate>
+          </urn3:DocumentPresentingDetails>
+        </urn3:ECPresentedDocDetails>
+        <!--Optional:-->
+        <urn1:DescriptionText>string</urn1:DescriptionText>
+        <!--Zero or more repetitions:-->
+        <urn3:CustomsPaymentDetails>
+          <urn2:CustomsTaxModeCode codeListId="token">toke</urn2:CustomsTaxModeCode>
+          <!--Optional:-->
+          <urn2:TaxBaseMeasure>1000.00000000000000000000</urn2:TaxBaseMeasure>
+          <!--Optional:-->
+          <urn1:UnifiedCurrencyN3Code codeListId="token">token</urn1:UnifiedCurrencyN3Code>
+          <!--Optional:-->
+          <urn1:UnifiedMeasurementUnitCode codeListId="token">token</urn1:UnifiedMeasurementUnitCode>
+          <!--Optional:-->
+          <urn3:EffectiveCustomsRateDetails>
+            <!--Optional:-->
+            <urn2:DutyTaxFeeRateKindCode>t</urn2:DutyTaxFeeRateKindCode>
+            <!--Optional:-->
+            <urn2:DutyTaxFeeRateValue>1000.00000000</urn2:DutyTaxFeeRateValue>
+            <!--Optional:-->
+            <urn1:UnifiedMeasurementUnitCode codeListId="token">token</urn1:UnifiedMeasurementUnitCode>
+            <!--Optional:-->
+            <urn1:UnifiedCurrencyN3Code codeListId="token">token</urn1:UnifiedCurrencyN3Code>
+            <!--Optional:-->
+            <urn1:DayQuantity>200</urn1:DayQuantity>
+            <!--Optional:-->
+            <urn2:StageQuantity>200</urn2:StageQuantity>
+            <!--Optional:-->
+            <urn1:MonthQuantity>200</urn1:MonthQuantity>
+            <!--Optional:-->
+            <urn2:WeightRatioNumber>1000.00000</urn2:WeightRatioNumber>
+          </urn3:EffectiveCustomsRateDetails>
+          <!--Optional:-->
+          <urn2:DutyTaxFeeRateDate>2016-10-07+03:00</urn2:DutyTaxFeeRateDate>
+          <!--Optional:-->
+          <urn2:CustomsTaxPaymentFeatureCode codeListId="token">to</urn2:CustomsTaxPaymentFeatureCode>
+          <!--Optional:-->
+          <urn2:CAPaymentNAmount currencyCode="token" currencyCodeListId="token">1000.0000000000000000</urn2:CAPaymentNAmount>
+          <!--Optional:-->
+          <urn1:CommodityCode>token</urn1:CommodityCode>
+          <!--Optional:-->
+          <urn2:ReferenceLineId>token</urn2:ReferenceLineId>
+          <!--Optional:-->
+          <urn2:RefReferenceLineId>token</urn2:RefReferenceLineId>
+          <!--Optional:-->
+          <urn2:ReferenceConsignmentItemOrdinal>201</urn2:ReferenceConsignmentItemOrdinal>
+        </urn3:CustomsPaymentDetails>
+        <!--Optional:-->
+        <urn3:ECChangeDetails>
+          <urn2:StageChangeCode>t</urn2:StageChangeCode>
+          <urn2:ReasonChangeCode>t</urn2:ReasonChangeCode>
+          <urn2:QuantityChangeCode>t</urn2:QuantityChangeCode>
+          <urn2:TNVEDChangeCode>t</urn2:TNVEDChangeCode>
+          <urn2:CustomsCostChangeCode>t</urn2:CustomsCostChangeCode>
+          <urn2:CustomsPaymentChangeCode>t</urn2:CustomsPaymentChangeCode>
+          <urn2:OtherChangeCode>t</urn2:OtherChangeCode>
+        </urn3:ECChangeDetails>
+      </urn3:ECGoodsItemDetails>
+      <!--Optional:-->
+      <urn1:UnifiedGrossMassMeasure measurementUnitCode="token" measurementUnitCodeListId="token">1000.00000000000000000000</urn1:UnifiedGrossMassMeasure>
+      <!--Optional:-->
+      <urn2:CustomsValueAmount currencyCode="token" currencyCodeListId="token">1000.0000000000000000</urn2:CustomsValueAmount>
+      <!--Optional:-->
+      <urn2:CAValueAmount currencyCode="token" currencyCodeListId="token">1000.0000000000000000</urn2:CAValueAmount>
+      <!--Zero or more repetitions:-->
+      <urn3:CustomsPaymentDetails>
+        <urn2:CustomsTaxModeCode codeListId="token">toke</urn2:CustomsTaxModeCode>
+        <!--Optional:-->
+        <urn2:TaxBaseMeasure>1000.00000000000000000000</urn2:TaxBaseMeasure>
+        <!--Optional:-->
+        <urn1:UnifiedCurrencyN3Code codeListId="token">token</urn1:UnifiedCurrencyN3Code>
+        <!--Optional:-->
+        <urn1:UnifiedMeasurementUnitCode codeListId="token">token</urn1:UnifiedMeasurementUnitCode>
+        <!--Optional:-->
+        <urn3:EffectiveCustomsRateDetails>
+          <!--Optional:-->
+          <urn2:DutyTaxFeeRateKindCode>t</urn2:DutyTaxFeeRateKindCode>
+          <!--Optional:-->
+          <urn2:DutyTaxFeeRateValue>1000.00000000</urn2:DutyTaxFeeRateValue>
+          <!--Optional:-->
+          <urn1:UnifiedMeasurementUnitCode codeListId="token">token</urn1:UnifiedMeasurementUnitCode>
+          <!--Optional:-->
+          <urn1:UnifiedCurrencyN3Code codeListId="token">token</urn1:UnifiedCurrencyN3Code>
+          <!--Optional:-->
+          <urn1:DayQuantity>200</urn1:DayQuantity>
+          <!--Optional:-->
+          <urn2:StageQuantity>200</urn2:StageQuantity>
+          <!--Optional:-->
+          <urn1:MonthQuantity>200</urn1:MonthQuantity>
+          <!--Optional:-->
+          <urn2:WeightRatioNumber>1000.00000</urn2:WeightRatioNumber>
+        </urn3:EffectiveCustomsRateDetails>
+        <!--Optional:-->
+        <urn2:DutyTaxFeeRateDate>2002-11-05</urn2:DutyTaxFeeRateDate>
+        <!--Optional:-->
+        <urn2:CustomsTaxPaymentFeatureCode codeListId="token">to</urn2:CustomsTaxPaymentFeatureCode>
+        <!--Optional:-->
+        <urn2:CAPaymentNAmount currencyCode="token" currencyCodeListId="token">1000.0000000000000000</urn2:CAPaymentNAmount>
+        <!--Optional:-->
+        <urn1:CommodityCode>token</urn1:CommodityCode>
+        <!--Optional:-->
+        <urn2:ReferenceLineId>token</urn2:ReferenceLineId>
+        <!--Optional:-->
+        <urn2:RefReferenceLineId>token</urn2:RefReferenceLineId>
+        <!--Optional:-->
+        <urn2:ReferenceConsignmentItemOrdinal>201</urn2:ReferenceConsignmentItemOrdinal>
+      </urn3:CustomsPaymentDetails>
+      <!--Zero or more repetitions:-->
+      <urn3:ECPaymentAmountDetails>
+        <urn2:CustomsTaxModeCode codeListId="token">toke</urn2:CustomsTaxModeCode>
+        <urn2:CAPaymentNAmount currencyCode="token" currencyCodeListId="token">1000.0000000000000000</urn2:CAPaymentNAmount>
+        <!--Optional:-->
+        <urn2:PreviousCAPaymentNAmount currencyCode="token" currencyCodeListId="token">1000.0000000000000000</urn2:PreviousCAPaymentNAmount>
+        <!--Optional:-->
+        <urn2:DifferenceCAPaymentNAmount currencyCode="token" currencyCodeListId="token">1000.0000000000000000</urn2:DifferenceCAPaymentNAmount>
+      </urn3:ECPaymentAmountDetails>
+      <!--Optional:-->
+      <urn3:ECChangeDetails>
+        <urn2:StageChangeCode>t</urn2:StageChangeCode>
+        <urn2:ReasonChangeCode>t</urn2:ReasonChangeCode>
+        <urn2:QuantityChangeCode>t</urn2:QuantityChangeCode>
+        <urn2:TNVEDChangeCode>t</urn2:TNVEDChangeCode>
+        <urn2:CustomsCostChangeCode>t</urn2:CustomsCostChangeCode>
+        <urn2:CustomsPaymentChangeCode>t</urn2:CustomsPaymentChangeCode>
+        <urn2:OtherChangeCode>t</urn2:OtherChangeCode>
+      </urn3:ECChangeDetails>
+    </urn3:ECHouseShipmentDetails>
+    <!--Optional:-->
+    <urn1:UnifiedGrossMassMeasure measurementUnitCode="token" measurementUnitCodeListId="token">1000.00000000000000000000</urn1:UnifiedGrossMassMeasure>
+    <!--Optional:-->
+    <urn2:CAValueAmount currencyCode="token" currencyCodeListId="token">1000.0000000000000000</urn2:CAValueAmount>
+    <!--Optional:-->
+    <urn2:CustomsValueAmount currencyCode="token" currencyCodeListId="token">1000.0000000000000000</urn2:CustomsValueAmount>
+    <!--Zero or more repetitions:-->
+    <urn3:ECPaymentAmountDetails>
+      <urn2:CustomsTaxModeCode codeListId="token">toke</urn2:CustomsTaxModeCode>
+      <urn2:CAPaymentNAmount currencyCode="token" currencyCodeListId="token">1000.0000000000000000</urn2:CAPaymentNAmount>
+      <!--Optional:-->
+      <urn2:PreviousCAPaymentNAmount currencyCode="token" currencyCodeListId="token">1000.0000000000000000</urn2:PreviousCAPaymentNAmount>
+      <!--Optional:-->
+      <urn2:DifferenceCAPaymentNAmount currencyCode="token" currencyCodeListId="token">1000.0000000000000000</urn2:DifferenceCAPaymentNAmount>
+    </urn3:ECPaymentAmountDetails>
+    <!--Zero or more repetitions:-->
+    <urn3:FactPaymentDetails>
+      <urn2:CustomsTaxModeCode codeListId="token">toke</urn2:CustomsTaxModeCode>
+      <urn2:CAPaymentNAmount currencyCode="token" currencyCodeListId="token">1000.0000000000000000</urn2:CAPaymentNAmount>
+      <!--Optional:-->
+      <urn2:ExchangeRate currencyCode="token" currencyCodeListId="token" scaleNumber="0">1000.0000000000000000</urn2:ExchangeRate>
+      <!--Optional:-->
+      <urn2:CustomsTaxPaymentMethodCode codeListId="token">to</urn2:CustomsTaxPaymentMethodCode>
+      <!--Optional:-->
+      <urn3:PaymentDocDetails>
+        <!--Optional:-->
+        <urn1:DocKindCode codeListId="token">token</urn1:DocKindCode>
+        <!--Optional:-->
+        <urn1:DocName>token</urn1:DocName>
+        <!--Optional:-->
+        <urn1:DocId>token</urn1:DocId>
+        <!--Optional:-->
+        <urn1:DocCreationDate>2011-11-03</urn1:DocCreationDate>
+        <!--Optional:-->
+        <urn1:TaxpayerId>token</urn1:TaxpayerId>
+        <!--Optional:-->
+        <urn1:TaxRegistrationReasonCode>token</urn1:TaxRegistrationReasonCode>
+        <!--Optional:-->
+        <urn2:PersonId>token</urn2:PersonId>
+      </urn3:PaymentDocDetails>
+      <!--Optional:-->
+      <urn2:PaymentDate>2008-08-28+04:00</urn2:PaymentDate>
+    </urn3:FactPaymentDetails>
+    <!--Optional:-->
+    <urn3:ECChangeDetails>
+      <urn2:StageChangeCode>t</urn2:StageChangeCode>
+      <urn2:ReasonChangeCode>t</urn2:ReasonChangeCode>
+      <urn2:QuantityChangeCode>t</urn2:QuantityChangeCode>
+      <urn2:TNVEDChangeCode>t</urn2:TNVEDChangeCode>
+      <urn2:CustomsCostChangeCode>t</urn2:CustomsCostChangeCode>
+      <urn2:CustomsPaymentChangeCode>t</urn2:CustomsPaymentChangeCode>
+      <urn2:OtherChangeCode>t</urn2:OtherChangeCode>
+    </urn3:ECChangeDetails>
+  </urn3:ECGoodsShipmentDetails>
+  <!--Optional:-->
+  <urn3:BrokerRegistryDocDetails>
+    <!--Optional:-->
+    <urn1:DocKindCode codeListId="token">token</urn1:DocKindCode>
+    <urn3:RegisterDocumentIdDetails>
+      <!--Optional:-->
+      <urn1:UnifiedCountryCode codeListId="token">token</urn1:UnifiedCountryCode>
+      <urn2:RegistrationNumberId>token</urn2:RegistrationNumberId>
+      <!--Optional:-->
+      <urn2:ReregistrationCode>token</urn2:ReregistrationCode>
+      <!--Optional:-->
+      <urn2:AEORegistryKindCode>t</urn2:AEORegistryKindCode>
+    </urn3:RegisterDocumentIdDetails>
+  </urn3:BrokerRegistryDocDetails>
+  <!--Optional:-->
+  <urn3:SignatoryPersonV2Details>
+    <urn3:SigningDetails>
+      <urn4:FullNameDetails>
+        <!--Optional:-->
+        <urn1:FirstName>token</urn1:FirstName>
+        <!--Optional:-->
+        <urn1:MiddleName>token</urn1:MiddleName>
+        <!--Optional:-->
+        <urn1:LastName>token</urn1:LastName>
+      </urn4:FullNameDetails>
+      <!--Optional:-->
+      <urn1:PositionName>token</urn1:PositionName>
+      <!--Zero or more repetitions:-->
+      <urn4:CommunicationDetails>
+        <!--Optional:-->
+        <urn1:CommunicationChannelCode>token</urn1:CommunicationChannelCode>
+        <!--Optional:-->
+        <urn1:CommunicationChannelName>token</urn1:CommunicationChannelName>
+        <!--1 or more repetitions:-->
+        <urn1:CommunicationChannelId>token</urn1:CommunicationChannelId>
+      </urn4:CommunicationDetails>
+      <urn2:SigningDate>2008-11-07+03:00</urn2:SigningDate>
+    </urn3:SigningDetails>
+    <!--Optional:-->
+    <urn4:IdentityDocV3Details>
+      <urn1:UnifiedCountryCode codeListId="token">token</urn1:UnifiedCountryCode>
+      <!--Optional:-->
+      <urn1:IdentityDocKindCode codeListId="token">token</urn1:IdentityDocKindCode>
+      <!--Optional:-->
+      <urn1:DocKindName>token</urn1:DocKindName>
+      <!--Optional:-->
+      <urn1:DocSeriesId>token</urn1:DocSeriesId>
+      <urn1:DocId>token</urn1:DocId>
+      <!--Optional:-->
+      <urn1:DocCreationDate>2019-05-04</urn1:DocCreationDate>
+      <!--Optional:-->
+      <urn1:DocValidityDate>2010-04-24+04:00</urn1:DocValidityDate>
+      <!--Optional:-->
+      <urn1:AuthorityId>token</urn1:AuthorityId>
+      <!--Optional:-->
+      <urn1:AuthorityName>token</urn1:AuthorityName>
+    </urn4:IdentityDocV3Details>
+    <!--Optional:-->
+    <urn2:QualificationCertificateId>token</urn2:QualificationCertificateId>
+    <!--Optional:-->
+    <urn3:PowerOfAttorneyDetails>
+      <!--Optional:-->
+      <urn1:DocKindCode codeListId="token">token</urn1:DocKindCode>
+      <!--Optional:-->
+      <urn1:DocName>token</urn1:DocName>
+      <!--Optional:-->
+      <urn1:DocId>token</urn1:DocId>
+      <!--Optional:-->
+      <urn1:DocCreationDate>2014-07-21+04:00</urn1:DocCreationDate>
+      <!--Optional:-->
+      <urn1:DocStartDate>2005-05-29+04:00</urn1:DocStartDate>
+      <!--Optional:-->
+      <urn1:DocValidityDate>2016-06-29</urn1:DocValidityDate>
+    </urn3:PowerOfAttorneyDetails>
+  </urn3:SignatoryPersonV2Details>
+</urn:ExpressCargoDeclaration>

@@ -31,35 +31,41 @@ public class XmlService {
            throw new StructureDocumentAlreadyParsedException();
         }
         XmlParser xmlParser = new XmlParser(rootXml);
-        Map<String, String> pathMap = xmlParser.getElementsPathMap(xmlParser.getElementsName(xmlParser.getChildrenPath()), xmlParser.getChildrenPath());
+        Map<String, String> pathMap = xmlParser.getElementsPathAndNameMap(xmlParser.getChildrenPath());
         pathMap.put(xmlParser.getRootElementName(), xmlParser.getRootElementPath());
-        Map<String, String> documentationMap = xmlParser.getElementsDocumentationMap(xmlParser.getElementsName(xmlParser.getChildrenPath()));
+        Map<String, String> documentationMap = xmlParser.getPathAndDocumentationMap(xmlParser.getElementsPathAndNameMap(xmlParser.getChildrenPath()));
+        documentationMap.put(xmlParser.getRootElementPath(),"Свидетельство о предоставленном обеспечении");
         xsdService.saveRootXsd(new File(rootXml.getName().replace(".xml", "")));
         StructureDocument structureDocument = structureDocumentService.getDocumentBySchemaLocation(schemaLocation);
+
         for (Map.Entry<String, String> entry : documentationMap.entrySet()) {
             Grafa grafa = new Grafa();
-            grafa.setPathXML(pathMap.get(entry.getKey()));
+            grafa.setPathXML(entry.getKey());
             grafa.setNameGrafa(entry.getValue());
             grafa.setNamePole(entry.getValue());
             grafaService.saveGrafa(grafa);
 
             Tag tag = new Tag();
-            tag.setPattern(xmlParser.getPatternForElement(entry.getKey()));
+            tag.setPattern(xmlParser.getPatternForElementByName(pathMap.get(entry.getKey())));
             tag.setStructureDocument(structureDocument);
-            tag.setParentPath(xmlParser.getParentElementPath(pathMap.get(entry.getKey())));
+            tag.setNodePath(entry.getKey());
+            tag.setParentPath(xmlParser.getParentElementPath(entry.getKey()));
             tag.setNodeName(entry.getValue());
-            tag.setNodePath(pathMap.get(entry.getKey()));
             tagService.saveTag(tag);
         }
-        for (Map.Entry<String, String> entry : documentationMap.entrySet()) {
-            Tag child = tagService.getTagByNodePath(pathMap.get(entry.getKey()));
-            if (child.getParentPath().length() > 2) {
-                Tag parent = tagService.getTagByNodePath(child.getParentPath());
-                child.setParentPath(parent.getNodePath());
-                child.setParentName(parent.getNodeName());
-                child.setParentId(parent.getId());
-                tagService.updateTag(child);
+        for (Map.Entry<String, String> entry : pathMap.entrySet()) {
+            Tag child = tagService.getTagByNodePath(entry.getKey());
+            if (child!=null){
+                if (child.getParentPath().length() > 2) {
+                    Tag parent = tagService.getTagByNodePath(child.getParentPath());
+                    if(parent!=null){
+                        child.setParentName(parent.getNodeName());
+                        child.setParentId(parent.getId());
+                        tagService.updateTag(child);
+                    }
+                }
             }
+
         }
     }
 

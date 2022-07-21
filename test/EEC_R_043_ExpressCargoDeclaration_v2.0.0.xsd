@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           elementFormDefault="qualified"
+           targetNamespace="urn:EEC:R:043:ExpressCargoDeclaration:v2.0.0"
+           xmlns:ecd="urn:EEC:R:043:ExpressCargoDeclaration:v2.0.0"
+           xmlns:cacdo="urn:EEC:M:CA:ComplexDataObjects:v1.5.1"
+           xmlns:casdo="urn:EEC:M:CA:SimpleDataObjects:v1.5.1"
+           xmlns:csdo="urn:EEC:M:SimpleDataObjects:v0.4.10"
+           version="2.0.0">
+
+    <xs:import namespace="urn:EEC:M:CA:ComplexDataObjects:v1.5.1" schemaLocation="EEC_M_CA_ComplexDataObjects_v1.5.1.xsd"/>
+    <xs:import namespace="urn:EEC:M:CA:SimpleDataObjects:v1.5.1" schemaLocation="EEC_M_CA_SimpleDataObjects_v1.5.1.xsd"/>
+    <xs:import namespace="urn:EEC:M:ComplexDataObjects:v0.4.10" schemaLocation="EEC_M_ComplexDataObjects_v0.4.10.xsd"/>
+    <xs:import namespace="urn:EEC:M:SimpleDataObjects:v0.4.10" schemaLocation="EEC_M_SimpleDataObjects_v0.4.10.xsd"/>
+    <!-- Декларация на товары и пассажирская таможенная декларация для экспресс-грузов -->
+
+    <!-- R.043: Декларация на товары и пассажирская таможенная декларация для экспресс-грузов (Декларация на товары и пассажирская таможенная декларация для экспресс-грузов) -->
+    <xs:element name="ExpressCargoDeclaration" type="ecd:ExpressCargoDeclarationType">
+        <xs:annotation>
+            <xs:documentation>Декларация на товары и пассажирская таможенная декларация для экспресс-грузов</xs:documentation>
+        </xs:annotation>
+    </xs:element>
+    <!-- R.043.CDT: Декларация на товары и пассажирская таможенная декларация для экспресс-грузов (Декларация на товары и пассажирская таможенная декларация для экспресс-грузов_ Детали. Тип) -->
+    <xs:complexType name="ExpressCargoDeclarationType">
+        <xs:annotation>
+            <xs:documentation>Декларация на товары и пассажирская таможенная декларация для экспресс-грузов</xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element ref="csdo:EDocCode"/>
+            <xs:element ref="csdo:EDocId"/>
+            <xs:element ref="csdo:EDocRefId" minOccurs="0"/>
+            <xs:element ref="csdo:EDocDateTime"/>
+            <xs:element ref="casdo:ExpressRegistryKindCode"/>
+            <xs:element ref="csdo:ObjectOrdinal" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation>Порядковый номер корректировки декларации на товары для экспресс-грузов или корректировки пассажирской таможенной декларации для экспресс-грузов</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element ref="cacdo:ExpressCargoDeclarationIdDetails" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation>Регистрационный номер декларации на товары для экспресс-грузов или пассажирской таможенной декларации для экспресс-грузов, в которую вносятся изменения (дополнения)</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element ref="casdo:DeclarationKindCode" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation>Код типа таможенной декларации</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element ref="casdo:CustomsProcedureCode" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation>Кодовое обозначение вида заявляемой таможенной процедуры</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element ref="casdo:PreviousCustomsProcedureModeCode" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation>Кодовое обозначение вида предшествующей таможенной процедуры</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element ref="casdo:DeclarationFeatureCode" minOccurs="0"/>
+            <xs:element ref="casdo:EDocIndicatorCode"/>
+            <xs:element ref="csdo:PageQuantity" minOccurs="0"/>
+            <xs:element ref="cacdo:ECGoodsShipmentDetails" minOccurs="0"/>
+            <xs:element ref="cacdo:BrokerRegistryDocDetails" minOccurs="0"/>
+            <xs:element ref="cacdo:SignatoryPersonV2Details" minOccurs="0"/>
+        </xs:sequence>
+    </xs:complexType>
+</xs:schema>

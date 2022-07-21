@@ -24,8 +24,8 @@ create sequence if not exists seq_flk_grafa start 100000;
 create table FLK_GRAFA (
                            ID numeric(19) primary key,
                            ID_FORM numeric(20),
-                           NAME_GRAFA varchar(300) ,
-                           NAME_POLE varchar(300) ,
+                           NAME_GRAFA varchar(1000) ,
+                           NAME_POLE varchar(1000) ,
                            PATH_XML varchar(500)
 );
 
