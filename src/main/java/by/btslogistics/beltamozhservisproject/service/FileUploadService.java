@@ -1,44 +1,54 @@
 package by.btslogistics.beltamozhservisproject.service;
 
 import by.btslogistics.beltamozhservisproject.exception.InvalidFileTypeException;
-import by.btslogistics.beltamozhservisproject.parser.xsd.XsdParser;
 import org.apache.commons.compress.utils.FileNameUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
+import org.xml.sax.SAXException;
 
+import javax.xml.parsers.ParserConfigurationException;
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.util.ArrayList;
 import java.util.List;
-
-import static by.btslogistics.beltamozhservisproject.service.ExcelService.excelParse;
 
 @Service
 public class FileUploadService {
     @Autowired
     ExcelService excelParse;
 
-    public String fileUpload(MultipartFile multipartFile) throws IOException {
-        String fileName = FileNameUtils.getExtension(multipartFile.getOriginalFilename());
-        List<String> splitedOriginalName =
-                List.of(fileName);
-        for (String l : splitedOriginalName) {
-            System.out.println(l);
+    @Autowired
+    XmlService xmlService;
+    private List<String> splitedOriginalName = new ArrayList<>();
+    private String destenationPath = "C:\\Users\\0_shtykh_ya\\IdeaProjects\\beltamozhservisProject\\uploadsFiles";
+    private Path path = Path.of(destenationPath);
+    private String fileExtension;
+    private String fileName;
+    private String filePath;
+    public String fileUpload(MultipartFile multipartFile) throws IOException, ParserConfigurationException, SAXException {
+        if (!Files.exists(path)) {
+            Files.createDirectory(path);
         }
-        String fileType = splitedOriginalName.get(0);
-        if (fileType.equals("xlsx")) {
-            File newFile = File.createTempFile("data-",".xlsx");
-            multipartFile.transferTo(newFile);
-            excelParse.saveParsedRows(excelParse(newFile)); // parsing xlsx file and saving to BD
-            newFile.deleteOnExit();
-        } else if (fileType.equals("xlm")||fileType.equals("xsd")) {
-            File newFile = File.createTempFile("data-",".xsd");
-            multipartFile.transferTo(newFile);
-            XsdParser.parseXsd(newFile); // print xsd File to console
-            newFile.deleteOnExit();
-        } else {
-            throw new InvalidFileTypeException();
-        }
-        return String.format("File %s file uploaded", multipartFile.getOriginalFilename());
+
+            System.out.println(multipartFile.getOriginalFilename());
+            fileName = multipartFile.getOriginalFilename();
+            filePath = destenationPath + "\\" + fileName;
+            fileExtension = FileNameUtils.getExtension(multipartFile.getOriginalFilename());
+            splitedOriginalName.add(fileExtension);
+            System.out.println(splitedOriginalName.get(splitedOriginalName.lastIndexOf(fileExtension)));
+            if (fileExtension.equals("xlsx") || fileExtension.equals("xls")) {
+                multipartFile.transferTo(new File(filePath));
+//                excelParse.excelParse(new File(filePath));
+            } else if (fileExtension.equals("xsd")) {
+                multipartFile.transferTo(new File(filePath));
+//                xmlService.saveDocumentInfo(new File(filePath));
+            } else {
+                throw new InvalidFileTypeException();
+            }
+
+        return "File uploaded";
     }
 }

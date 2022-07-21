@@ -1,49 +1,52 @@
 package by.btslogistics.beltamozhservisproject.controller;
-
 import by.btslogistics.beltamozhservisproject.exception.InvalidFileTypeException;
 import by.btslogistics.beltamozhservisproject.parser.xsd.XsdParser;
 import by.btslogistics.beltamozhservisproject.service.ExcelService;
+import by.btslogistics.beltamozhservisproject.service.FileUploadService;
 import org.apache.commons.compress.utils.FileNameUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mock.web.MockMultipartFile;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
+import org.xml.sax.SAXException;
 
 import javax.persistence.criteria.CriteriaBuilder;
+import javax.xml.parsers.ParserConfigurationException;
+import java.io.BufferedInputStream;
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.List;
-
 import static by.btslogistics.beltamozhservisproject.service.ExcelService.excelParse;
-
 @RestController
 public class FileUploadController {
     @Autowired
-    ExcelService excelParse;
-
+    FileUploadService fileUploadService;
+    private byte[] content = null;
     @PostMapping("/upload")
-    public String fileUpload(@RequestParam("file")MultipartFile multipartFile) throws IOException {
-        String fileName = FileNameUtils.getExtension(multipartFile.getOriginalFilename());
-        List<String> splitedOriginalName =
-                List.of(fileName);
-        for (String l : splitedOriginalName) {
-            System.out.println(l);
+    public String fileUpload(@RequestParam("file")MultipartFile[] multipartFile) throws IOException, ParserConfigurationException, SAXException {
+        for (int i = 0; i < multipartFile.length; i++) {
+            BufferedInputStream bf = new BufferedInputStream(multipartFile[i].getInputStream());
+            if (multipartFile == null) {
+                System.out.println("File is NULL");
+            } else {
+                try {
+                    content = multipartFile[i].getBytes();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                MultipartFile file = new MockMultipartFile
+                        (multipartFile[i].getOriginalFilename(),
+                                multipartFile[i].getOriginalFilename(),
+                                multipartFile[i].getContentType(),
+                                content);
+                fileUploadService.fileUpload(file);
+                file = null;
+            }
         }
-        String fileType = splitedOriginalName.get(0);
-        if (fileType.equals("xlsx")) {
-            File newFile = File.createTempFile("data1-",".xlsx");
-            multipartFile.transferTo(newFile);
-            excelParse.saveParsedRows(excelParse(newFile)); // parsing xlsx file and saving to BD
-            newFile.deleteOnExit();
-        } else if (fileType.equals("xlm")||fileType.equals("xsd")) {
-            File newFile = File.createTempFile("data-",".xsd");
-            multipartFile.transferTo(newFile);
-//            XsdParser.parseXsd(newFile); // print xsd File to console
-            newFile.deleteOnExit();
-        } else {
-            throw new InvalidFileTypeException();
-        }
-        return String.format("File %s file uploaded", multipartFile.getOriginalFilename());
+        return "File uploaded";
     }
 }
