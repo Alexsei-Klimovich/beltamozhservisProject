@@ -54,6 +54,30 @@ public class XmlParser {
                                 paths.add("/" + nodes.item(i).getNodeName() + "/" + nodes1.item(j).getNodeName() + "/" +
                                         nodes2.item(k).getNodeName() + "/" + nodes3.item(m).getNodeName() + "/" + nodes4.item(n).getNodeName());
                             }
+                            NodeList nodes5 = node5.getChildNodes();
+                            for (int b = 0; b < nodes5.getLength(); b++) {
+                                Node node6 = nodes5.item(b);
+                                if (node6.getNodeType() != Node.TEXT_NODE && node6.getNodeType() != Node.COMMENT_NODE) {
+                                    paths.add("/" + nodes.item(i).getNodeName() + "/" + nodes1.item(j).getNodeName() + "/" +
+                                            nodes2.item(k).getNodeName() + "/" + nodes3.item(m).getNodeName() + "/" + nodes4.item(n).getNodeName() + "/" + nodes5.item(b).getNodeName());
+                                }
+                                NodeList nodes6 = node6.getChildNodes();
+                                for (int a = 0; a < nodes6.getLength(); a++) {
+                                    Node node7 = nodes6.item(a);
+                                    if (node7.getNodeType() != Node.TEXT_NODE && node7.getNodeType() != Node.COMMENT_NODE) {
+                                        paths.add("/" + nodes.item(i).getNodeName() + "/" + nodes1.item(j).getNodeName() + "/" +
+                                                nodes2.item(k).getNodeName() + "/" + nodes3.item(m).getNodeName() + "/" + nodes4.item(n).getNodeName() + "/" + nodes5.item(b).getNodeName()+"/" + nodes6.item(a).getNodeName());
+                                    }
+                                    NodeList nodes7 = node7.getChildNodes();
+                                    for (int c = 0; c < nodes7.getLength(); c++) {
+                                        Node node8 = nodes7.item(c);
+                                        if (node8.getNodeType() != Node.TEXT_NODE && node8.getNodeType() != Node.COMMENT_NODE) {
+                                            paths.add("/" + nodes.item(i).getNodeName() + "/" + nodes1.item(j).getNodeName() + "/" +
+                                                    nodes2.item(k).getNodeName() + "/" + nodes3.item(m).getNodeName() + "/" + nodes4.item(n).getNodeName() + "/" + nodes5.item(b).getNodeName() + "/" + nodes6.item(a).getNodeName()+"/" + nodes7.item(c).getNodeName());
+                                        }
+                                    }
+                                }
+                            }
                         }
                     }
                 }
@@ -65,6 +89,7 @@ public class XmlParser {
 
     //TODO: REFACTOR THIS
     public List<String> changePathsPrefix(List<String> paths) throws IOException, ParserConfigurationException, SAXException {
+        System.out.println("LLLLLL:" + paths.size());
         Document document = XsdParser.buildDocumentFromFile(rootXml);
         Node node = document.getDocumentElement();
         NamedNodeMap tags = node.getAttributes();
@@ -101,6 +126,7 @@ public class XmlParser {
             changesPrefixPaths.add(rootPrefix + rootNodeName + result.replace("::", ":"));
 
         }
+        System.out.println("SIZE2:" + changesPrefixPaths.size());
         return changesPrefixPaths;
     }
 
@@ -137,7 +163,7 @@ public class XmlParser {
     }
 
     public String getRootElementPath() throws IOException, ParserConfigurationException, SAXException {
-        return XsdService.getPathPrefixFromFile(new File(rootXml.getName().replace(".xml","")))+getRootElementName();
+        return XsdService.getPathPrefixFromFile(new File(rootXml.getName().replace(".xml", ""))) + getRootElementName();
     }
 
     public Map<String, String> getElementsDocumentationMap(List<String> elements) throws IOException, ParserConfigurationException, SAXException {
@@ -175,15 +201,44 @@ public class XmlParser {
         return fileNames;
     }
 
-    public String getParentElementPath(String elementPath){
-        String parentElementPath="";
-        List<String> splitedPath= List.of(elementPath.split("/"));
-        for(int i = 0; i<splitedPath.size()-1;i++){
-            parentElementPath=parentElementPath+splitedPath.get(i)+"/";
+    public String getParentElementPath(String elementPath) {
+        String parentElementPath = "";
+        List<String> splitedPath = List.of(elementPath.split("/"));
+        for (int i = 0; i < splitedPath.size() - 1; i++) {
+            parentElementPath = parentElementPath + splitedPath.get(i) + "/";
         }
-        parentElementPath = parentElementPath.substring(0,parentElementPath.length()-1);
+        parentElementPath = parentElementPath.substring(0, parentElementPath.length() - 1);
         return parentElementPath;
     }
+
+    public Map<String, String> getAllPatternsMap() throws IOException, ParserConfigurationException, SAXException {
+        Map<String, String> patternsMap = new HashMap<>();
+        List<String> fileNames = getFileNames();
+        for (String fileName : fileNames) {
+            Document document = XsdParser.buildDocumentFromFile(new File(fileName));
+            NodeList patterns = document.getElementsByTagName("xs:pattern");
+            for (int i = 0; i < patterns.getLength(); i++) {
+                Element element = (Element) patterns.item(i);
+                String pattern = element.getAttribute("value");
+                Element parentElement = (Element) element.getParentNode().getParentNode();
+                String attributeName = parentElement.getAttribute("name").replace("Type", "");
+                if (attributeName.isEmpty()) {
+                    Element doubleParent = (Element) parentElement.getParentNode();
+                    attributeName = doubleParent.getAttribute("name").replace("Type", "");
+                }
+                patternsMap.put(attributeName, pattern);
+            }
+        }
+        return patternsMap;
+    }
+
+    public String getPatternForElement(String elementName) throws IOException, ParserConfigurationException, SAXException {
+        Map<String, String> patterns = getAllPatternsMap();
+        String pattern = null;
+        pattern = patterns.get(elementName);
+        return pattern;
+    }
+
 
 }
 

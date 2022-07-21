@@ -12,4 +12,6 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface StructureDocumentRepository extends JpaRepository<StructureDocument, Long> {
     StructureDocument getStructureDocumentBySchemaName(String schemaName);
+
+    StructureDocument getStructureDocumentBySchemaLocation(String schemaLocation);
 }
