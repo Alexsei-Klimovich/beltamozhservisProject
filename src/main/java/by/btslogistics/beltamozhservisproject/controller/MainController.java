@@ -36,7 +36,7 @@ public class MainController {
 
     @GetMapping("/")
     public String hello() throws IOException, ParserConfigurationException, SAXException {
-//        xmlService.saveDocumentInfo(new File("BY_GuaranteeCertificate_1.0.1.xsd.xml"));
+        xmlService.saveDocumentInfo(new File("BY_GuaranteeCertificate_1.0.1.xsd.xml"));
         excelService.saveParsedRows(ExcelService.excelParse(new File("ФЛК0722 для БД.xlsx")));
         return "hello";
     }

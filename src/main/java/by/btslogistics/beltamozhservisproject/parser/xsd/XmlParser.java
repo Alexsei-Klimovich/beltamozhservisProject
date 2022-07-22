@@ -227,6 +227,9 @@ public class XmlParser {
         for (String s : changesPrefixPaths) {
             System.out.println("2:" + s);
         }
+        changesPrefixPaths.add("/gc:GuaranteeCertificate/gc:DeclarantInfo/gc:FilledPerson/gc:PersonSurname");
+        changesPrefixPaths.add("/gc:GuaranteeCertificate/gc:DeclarantInfo/cat:DocumentDateTime");
+        changesPrefixPaths.add("/gc:GuaranteeCertificate/gc:DeclarantInfo/gc:Declarant/cat:IdentityCard/cat:IdentityCardDate/cat:RBIdendificationNumber");
         return changesPrefixPaths;
     }
 
