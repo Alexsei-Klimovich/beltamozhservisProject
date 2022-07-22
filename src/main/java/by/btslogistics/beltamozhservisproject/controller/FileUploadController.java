@@ -26,10 +26,10 @@ public class FileUploadController {
     @Autowired
     FileUploadService fileUploadService;
     private byte[] content = null;
+    private MultipartFile uploadedFile;
     @PostMapping("/upload")
     public String fileUpload(@RequestParam("file")MultipartFile[] multipartFile) throws IOException, ParserConfigurationException, SAXException {
         for (int i = 0; i < multipartFile.length; i++) {
-            BufferedInputStream bf = new BufferedInputStream(multipartFile[i].getInputStream());
             if (multipartFile == null) {
                 System.out.println("File is NULL");
             } else {
@@ -38,13 +38,13 @@ public class FileUploadController {
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
-                MultipartFile file = new MockMultipartFile
+                uploadedFile = new MockMultipartFile
                         (multipartFile[i].getOriginalFilename(),
                                 multipartFile[i].getOriginalFilename(),
                                 multipartFile[i].getContentType(),
                                 content);
-                fileUploadService.fileUpload(file);
-                file = null;
+                fileUploadService.fileUpload(uploadedFile);
+                uploadedFile = null;
             }
         }
         return "File uploaded";
