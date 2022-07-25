@@ -10,12 +10,8 @@ import org.w3c.dom.*;
 import org.xml.sax.SAXException;
 
 import javax.xml.parsers.ParserConfigurationException;
-import javax.xml.xpath.XPath;
-import javax.xml.xpath.XPathFactory;
 import java.io.File;
 import java.io.IOException;
-import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
 
 import static by.btslogistics.beltamozhservisproject.parser.xsd.XsdParser.buildDocumentFromFile;
@@ -58,7 +54,7 @@ public class XsdService {
         for (int i = 0; i < tags.getLength(); i++) {
             if (tags.item(i).toString().contains("xmlns")) {
                 List<String> compareStrings = List.of(tags.item(i).toString().split(":"));
-                String compareString = (compareStrings.get(compareStrings.size() - 1).replace("\"", ""));
+                String compareString = compareStrings.get(compareStrings.size() - 2);
                 if (file.getName().contains(compareString)) {
                     List<String> firstSplit = List.of(tags.item(i).toString().split("="));
                     List<String> result = List.of(firstSplit.get(0).split(":"));
