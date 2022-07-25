@@ -9,6 +9,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -27,5 +28,11 @@ public class StructureDocumentController {
             return new ResponseEntity<>(structureDocumentDto, HttpStatus.OK);
         }
         return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+    }
+
+    @DeleteMapping
+    public ResponseEntity<String> deleteStructureDocument(@RequestParam("id") String documentId) {
+        structureDocumentService.deleteDocumentById(Long.parseLong(documentId));
+        return new ResponseEntity<>("Document deleted", HttpStatus.OK);
     }
 }

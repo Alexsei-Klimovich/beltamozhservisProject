@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -28,5 +29,9 @@ public class GrafaController {
         return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
     }
 
-
+    @DeleteMapping("/deleteGrafa")
+    public ResponseEntity<String> deleteGrafa(@RequestParam("id") String grafaId) {
+        grafaService.deleteGrafaById(Long.parseLong(grafaId));
+        return new ResponseEntity<>("Grafa deleted", HttpStatus.OK);
+    }
 }
