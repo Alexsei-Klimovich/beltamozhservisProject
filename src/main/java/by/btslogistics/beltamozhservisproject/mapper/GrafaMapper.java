@@ -25,7 +25,7 @@ public class GrafaMapper {
         return Objects.isNull(dto)? null: modelMapper.map(dto,Grafa.class);
     }
 
-    public GrafaDto toDto(Check entity){
+    public GrafaDto toDto(Grafa entity){
         return Objects.isNull(entity)? null: modelMapper.map(entity, GrafaDto.class);
     }
 }

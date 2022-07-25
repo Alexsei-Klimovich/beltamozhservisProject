@@ -6,6 +6,9 @@ import by.btslogistics.beltamozhservisproject.model.Check;
 import by.btslogistics.beltamozhservisproject.model.Tag;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Controller;
+import org.springframework.stereotype.Service;
 
 import java.util.Objects;
 /**
@@ -14,6 +17,7 @@ import java.util.Objects;
  * @author Yaroslav
  *
  */
+@Component
 public class TagMapper {
     @Autowired
     private ModelMapper modelMapper;

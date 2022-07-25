@@ -4,6 +4,9 @@ import by.btslogistics.beltamozhservisproject.dto.CheckDto;
 import by.btslogistics.beltamozhservisproject.model.Check;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
+import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 import java.util.Objects;
 /**
@@ -12,6 +15,7 @@ import java.util.Objects;
  * @author Yaroslav
  *
  */
+@Component
 public class CheckMapper {
     @Autowired
     private ModelMapper modelMapper;
