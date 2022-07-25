@@ -8,11 +8,10 @@ import java.time.LocalDateTime;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class KindDocument {
+public class KindStructureDto {
     private Long id;
-    private Long code_eng;
-    private Long code_rus;
-    private String description;
+    private Long to_kind_id;
+    private Long to_struct_doc_id;
     private LocalDateTime date_activate;
     private LocalDateTime date_deactivate;
 }
