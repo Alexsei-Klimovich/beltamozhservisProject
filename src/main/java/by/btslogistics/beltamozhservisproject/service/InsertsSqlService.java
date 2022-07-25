@@ -75,7 +75,7 @@ public class InsertsSqlService {
 
     public void createSqlInsertFiles() throws IOException {
         Files.write(Paths.get("flk_grafa.sql"), getGrafaInserts(), StandardOpenOption.CREATE);
-        Files.write(Paths.get("flk_cheks.sql"), getCheckInserts(), StandardOpenOption.CREATE);
+        Files.write(Paths.get("flk_checks.sql"), getCheckInserts(), StandardOpenOption.CREATE);
         Files.write(Paths.get("tag_document.sql"), getTagInserts(), StandardOpenOption.CREATE);
         Files.write(Paths.get("structure_document.sql"), getStructureDocumentInserts(), StandardOpenOption.CREATE);
     }
