@@ -8,9 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 public class TagController {
@@ -20,9 +18,11 @@ public class TagController {
     @Autowired
     TagMapper tagMapper;
 
-
-
-
+    @PostMapping("/createTag")
+    public ResponseEntity<String> createTag(@ModelAttribute("tag") Tag tag){
+        tagService.saveTag(tag);
+        return new ResponseEntity<>("Saved",HttpStatus.OK);
+    }
 
     @GetMapping("/getTag")
     public ResponseEntity<TagDto> getTagById(@RequestParam("id") String tagId) {

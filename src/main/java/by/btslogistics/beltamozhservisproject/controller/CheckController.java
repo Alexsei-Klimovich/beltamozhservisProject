@@ -3,15 +3,14 @@ package by.btslogistics.beltamozhservisproject.controller;
 import by.btslogistics.beltamozhservisproject.dto.CheckDto;
 import by.btslogistics.beltamozhservisproject.mapper.CheckMapper;
 import by.btslogistics.beltamozhservisproject.model.Check;
+import by.btslogistics.beltamozhservisproject.model.Tag;
 import by.btslogistics.beltamozhservisproject.service.CheckService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 public class CheckController {
@@ -34,5 +33,10 @@ public class CheckController {
     public ResponseEntity<String> deleteCheck(@RequestParam("id") String checkId) {
         checkService.deleteCheckById(Long.parseLong(checkId));
         return new ResponseEntity<>("Check deleted", HttpStatus.OK);
+    }
+    @PostMapping("/createCheck")
+    public ResponseEntity<String> createTag(@ModelAttribute("check") Check check){
+        checkService.saveCheck(check);
+        return new ResponseEntity<>("Saved",HttpStatus.OK);
     }
 }

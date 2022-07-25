@@ -3,15 +3,14 @@ package by.btslogistics.beltamozhservisproject.controller;
 import by.btslogistics.beltamozhservisproject.dto.GrafaDto;
 import by.btslogistics.beltamozhservisproject.mapper.GrafaMapper;
 import by.btslogistics.beltamozhservisproject.model.Grafa;
+import by.btslogistics.beltamozhservisproject.model.Tag;
 import by.btslogistics.beltamozhservisproject.service.GrafaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 public class GrafaController {
@@ -27,6 +26,11 @@ public class GrafaController {
             return new ResponseEntity<>(grafaDto, HttpStatus.OK);
         }
         return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+    }
+    @PostMapping("/createGrafa")
+    public ResponseEntity<String> createGrafa(@ModelAttribute("grafa") Grafa grafa){
+        grafaService.saveGrafa(grafa);
+        return new ResponseEntity<>("Saved",HttpStatus.OK);
     }
 
     @DeleteMapping("/deleteGrafa")
