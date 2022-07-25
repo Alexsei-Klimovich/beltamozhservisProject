@@ -1,7 +1,13 @@
 package by.btslogistics.beltamozhservisproject.dto;
 
-import java.time.LocalDateTime;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
+import java.time.LocalDateTime;
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class TypeControlDto {
     private Long id;
     private Long to_kind_m2m_structure_id;
