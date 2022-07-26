@@ -34,7 +34,7 @@ public class TagController {
         return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
     }
 
-    @DeleteMapping
+    @DeleteMapping("/deleteTag")
     public ResponseEntity<String> deleteTag(@RequestParam("id") String tagId) {
         tagService.deleteTagById(Long.parseLong(tagId));
         return new ResponseEntity<>("Tag deleted", HttpStatus.OK);

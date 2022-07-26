@@ -39,7 +39,7 @@ public class StructureDocumentController {
         return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
     }
 
-    @DeleteMapping
+    @DeleteMapping("/deleteStructureDocument")
     public ResponseEntity<String> deleteStructureDocument(@RequestParam("id") String documentId) {
         structureDocumentService.deleteDocumentById(Long.parseLong(documentId));
         return new ResponseEntity<>("Document deleted", HttpStatus.OK);
