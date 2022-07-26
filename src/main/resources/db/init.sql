@@ -72,7 +72,8 @@ create table KIND_M2M_STRUCTURE (
                                   TO_KIND_ID numeric(19) ,
                                   TO_STRUCT_DOC_ID numeric(19) ,
                                   DATE_ACTIVATE date,
-                                  DATE_DEACTIVATE date
+                                  DATE_DEACTIVATE date,
+                                  TO_FLK_TYPE_CNTRL_ID numeric(19)
 );
 
 create sequence if not exists seq_flk_type_control start 100000;
@@ -113,6 +114,10 @@ ALTER table TAG_DOCUMENT  ADD constraint FK_TO_STRDOC_ID foreign key (TO_STRDOC_
 
 ALTER table FLK_TYPE_CONTROL  ADD constraint FK_TO_KIND_M2M_STRUCTURE foreign key (TO_KIND_M2M_STRUCTURE_ID)
     references KIND_M2M_STRUCTURE (ID)
+    on DELETE cascade;
+
+ALTER table KIND_M2M_STRUCTURE  ADD constraint FK_TO_FLK_TYPE_CONTROL foreign key (TO_FLK_TYPE_CNTRL_ID)
+    references FLK_TYPE_CONTROL (ID)
     on DELETE cascade;
 
 ALTER table KIND_M2M_STRUCTURE  ADD constraint FK_TO_KIND_M2M_STRUCTURE foreign key (TO_KIND_ID)
