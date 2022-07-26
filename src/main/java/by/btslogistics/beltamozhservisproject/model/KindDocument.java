@@ -43,4 +43,7 @@ public class KindDocument {
 
     @Column(name = "date_deactivate")
     private LocalDateTime deactivateDateDocument;
+
+    @OneToOne(mappedBy = "kindDocument")
+    private KindStructure kindStructure;
 }

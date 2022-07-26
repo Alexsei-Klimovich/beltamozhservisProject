@@ -55,4 +55,8 @@ public class TypeControl {
 
     @Column(name = "date_update")
     private LocalDateTime updateDate;
+
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "to_kind_m2m_structure_id", referencedColumnName = "id")
+    private KindStructure kindStructure;
 }
