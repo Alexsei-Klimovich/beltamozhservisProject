@@ -21,8 +21,9 @@ public class KindDocumentController {
     @GetMapping("/getKindDocument")
     public ResponseEntity<KindDocumentDto> getKindDocument(@RequestParam("id") Long kindDocumentId) {
         KindDocument kindDocument = kindDocumentService.getKindDocumentById(kindDocumentId);
+        KindDocumentDto kindDocumentDto = kindDocumentMapper.toDto(kindDocument);
         if (kindDocument != null) {
-            return new ResponseEntity<>(kindDocumentMapper.toDto(kindDocument), HttpStatus.OK);
+            return new ResponseEntity<>(kindDocumentDto, HttpStatus.OK);
         }
         return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
     }

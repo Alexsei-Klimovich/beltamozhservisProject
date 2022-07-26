@@ -29,7 +29,7 @@ public class StructureDocumentController {
         return new ResponseEntity<>("Saved",HttpStatus.OK);
     }
 
-    @GetMapping("/getDocument")
+    @GetMapping("/getStructureDocument")
     public ResponseEntity<StructureDocumentDto> getStructureDocumentById(@RequestParam("id") String documentId) {
         StructureDocument structureDocument = structureDocumentService.getDocumentById(Long.parseLong(documentId));
         StructureDocumentDto structureDocumentDto = structureDocumentMapper.toDto(structureDocument);
@@ -39,7 +39,7 @@ public class StructureDocumentController {
         return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
     }
 
-    @DeleteMapping
+    @DeleteMapping("/deleteStructureDocument")
     public ResponseEntity<String> deleteStructureDocument(@RequestParam("id") String documentId) {
         structureDocumentService.deleteDocumentById(Long.parseLong(documentId));
         return new ResponseEntity<>("Document deleted", HttpStatus.OK);

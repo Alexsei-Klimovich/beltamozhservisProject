@@ -27,14 +27,14 @@ public class TagController {
     @GetMapping("/getTag")
     public ResponseEntity<TagDto> getTagById(@RequestParam("id") String tagId) {
         Tag tag = tagService.getTagById(Long.parseLong(tagId));
-        TagDto tagDto =tagMapper.toDto(tag);
+        TagDto tagDto = tagMapper.toDto(tag);
         if (tag != null) {
             return new ResponseEntity<>(tagDto, HttpStatus.OK);
         }
         return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
     }
 
-    @DeleteMapping
+    @DeleteMapping("/deleteTag")
     public ResponseEntity<String> deleteTag(@RequestParam("id") String tagId) {
         tagService.deleteTagById(Long.parseLong(tagId));
         return new ResponseEntity<>("Tag deleted", HttpStatus.OK);

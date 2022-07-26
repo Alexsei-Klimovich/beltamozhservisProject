@@ -25,8 +25,9 @@ public class TypeControlController {
     @GetMapping("/getTypeControl")
     public ResponseEntity<TypeControlDto> getTypeControl(@RequestParam("id") Long typeControlId) {
         TypeControl typeControl = typeControlService.getTypeControlById(typeControlId);
+        TypeControlDto typeControlDto = typeControlMapper.toDto(typeControl);
         if (typeControl != null) {
-            return new ResponseEntity<>(typeControlMapper.toDto(typeControl), HttpStatus.OK);
+            return new ResponseEntity<>(typeControlDto, HttpStatus.OK);
         }
         return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
     }

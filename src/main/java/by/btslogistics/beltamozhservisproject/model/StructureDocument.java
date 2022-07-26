@@ -51,8 +51,8 @@ public class StructureDocument {
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "structureDocument", cascade = CascadeType.ALL)
     private List<Tag> tags = new ArrayList<>();
 
-    @OneToOne(mappedBy = "structureDocument")
-    private KindStructure kindStructure;
+//    @OneToOne(mappedBy = "structureDocument")
+//    private KindStructure kindStructure;
 
     public void addTag(Tag tag){
         tags.add(tag);

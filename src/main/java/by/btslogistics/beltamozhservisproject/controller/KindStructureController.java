@@ -21,8 +21,9 @@ public class KindStructureController {
     @GetMapping("/getKindStructure")
     public ResponseEntity<KindStructureDto> getKindStructure(@RequestParam("id") Long kindStructureId) {
         KindStructure kindStructure = kindStructureService.getKindStructureById(kindStructureId);
+        KindStructureDto kindStructureDto = kindStructureMapper.toDto(kindStructure);
         if (kindStructure != null) {
-            return new ResponseEntity<>(kindStructureMapper.toDto(kindStructure), HttpStatus.OK);
+            return new ResponseEntity<>(kindStructureDto, HttpStatus.OK);
         }
         return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
     }
