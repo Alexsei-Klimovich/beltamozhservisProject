@@ -59,8 +59,8 @@ create table STRUCTURE_DOCUMENT (
 create sequence if not exists seq_kind_document start 100000;
 create table KIND_DOCUMENT (
                                     ID numeric(19) primary key,
-                                    CODE_ENG numeric(19) ,
-                                    CODE_RUS numeric(19) ,
+                                    CODE_ENG VARCHAR(10) ,
+                                    CODE_RUS VARCHAR(10) ,
                                     DESCRIPTION varchar(450) ,
                                     DATE_ACTIVATE date,
                                     DATE_DEACTIVATE date
