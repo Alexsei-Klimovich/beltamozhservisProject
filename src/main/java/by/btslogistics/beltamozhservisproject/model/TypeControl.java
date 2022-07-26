@@ -29,9 +29,6 @@ public class TypeControl {
     @Column(name = "id")
     private Long id;
 
-    @Column(name = "to_kind_m2m_structure_id", insertable = false, updatable = false)
-    private Long toKindM2MStructureId;
-
     @Column(name = "name_type")
     private String nameType;
 
@@ -56,7 +53,7 @@ public class TypeControl {
     @Column(name = "date_update")
     private LocalDateTime updateDate;
 
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "to_kind_m2m_structure_id", referencedColumnName = "id")
+    @OneToOne(mappedBy = "typeControl")
     private KindStructure kindStructure;
+
 }

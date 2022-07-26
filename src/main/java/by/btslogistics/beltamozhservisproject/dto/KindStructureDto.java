@@ -14,4 +14,5 @@ public class KindStructureDto {
     private Long to_struct_doc_id;
     private LocalDateTime date_activate;
     private LocalDateTime date_deactivate;
+    private Long to_flk_type_cntrl_id;
 }

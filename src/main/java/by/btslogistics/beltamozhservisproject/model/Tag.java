@@ -20,8 +20,8 @@ import java.util.List;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@Entity
 @Table(name = "tag_document")
+@Entity
 public class Tag {
 
     @Id
@@ -60,7 +60,7 @@ public class Tag {
     @Column(name = "parent_id")
     private Long parentId;
 
-    @OneToMany(fetch = FetchType.EAGER, mappedBy = "tag", cascade = CascadeType.ALL)
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "tag", cascade = CascadeType.ALL)
     private List<Check> checks = new ArrayList<>();
 
     public void addCheck(Check check){

@@ -10,7 +10,6 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 public class TypeControlDto {
     private Long id;
-    private Long to_kind_m2m_structure_id;
     private String name_type;
     private LocalDateTime d_on;
     private LocalDateTime d_off;

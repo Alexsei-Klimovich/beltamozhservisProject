@@ -15,11 +15,12 @@ import java.util.List;
  * @author Yaroslav
  *
  */
+
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name = "STRUCTURE_DOCUMENT")
+@Table(name = "structure_document")
 @Entity
 public class StructureDocument {
 
@@ -48,11 +49,11 @@ public class StructureDocument {
     private String schemaName;
 
     /**    Связь с таблицей "TAG_DOCUMENT" */
-    @OneToMany(fetch = FetchType.EAGER, mappedBy = "structureDocument", cascade = CascadeType.ALL)
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "structureDocument", cascade = CascadeType.ALL)
     private List<Tag> tags = new ArrayList<>();
 
-//    @OneToOne(mappedBy = "structureDocument")
-//    private KindStructure kindStructure;
+    @OneToOne(mappedBy = "structureDocument")
+    private KindStructure kindStructure;
 
     public void addTag(Tag tag){
         tags.add(tag);

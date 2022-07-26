@@ -40,14 +40,18 @@ public class KindStructure {
     @Column(name = "date_deactivate")
     private LocalDateTime deactivateDateStructure;
 
-    @OneToOne(mappedBy = "kindStructure")
+    @Column(name = "to_flk_type_cntrl_id", insertable = false, updatable = false)
+    private Long toFlkTypeCntrlId;
+
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "to_flk_type_cntrl_id", referencedColumnName = "id")
     private TypeControl typeControl;
 
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "to_kind_id", referencedColumnName = "id")
     private KindDocument kindDocument;
 
-//    @OneToOne(cascade = CascadeType.ALL)
-//    @JoinColumn(name = "to_struct_doc_id", referencedColumnName = "id")
-//    private StructureDocument structureDocument;
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "to_struct_doc_id", referencedColumnName = "id")
+    private StructureDocument structureDocument;
 }

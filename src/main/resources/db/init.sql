@@ -86,8 +86,7 @@ create table FLK_TYPE_CONTROL (
                                     IS_ACTIVE varchar(1),
                                     DEFAULT_CONTROL numeric(38),
                                     DATE_CREATE date,
-                                    DATE_UPDATE date,
-                                    TO_KIND_M2M_STRUCTURE_ID numeric(19)
+                                    DATE_UPDATE date
 );
 
 
@@ -110,10 +109,6 @@ ALTER table FLK_CHECKS  ADD constraint FK_CHECKS_TAG_ID foreign key (TO_TAG_DOC_
 
 ALTER table TAG_DOCUMENT  ADD constraint FK_TO_STRDOC_ID foreign key (TO_STRDOC_ID)
     references STRUCTURE_DOCUMENT (ID)
-    on DELETE cascade;
-
-ALTER table FLK_TYPE_CONTROL  ADD constraint FK_TO_KIND_M2M_STRUCTURE foreign key (TO_KIND_M2M_STRUCTURE_ID)
-    references KIND_M2M_STRUCTURE (ID)
     on DELETE cascade;
 
 ALTER table KIND_M2M_STRUCTURE  ADD constraint FK_TO_FLK_TYPE_CONTROL foreign key (TO_FLK_TYPE_CNTRL_ID)
