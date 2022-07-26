@@ -48,7 +48,7 @@ public class Grafa {
     @Column(name = "path_xml")
     private String pathXML;
 
-    @OneToMany(fetch = FetchType.EAGER, mappedBy = "grafa", cascade = CascadeType.ALL)
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "grafa", cascade = CascadeType.ALL)
     private List<Check> checks = new ArrayList<>();
 
     public void addCheck(Check check){
