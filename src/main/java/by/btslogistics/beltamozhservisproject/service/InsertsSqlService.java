@@ -1,9 +1,6 @@
 package by.btslogistics.beltamozhservisproject.service;
 
-import by.btslogistics.beltamozhservisproject.model.Check;
-import by.btslogistics.beltamozhservisproject.model.Grafa;
-import by.btslogistics.beltamozhservisproject.model.StructureDocument;
-import by.btslogistics.beltamozhservisproject.model.Tag;
+import by.btslogistics.beltamozhservisproject.model.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -18,15 +15,18 @@ import java.util.List;
 public class InsertsSqlService {
     @Autowired
     StructureDocumentService structureDocumentService;
-
     @Autowired
     GrafaService grafaService;
-
     @Autowired
     TagService tagService;
-
     @Autowired
     CheckService checkService;
+    @Autowired
+    KindDocumentService kindDocumentService;
+    @Autowired
+    KindStructureService kindStructureService;
+    @Autowired
+    TypeControlService typeControlService;
 
     public List<String> getGrafaInserts(){
         List<Grafa> grafs = grafaService.getAllGrafs();
@@ -73,11 +73,50 @@ public class InsertsSqlService {
         return tagInserts;
     }
 
+    public List<String> getKindDocumentInserts(){
+        List<KindDocument> kindDocuments = kindDocumentService.getAllKindDocuments();
+        List<String> kindDocumentInserts = new ArrayList<>();
+        for (KindDocument kindDocument: kindDocuments){
+            String insertRow = String.format("INSERT INTO public.kind_document (id, code_eng, code_rus, description, date_activate, date_deactivate) VALUES (%s, '%s', '%s', '%s', '%s', '%s');\n",
+                    kindDocument.getId(),kindDocument.getCodeEng(),kindDocument.getCodeRus(),kindDocument.getActivateDateDocument(),kindDocument.getDeactivateDateDocument());
+            kindDocumentInserts.add(insertRow);
+        }
+        return kindDocumentInserts;
+    }
+
+    public List<String> getTypeControlInserts(){
+        List<TypeControl> typeControls = typeControlService.getAllTypeControls();
+        List<String> typeControlInserts = new ArrayList<>();
+        for (TypeControl typeControl: typeControls){
+            String insertRow = String.format("INSERT INTO public.flk_type_control (id, name_type, description, d_on, d_off, is_active, default_control, date_create, date_update) VALUES (%s, '%s', '%s', '%s', '%s', '%s', %s, '%s', '%s');\n",
+                    typeControl.getId(),typeControl.getNameType(),typeControl.getDescription(),typeControl.getStartCheckTime(),
+                    typeControl.getEndCheckTime(),typeControl.getIsActive(),typeControl.getDefaultControl(),typeControl.getCreateDate(),typeControl.getUpdateDate());
+            typeControlInserts.add(insertRow);
+        }
+        return typeControlInserts;
+    }
+
+    public List<String> getKindStructureInserts(){
+        List<KindStructure> kindStructures = kindStructureService.getAllKindStructures();
+        List<String> kindStructureInserts = new ArrayList<>();
+        for(KindStructure kindStructure: kindStructures){
+            String insertRow = String.format("INSERT INTO public.kind_m2m_structure (id, to_kind_id, to_struct_doc_id, date_activate, date_deactivate, to_flk_type_cntrl_id) VALUES (%s, %s, %s, '%s', '%s', %s);\n",
+                    kindStructure.getId(),kindStructure.getToKindId(),kindStructure.getToStructDocId(),
+                    kindStructure.getActivateDateDStructure(),kindStructure.getDeactivateDateStructure(),kindStructure.getToFlkTypeCntrlId());
+            kindStructureInserts.add(insertRow);
+        }
+        return kindStructureInserts;
+    }
+
+
     public void createSqlInsertFiles() throws IOException {
         Files.write(Paths.get("flk_grafa.sql"), getGrafaInserts(), StandardOpenOption.CREATE);
         Files.write(Paths.get("flk_checks.sql"), getCheckInserts(), StandardOpenOption.CREATE);
         Files.write(Paths.get("tag_document.sql"), getTagInserts(), StandardOpenOption.CREATE);
         Files.write(Paths.get("structure_document.sql"), getStructureDocumentInserts(), StandardOpenOption.CREATE);
+        Files.write(Paths.get("kind_m2m_structure.sql"), getKindStructureInserts(), StandardOpenOption.CREATE);
+        Files.write(Paths.get("flk_type_control.sql"), getTypeControlInserts(), StandardOpenOption.CREATE);
+        Files.write(Paths.get("kind_document.sql"), getKindDocumentInserts(), StandardOpenOption.CREATE);
     }
 
 
