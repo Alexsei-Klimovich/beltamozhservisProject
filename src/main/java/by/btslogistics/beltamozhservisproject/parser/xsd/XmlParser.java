@@ -1,5 +1,6 @@
 package by.btslogistics.beltamozhservisproject.parser.xsd;
 
+import by.btslogistics.beltamozhservisproject.model.StructureDocument;
 import by.btslogistics.beltamozhservisproject.service.XsdService;
 import org.w3c.dom.*;
 import org.xml.sax.SAXException;
@@ -9,23 +10,24 @@ import java.io.File;
 import java.io.IOException;
 import java.util.*;
 
+import static by.btslogistics.beltamozhservisproject.parser.xsd.XsdParser.buildDocumentFromFile;
+
 public class XmlParser {
-    //TODO: MAKE RECURSION HERE
+
     private final File rootXml;
 
     public XmlParser(File rootXml) {
         this.rootXml = rootXml;
     }
-
+    //TODO: MAKE RECURSION HERE
     public List<String> getChildrenPath() throws IOException, SAXException, ParserConfigurationException {
         List<String> paths = new ArrayList<>();
         Document document = XsdParser.buildDocumentFromFile(rootXml);
-        // Получаем корневой элемент
         Node node = document.getDocumentElement();
         NodeList nodes = node.getChildNodes();
         for (int i = 0; i < nodes.getLength(); i++) {
             Node node1 = nodes.item(i);
-            if (nodes.item(i).getNodeType() != Node.TEXT_NODE && nodes.item(i).getNodeType() != Node.COMMENT_NODE) {
+            if (nodes.item(i).getNodeType() != Node.COMMENT_NODE && !nodes.item(i).getNodeName().contains("#text")) {
                 paths.add("/" + nodes.item(i).getNodeName());
                 if (nodes.item(i).hasAttributes()) {
                     for (int j = 0; j < nodes.item(i).getAttributes().getLength(); j++) {
@@ -36,7 +38,7 @@ public class XmlParser {
             NodeList nodes1 = node1.getChildNodes();
             for (int j = 0; j < nodes1.getLength(); j++) {
                 Node node2 = nodes1.item(j);
-                if (node2.getNodeType() != Node.TEXT_NODE && node2.getNodeType() != Node.COMMENT_NODE) {
+                if ( node2.getNodeType() != Node.COMMENT_NODE && !nodes1.item(j).getNodeName().contains("#text")) {
                     paths.add("/" + nodes.item(i).getNodeName() + "/" + nodes1.item(j).getNodeName());
                     if (nodes1.item(j).hasAttributes()) {
                         for (int q = 0; q < nodes1.item(j).getAttributes().getLength(); q++) {
@@ -48,7 +50,7 @@ public class XmlParser {
                 NodeList nodes2 = node2.getChildNodes();
                 for (int k = 0; k < nodes2.getLength(); k++) {
                     Node node3 = nodes2.item(k);
-                    if (node3.getNodeType() != Node.TEXT_NODE && node3.getNodeType() != Node.COMMENT_NODE) {
+                    if (node3.getNodeType() != Node.COMMENT_NODE && !nodes2.item(k).getNodeName().contains("#text")) {
                         paths.add("/" + nodes.item(i).getNodeName() + "/" + nodes1.item(j).getNodeName() + "/" + nodes2.item(k).getNodeName());
                         if (nodes2.item(k).hasAttributes()) {
                             for (int q = 0; q < nodes2.item(k).getAttributes().getLength(); q++) {
@@ -61,7 +63,7 @@ public class XmlParser {
                     NodeList nodes3 = node3.getChildNodes();
                     for (int m = 0; m < nodes3.getLength(); m++) {
                         Node node4 = nodes3.item(m);
-                        if (node4.getNodeType() != Node.TEXT_NODE && node4.getNodeType() != Node.COMMENT_NODE) {
+                        if (node4.getNodeType() != Node.COMMENT_NODE && !nodes3.item(m).getNodeName().contains("#text")) {
                             paths.add("/" + nodes.item(i).getNodeName() + "/" + nodes1.item(j).getNodeName() + "/" +
                                     nodes2.item(k).getNodeName() + "/" + nodes3.item(m).getNodeName());
                             if (nodes3.item(m).hasAttributes()) {
@@ -75,7 +77,7 @@ public class XmlParser {
                         NodeList nodes4 = node4.getChildNodes();
                         for (int n = 0; n < nodes4.getLength(); n++) {
                             Node node5 = nodes4.item(n);
-                            if (node5.getNodeType() != Node.TEXT_NODE && node5.getNodeType() != Node.COMMENT_NODE) {
+                            if ( node5.getNodeType() != Node.COMMENT_NODE && !nodes4.item(n).getNodeName().contains("#text")) {
                                 paths.add("/" + nodes.item(i).getNodeName() + "/" + nodes1.item(j).getNodeName() + "/" +
                                         nodes2.item(k).getNodeName() + "/" + nodes3.item(m).getNodeName() + "/" + nodes4.item(n).getNodeName());
                                 if (nodes4.item(n).hasAttributes()) {
@@ -90,7 +92,7 @@ public class XmlParser {
                             NodeList nodes5 = node5.getChildNodes();
                             for (int b = 0; b < nodes5.getLength(); b++) {
                                 Node node6 = nodes5.item(b);
-                                if (node6.getNodeType() != Node.TEXT_NODE && node6.getNodeType() != Node.COMMENT_NODE) {
+                                if ( node6.getNodeType() != Node.COMMENT_NODE && !nodes5.item(b).getNodeName().contains("#text")) {
                                     paths.add("/" + nodes.item(i).getNodeName() + "/" + nodes1.item(j).getNodeName() + "/" +
                                             nodes2.item(k).getNodeName() + "/" + nodes3.item(m).getNodeName() + "/" + nodes4.item(n).getNodeName() + "/" + nodes5.item(b).getNodeName());
                                     if (nodes5.item(b).hasAttributes()) {
@@ -106,7 +108,7 @@ public class XmlParser {
                                 NodeList nodes6 = node6.getChildNodes();
                                 for (int a = 0; a < nodes6.getLength(); a++) {
                                     Node node7 = nodes6.item(a);
-                                    if (node7.getNodeType() != Node.TEXT_NODE && node7.getNodeType() != Node.COMMENT_NODE) {
+                                    if ( node7.getNodeType() != Node.COMMENT_NODE && !nodes6.item(a).getNodeName().contains("#text")) {
                                         paths.add("/" + nodes.item(i).getNodeName() + "/" + nodes1.item(j).getNodeName() + "/" +
                                                 nodes2.item(k).getNodeName() + "/" + nodes3.item(m).getNodeName() + "/" + nodes4.item(n).getNodeName() + "/" + nodes5.item(b).getNodeName() + "/" + nodes6.item(a).getNodeName());
                                         if (nodes6.item(a).hasAttributes()) {
@@ -123,7 +125,7 @@ public class XmlParser {
                                     NodeList nodes7 = node7.getChildNodes();
                                     for (int c = 0; c < nodes7.getLength(); c++) {
                                         Node node8 = nodes7.item(c);
-                                        if (node8.getNodeType() != Node.TEXT_NODE && node8.getNodeType() != Node.COMMENT_NODE) {
+                                        if (node8.getNodeType() != Node.COMMENT_NODE && !nodes7.item(c).getNodeName().contains("#text")) {
                                             paths.add("/" + nodes.item(i).getNodeName() + "/" + nodes1.item(j).getNodeName() + "/" +
                                                     nodes2.item(k).getNodeName() + "/" + nodes3.item(m).getNodeName() + "/" + nodes4.item(n).getNodeName() + "/" + nodes5.item(b).getNodeName() + "/" + nodes6.item(a).getNodeName() + "/" + nodes7.item(c).getNodeName());
                                             if (nodes7.item(c).hasAttributes()) {
@@ -177,9 +179,18 @@ public class XmlParser {
             for (String split : splitedPath) {
                 for (String key : keys) {
                     if (split.contains(key)) {
-                        String replace = split.replace(key, newPrefixMap.get(key));
-                        if (!replace.contains(":1")) {
-                            result = result + replace;
+                        if(!key.equals("urn")){
+                            String replace = split.replace(key, newPrefixMap.get(key));
+                            if (!replace.contains(":1")) {
+                                result = result + replace;
+                            }
+                        } else {
+                            if(split.indexOf("urn")==0){
+                                String replace = split.replaceFirst(key, newPrefixMap.get(key));
+                                if (!replace.contains(":1")) {
+                                    result = result + replace;
+                                }
+                            }
                         }
                     }
                 }
@@ -191,26 +202,7 @@ public class XmlParser {
             String rootPrefix = XsdService.getPathPrefixFromFile(new File(rootXml.getName().replace(".xml", "")));
             changesPrefixPaths.add(rootPrefix + rootNodeName + result.replace("::", ":"));
         }
-        //TODO: REMOVE
-        changesPrefixPaths.add("/gc:GuaranteeCertificate/gc:DeclarantInfo/gc:FilledPerson/gc:PersonSurname");
-        changesPrefixPaths.add("/gc:GuaranteeCertificate/gc:DeclarantInfo/cat:DocumentDateTime");
-        changesPrefixPaths.add("/gc:GuaranteeCertificate/gc:DeclarantInfo/gc:Declarant/cat:IdentityCard/cat:IdentityCardDate/cat:RBIdendificationNumber");
         return changesPrefixPaths;
-    }
-
-    public Map<String, String> getElementsPathMap(List<String> elementsName, List<String> elementsPaths) throws IOException, ParserConfigurationException, SAXException {
-        Map<String, String> elementsPathMap = new HashMap<>();
-        elementsName.remove(getRootElementName());
-        for (String elementName : elementsName) {
-            for (String elementPath : elementsPaths) {
-                List<String> splitedPath = List.of(elementPath.split("/"));
-                String lastPathElement = splitedPath.get(splitedPath.size() - 1);
-                if (lastPathElement.contains(elementName)) {
-                    elementsPathMap.put(elementName, elementPath);
-                }
-            }
-        }
-        return elementsPathMap;
     }
 
     public Map<String, String> getElementsPathAndNameMap(List<String> elementsPaths) throws IOException, ParserConfigurationException, SAXException {
@@ -257,7 +249,6 @@ public class XmlParser {
                 }
             }
         }
-
         return pathAndDocumentationMap;
     }
 
@@ -312,6 +303,13 @@ public class XmlParser {
         String pattern = null;
         pattern = patterns.get(elementName);
         return pattern;
+    }
+
+    public String getRootElementDocumentation() throws IOException, ParserConfigurationException, SAXException {
+        Document document = buildDocumentFromFile(new File(rootXml.getName().replace(".xml", "")));
+        NodeList documentations = document.getElementsByTagName("xs:documentation");
+        Element element = (Element) documentations.item(0);
+        return element.getTextContent();
     }
 }
 
