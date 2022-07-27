@@ -46,9 +46,10 @@ public class InsertsSqlService {
     public List<String> getCheckInserts(){
         List<Check> checks = checkService.getAllChecks();
         List<String> checksInserts = new ArrayList<>();
-        for (Check check: checks){
+        for (var check: checks){
+            Long strDocId=checkService.getToTagDocIdById(check.getId());
             String insertRow = String.format("INSERT INTO public.flk_checks (id, id_grafa, to_tag_doc_id, code_check, description_check, description_error, d_on, d_off) VALUES (%s, %s, %s, '%s', '%s', '%s', %s, %s);\n",
-                    check.getId(),check.getGrafaId(),check.getToTagDocId(),
+                    check.getId(),check.getGrafaId(),strDocId,
                     check.getCheckCode(),check.getCheckDescription(),check.getErrorDescription(),check.getStartCheckTime(),check.getEndCheckTime());
             checksInserts.add(insertRow);
             if(insertRow.contains("'null'")){
