@@ -28,6 +28,7 @@ public class InsertsSqlService {
     @Autowired
     TypeControlService typeControlService;
 
+
     public List<String> getGrafaInserts(){
         List<Grafa> grafs = grafaService.getAllGrafs();
         List<String> grafaInserts = new ArrayList<>();
@@ -35,6 +36,9 @@ public class InsertsSqlService {
             String insertRow = String.format("INSERT INTO public.flk_grafa (id, id_form, name_grafa, name_pole, path_xml) VALUES (%s, %s, '%s', '%s', '%s');\n",
                     grafa.getId(),grafa.getFormId(),grafa.getNameGrafa(),grafa.getNamePole(),grafa.getPathXML());
             grafaInserts.add(insertRow);
+            if(insertRow.contains("'null'")){
+                insertRow = insertRow.replaceAll("'null'","null");
+            }
         }
         return grafaInserts;
     }
@@ -42,11 +46,15 @@ public class InsertsSqlService {
     public List<String> getCheckInserts(){
         List<Check> checks = checkService.getAllChecks();
         List<String> checksInserts = new ArrayList<>();
-        for (Check check: checks){
+        for (var check: checks){
+            Long strDocId=checkService.getToTagDocIdById(check.getId());
             String insertRow = String.format("INSERT INTO public.flk_checks (id, id_grafa, to_tag_doc_id, code_check, description_check, description_error, d_on, d_off) VALUES (%s, %s, %s, '%s', '%s', '%s', %s, %s);\n",
-                    check.getId(),check.getGrafaId(),check.getToTagDocId(),
+                    check.getId(),check.getGrafaId(),strDocId,
                     check.getCheckCode(),check.getCheckDescription(),check.getErrorDescription(),check.getStartCheckTime(),check.getEndCheckTime());
             checksInserts.add(insertRow);
+            if(insertRow.contains("'null'")){
+                insertRow = insertRow.replaceAll("'null'","null");
+            }
         }
         return checksInserts;
     }
@@ -57,6 +65,9 @@ public class InsertsSqlService {
         for (StructureDocument structureDocument: structureDocuments){
             String insertRow = String.format("INSERT INTO public.structure_document (id, schema_location, root_element, schema_version, schema_name) VALUES (%s, '%s', '%s', '%s', '%s');\n",
                     structureDocument.getId(),structureDocument.getSchemaLocation(),structureDocument.getRootElement(), structureDocument.getSchemaVersion(),structureDocument.getSchemaName());
+            if(insertRow.contains("'null'")){
+                insertRow = insertRow.replaceAll("'null'","null");
+            }
             structureDocumentInserts.add(insertRow);
         }
         return structureDocumentInserts;
@@ -65,9 +76,12 @@ public class InsertsSqlService {
     public List<String> getTagInserts(){
         List<Tag> tags = tagService.getAllTags();
         List<String> tagInserts = new ArrayList<>();
-        for (Tag tag: tags){
-            String insertRow = String.format("INSERT INTO public.tag_document (id, to_strdoc_id, node_name, node_path, parent_name, parent_path, pattern, parent_id) VALUES (%s, %s, '%s', '%s', %s, '%s', %s, %s);\n",
-                    tag.getId(),tag.getToStrdocId(),tag.getNodeName(),tag.getNodePath(),tag.getParentName(),tag.getParentPath(),tag.getPattern(),tag.getParentId());
+        for (var tag: tags){
+            String insertRow = String.format("INSERT INTO public.tag_document (id, to_strdoc_id, node_name, node_path, parent_name, parent_path, pattern, parent_id) VALUES (%s, %s, '%s', '%s', '%s', '%s', %s, %s);\n",
+                    tag.getId(),tag.getStructureDocument().getId(),tag.getNodeName(),tag.getNodePath(),tag.getParentName(),tag.getParentPath(),tag.getPattern(),tag.getParentId());
+            if(insertRow.contains("'null'")){
+                insertRow = insertRow.replaceAll("'null'","null");
+            }
             tagInserts.add(insertRow);
         }
         return tagInserts;
@@ -78,7 +92,10 @@ public class InsertsSqlService {
         List<String> kindDocumentInserts = new ArrayList<>();
         for (KindDocument kindDocument: kindDocuments){
             String insertRow = String.format("INSERT INTO public.kind_document (id, code_eng, code_rus, description, date_activate, date_deactivate) VALUES (%s, '%s', '%s', '%s', '%s', '%s');\n",
-                    kindDocument.getId(),kindDocument.getCodeEng(),kindDocument.getCodeRus(),kindDocument.getActivateDateDocument(),kindDocument.getDeactivateDateDocument());
+                    kindDocument.getId(),kindDocument.getCodeEng(),kindDocument.getCodeRus(), kindDocument.getDescription(),kindDocument.getActivateDateDocument(),kindDocument.getDeactivateDateDocument());
+            if(insertRow.contains("'null'")){
+                insertRow = insertRow.replaceAll("'null'","null");
+            }
             kindDocumentInserts.add(insertRow);
         }
         return kindDocumentInserts;
@@ -91,6 +108,9 @@ public class InsertsSqlService {
             String insertRow = String.format("INSERT INTO public.flk_type_control (id, name_type, description, d_on, d_off, is_active, default_control, date_create, date_update) VALUES (%s, '%s', '%s', '%s', '%s', '%s', %s, '%s', '%s');\n",
                     typeControl.getId(),typeControl.getNameType(),typeControl.getDescription(),typeControl.getStartCheckTime(),
                     typeControl.getEndCheckTime(),typeControl.getIsActive(),typeControl.getDefaultControl(),typeControl.getCreateDate(),typeControl.getUpdateDate());
+            if(insertRow.contains("'null'")){
+                insertRow = insertRow.replaceAll("'null'","null");
+            }
             typeControlInserts.add(insertRow);
         }
         return typeControlInserts;
@@ -103,6 +123,9 @@ public class InsertsSqlService {
             String insertRow = String.format("INSERT INTO public.kind_m2m_structure (id, to_kind_id, to_struct_doc_id, date_activate, date_deactivate, to_flk_type_cntrl_id) VALUES (%s, %s, %s, '%s', '%s', %s);\n",
                     kindStructure.getId(),kindStructure.getToKindId(),kindStructure.getToStructDocId(),
                     kindStructure.getActivateDateDStructure(),kindStructure.getDeactivateDateStructure(),kindStructure.getToFlkTypeCntrlId());
+            if(insertRow.contains("'null'")){
+                insertRow = insertRow.replaceAll("'null'","null");
+            }
             kindStructureInserts.add(insertRow);
         }
         return kindStructureInserts;

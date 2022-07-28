@@ -45,7 +45,7 @@ public class XmlService {
         Map<String, String> pathMap = xmlParser.getElementsPathAndNameMap(xmlParser.getChildrenPath());
         pathMap.put(xmlParser.getRootElementName(), xmlParser.getRootElementPath());
         Map<String, String> documentationMap = xmlParser.getPathAndDocumentationMap(xmlParser.getElementsPathAndNameMap(xmlParser.getChildrenPath()));
-        documentationMap.put(xmlParser.getRootElementPath(),"Свидетельство о предоставленном обеспечении");//TODO: REMOVE
+        documentationMap.put(xmlParser.getRootElementPath(),xmlParser.getRootElementDocumentation());
         xsdService.saveRootXsd(new File(rootXml.getName().replace(".xml", "")));
         StructureDocument structureDocument = structureDocumentService.getDocumentBySchemaLocation(schemaLocation);
         ///////////////////////////////////TODO: REFACTOR
@@ -113,32 +113,6 @@ public class XmlService {
         StructureDocument document = structureDocumentService.getDocumentBySchemaLocation(schemaLocation);
         return document != null;
     }
-
-//    public void saveKindDocument(){
-//        KindDocument kindDocument = new KindDocument();
-//        kindDocument.setDescription("Уведомление об отсутствии необходимости внесения изменений (дополнений) в сведения, заявленные в таможенной декларации, поданной при предварительном таможенном декларировании товаров");
-//        kindDocument.setCodeEng("UDPT");
-//        kindDocument.setCodeRus("УПДТ");
-//
-//        kindDocument.setKindStructure(new KindStructure());
-//        DateTimeFormatter formatter  =  DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
-//        LocalDateTime activateTime = LocalDateTime.parse("1995-01-01 00:00:00",formatter);
-//        LocalDateTime deactivateTime = LocalDateTime.parse("4712-12-31 00:00:00",formatter);
-//        kindDocument.setActivateDateDocument(activateTime);
-//        kindDocument.setDeactivateDateDocument(deactivateTime);
-//        kindDocumentService.saveKindDocument(kindDocument);
-//    }
-//    public void saveKindStructure(Long toKindDocumentId, Long toStrDocId){
-//        KindStructure kindStructure = new KindStructure();
-//        kindStructure.setToKindId(toKindDocumentId);
-//        kindStructure.setToStructDocId(toStrDocId);
-//        DateTimeFormatter formatter  =  DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
-//        LocalDateTime activateTime = LocalDateTime.parse("1995-01-01 00:00:00",formatter);
-//        LocalDateTime deactivateTime = LocalDateTime.parse("4712-12-31 00:00:00",formatter);
-//        kindStructure.setActivateDateDStructure(activateTime);
-//        kindStructure.setDeactivateDateStructure(deactivateTime);
-//        kindStructureService.saveKindStructure(kindStructure);
-//    }
 
 
 }

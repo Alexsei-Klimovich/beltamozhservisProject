@@ -19,6 +19,10 @@ public class CheckService {
     @Autowired
     private CheckRepository checkRepository;
 
+
+    public Long getToTagDocIdById(Long id){
+        return checkRepository.getToStrDocIdByCheckId(id);
+    }
     public void deleteCheckById(Long checkId) {
         checkRepository.deleteById(checkId);
     }

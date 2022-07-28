@@ -31,18 +31,16 @@ public class XsdService {
         NodeList schemas = document.getElementsByTagName("xs:schema");
         Element schema = (Element) schemas.item(0);
         String version = schema.getAttribute("version");
-        for (int i = 0; i < elements.getLength(); i++) {
-            Element element = (Element) elements.item(i);
-            if (element.hasAttribute("type")) {
-                String rootElement = element.getAttribute("type").replace("Type", "");
-                String schemaName = element.getAttribute("name");
-                String schemaLocation = file.getPath();
-                structureDocument.setRootElement(rootElement);
-                structureDocument.setSchemaLocation(schemaLocation);
-                structureDocument.setSchemaVersion(version);
-                structureDocument.setSchemaName(schemaName);
-                structureDocumentService.saveStructureDocument(structureDocument);
-            }
+        Element element = (Element) elements.item(0);
+        if (element.hasAttribute("type")) {
+            String rootElement = element.getAttribute("type").replace("Type", "");
+            String schemaName = element.getAttribute("name");
+            String schemaLocation = file.getPath();
+            structureDocument.setRootElement(rootElement);
+            structureDocument.setSchemaLocation(schemaLocation);
+            structureDocument.setSchemaVersion(version);
+            structureDocument.setSchemaName(schemaName);
+            structureDocumentService.saveStructureDocument(structureDocument);
         }
     }
 
