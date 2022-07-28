@@ -14,7 +14,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class TagDto {
     private Long toStrdocId;
-    private Long nodeName;
+    private String nodeName;
     private String nodePath;
     private String parentName;
     private String parentPath;

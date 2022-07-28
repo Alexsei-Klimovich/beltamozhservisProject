@@ -10,6 +10,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @RestController
 public class TagController {
     @Autowired
@@ -32,6 +35,16 @@ public class TagController {
             return new ResponseEntity<>(tagDto, HttpStatus.OK);
         }
         return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+    }
+
+    @GetMapping("/getAllTags")
+    public ResponseEntity<List<TagDto>> getAllTags(){
+        List<Tag> tagList = tagService.getAllTags();
+        List<TagDto> tagDtoList = new ArrayList<>();
+        for(var tag : tagList){
+            tagDtoList.add(tagMapper.toDto(tag));
+        }
+        return new ResponseEntity<>(tagDtoList,HttpStatus.OK);
     }
 
     @DeleteMapping("/deleteTag")

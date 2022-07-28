@@ -12,6 +12,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+
 @RestController
 public class GrafaController {
     @Autowired
@@ -27,6 +31,16 @@ public class GrafaController {
         }
         return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
     }
+    //получить всю таблицу графа
+    @GetMapping("/getAllGrafa")
+    public ResponseEntity<List<GrafaDto>> getAllGrafs(){
+        List<Grafa> grafaList = grafaService.getAllGrafs();
+        List<GrafaDto> grafaDtoList = new ArrayList<>();
+        for(var grafa : grafaList){
+            grafaDtoList.add(grafaMapper.toDto(grafa));
+        }
+        return new ResponseEntity<>(grafaDtoList,HttpStatus.OK);
+    }
     @PostMapping("/createGrafa")
     public ResponseEntity<String> createGrafa(@ModelAttribute("grafa") Grafa grafa){
         grafaService.saveGrafa(grafa);
@@ -38,4 +52,6 @@ public class GrafaController {
         grafaService.deleteGrafaById(Long.parseLong(grafaId));
         return new ResponseEntity<>("Grafa deleted", HttpStatus.OK);
     }
+
+
 }

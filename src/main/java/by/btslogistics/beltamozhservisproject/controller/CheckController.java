@@ -12,6 +12,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @RestController
 public class CheckController {
     @Autowired
@@ -29,6 +32,15 @@ public class CheckController {
         return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
     }
 
+    @GetMapping("/getAllCheck")
+    public ResponseEntity<List<CheckDto>> getAllCheck(){
+        List<Check> checkList = checkService.getAllChecks();
+        List<CheckDto> checkDtoList = new ArrayList<>();
+        for(var check : checkList){
+            checkDtoList.add(checkMapper.toDto(check));
+        }
+        return new ResponseEntity<>(checkDtoList,HttpStatus.OK);
+    }
     @DeleteMapping("/deleteCheck")
     public ResponseEntity<String> deleteCheck(@RequestParam("id") String checkId) {
         checkService.deleteCheckById(Long.parseLong(checkId));

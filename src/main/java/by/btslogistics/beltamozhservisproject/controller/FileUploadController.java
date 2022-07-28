@@ -49,6 +49,7 @@ public class FileUploadController {
         return "File uploaded";
     }
 
+    // вытягивает список Excel файлов из директории и ее поддерикторий с сервера
     @GetMapping("/getFilesNames")
     public List<String> getFilesNames() throws IOException {
         List<String> listFilesNames = new ArrayList<>();
