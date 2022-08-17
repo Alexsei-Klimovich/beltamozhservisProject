@@ -29,7 +29,7 @@ create table FLK_CHECKS (
 create sequence if not exists seq_flk_grafa start 100000;
 create table FLK_GRAFA (
                            ID numeric(19) primary key,
-                           ID_FORM numeric(20),
+                           ID_FORM varchar(20),
                            NAME_GRAFA varchar(700) ,
                            NAME_POLE varchar(700) ,
                            PATH_XML varchar(500)
