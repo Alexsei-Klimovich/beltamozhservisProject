@@ -20,8 +20,8 @@ create table FLK_CHECKS (
                             ID_GRAFA numeric(19) not null,
                             TO_TAG_DOC_ID numeric(19) not null,
                             CODE_CHECK varchar(25) ,
-                            DESCRIPTION_CHECK varchar(700) ,
-                            DESCRIPTION_ERROR varchar(600) ,
+                            DESCRIPTION_CHECK varchar(1000) ,
+                            DESCRIPTION_ERROR varchar(1000) ,
                             D_ON date,
                             D_OFF date
 );
@@ -30,19 +30,19 @@ create sequence if not exists seq_flk_grafa start 100000;
 create table FLK_GRAFA (
                            ID numeric(19) primary key,
                            ID_FORM varchar(20),
-                           NAME_GRAFA varchar(700) ,
-                           NAME_POLE varchar(700) ,
-                           PATH_XML varchar(500)
+                           NAME_GRAFA varchar(1000) ,
+                           NAME_POLE varchar(1000) ,
+                           PATH_XML varchar(1000)
 );
 
 create sequence if not exists seq_tag_document start 100000;
 create table TAG_DOCUMENT (
                               ID numeric(19) primary key,
                               TO_STRDOC_ID numeric(19) not null,
-                              NODE_NAME varchar(700) ,
-                              NODE_PATH varchar(700) ,
-                              PARENT_NAME varchar(700),
-                              PARENT_PATH varchar(700),
+                              NODE_NAME varchar(1000) ,
+                              NODE_PATH varchar(1000) ,
+                              PARENT_NAME varchar(1000),
+                              PARENT_PATH varchar(1000),
                               PATTERN varchar(255),
                               PARENT_ID numeric(19)
 );
@@ -50,8 +50,8 @@ create table TAG_DOCUMENT (
 create sequence if not exists seq_structure_document start 100000;
 create table STRUCTURE_DOCUMENT (
                                     ID numeric(19) primary key,
-                                    SCHEMA_LOCATION varchar(700) ,
-                                    ROOT_ELEMENT varchar(700) ,
+                                    SCHEMA_LOCATION varchar(1000) ,
+                                    ROOT_ELEMENT varchar(1000) ,
                                     SCHEMA_VERSION varchar(50) ,
                                     SCHEMA_NAME varchar(50)
 );
@@ -61,7 +61,7 @@ create table KIND_DOCUMENT (
                                     ID numeric(19) primary key,
                                     CODE_ENG VARCHAR(10) ,
                                     CODE_RUS VARCHAR(10) ,
-                                    DESCRIPTION varchar(450) ,
+                                    DESCRIPTION varchar(1000) ,
                                     DATE_ACTIVATE date,
                                     DATE_DEACTIVATE date
 );
@@ -80,7 +80,7 @@ create sequence if not exists seq_flk_type_control start 100000;
 create table FLK_TYPE_CONTROL (
                                     ID numeric(19) primary key,
                                     NAME_TYPE varchar(150) ,
-                                    DESCRIPTION varchar(500) ,
+                                    DESCRIPTION varchar(1000) ,
                                     D_ON date,
                                     D_OFF date,
                                     IS_ACTIVE varchar(1),
