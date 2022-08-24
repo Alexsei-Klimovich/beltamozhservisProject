@@ -148,7 +148,7 @@ public class XmlParser {
                 }
             }
         }
-        return changePathsPrefix(paths);
+        return paths;
     }
 
     //TODO: REFACTOR THIS
