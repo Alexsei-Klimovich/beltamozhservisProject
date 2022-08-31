@@ -326,48 +326,44 @@ public class XmlParser {
         return condition;
     }
 
-    public Map<String, String> getMaxMultiplicityForElementByName() throws IOException, ParserConfigurationException, SAXException {
-        Map<String, String> maxMultiplicityMap = new HashMap<>();
-        List<String> fileNames = getFileNames();
-        for (String fileName : fileNames) {
-            Document document = XsdParser.buildDocumentFromFile(new File(fileName));
-            NodeList multiplicities = document.getElementsByTagName("xs:element");
-            for (int i = 0; i < multiplicities.getLength(); i++) {
-                Element element = (Element) multiplicities.item(i);
-                String maxOccurs = element.getAttribute("maxOccurs");
-                Element parentElement = (Element) element.getParentNode().getParentNode();
-                String attributeName = parentElement.getAttribute("name").replace("Type", "");
-                if (attributeName.isEmpty()) {
-                    Element doubleParent = (Element) parentElement.getParentNode();
-                    attributeName = doubleParent.getAttribute("name").replace("Type", "");
-                }
-                maxMultiplicityMap.put(attributeName, maxOccurs);
-            }
-        }
-        return maxMultiplicityMap;
-    }
-
 
     public Map<String, String> getMinMultiplicityForElementByName() throws IOException, ParserConfigurationException, SAXException {
         Map<String, String> minMultiplicityMap = new HashMap<>();
         List<String> fileNames = getFileNames();
         for (String fileName : fileNames) {
             Document document = XsdParser.buildDocumentFromFile(new File(fileName));
-            NodeList minMultiplicities = document.getElementsByTagName("xs:element");
-            for (int i = 0; i < minMultiplicities.getLength(); i++) {
-                Element element = (Element) minMultiplicities.item(i);
-                String minOccurs = element.getAttribute("minOccurs");
-                Element parentElement = (Element) element.getParentNode().getParentNode();
-                String attributeName = parentElement.getAttribute("name").replace("Type", "");
-                if (attributeName.isEmpty()) {
-                    Element doubleParent = (Element) parentElement.getParentNode();
-                    attributeName = doubleParent.getAttribute("name").replace("Type", "");
+            NodeList elements = document.getElementsByTagName("xs:element");
+            for (int i = 0; i < elements.getLength(); i++) {
+                Element element = (Element) elements.item(i);
+                String attributeName = element.getAttribute("name");
+                if (!attributeName.isEmpty()) {
+                    String minMultiplicity = element.getAttribute("minOccurs");
+                    minMultiplicityMap.put(attributeName, minMultiplicity);
                 }
-                minMultiplicityMap.put(attributeName, minOccurs);
             }
         }
         return minMultiplicityMap;
     }
+
+    public Map<String, String> getMaxMultiplicityForElementByName() throws IOException, ParserConfigurationException, SAXException {
+        Map<String, String> maxMultiplicityMap = new HashMap<>();
+        List<String> fileNames = getFileNames();
+        for (String fileName : fileNames) {
+            Document document = XsdParser.buildDocumentFromFile(new File(fileName));
+            NodeList elements = document.getElementsByTagName("xs:element");
+            for (int i = 0; i < elements.getLength(); i++) {
+                Element element = (Element) elements.item(i);
+                String attributeName = element.getAttribute("name");
+                if (!attributeName.isEmpty()) {
+                    String maxMultiplicity = element.getAttribute("maxOccurs");
+                    maxMultiplicityMap.put(attributeName, maxMultiplicity);
+                }
+            }
+        }
+        return maxMultiplicityMap;
+    }
+
+
 
 
     public String getRootElementDocumentation() throws IOException, ParserConfigurationException, SAXException {
