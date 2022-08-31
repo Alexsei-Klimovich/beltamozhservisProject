@@ -5,7 +5,6 @@ import by.btslogistics.beltamozhservisproject.model.*;
 import by.btslogistics.beltamozhservisproject.parser.xsd.XmlParser;
 import by.btslogistics.beltamozhservisproject.parser.xsd.XsdParser;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.jpa.convert.threeten.Jsr310JpaConverters;
 import org.springframework.stereotype.Service;
 import org.w3c.dom.Document;
 import org.w3c.dom.NamedNodeMap;
@@ -91,6 +90,7 @@ public class XmlService {
             grafaService.saveGrafa(grafa);
             Tag tag = new Tag();
             tag.setPattern(xmlParser.getPatternForElementByName(pathMap.get(entry.getKey())));
+            tag.setMultiplicity(xmlParser.getConditionByMultiplicity(pathMap.get(entry.getKey())));
             tag.setStructureDocument(structureDocument);
             tag.setNodePath(entry.getKey());
             tag.setParentPath(xmlParser.getParentElementPath(entry.getKey()));
@@ -153,6 +153,7 @@ public class XmlService {
             grafaService.saveGrafa(grafa);
             Tag tag = new Tag();
             tag.setPattern(xmlParser.getPatternForElementByName(pathMap.get(entry.getKey())));
+            tag.setMultiplicity(xmlParser.getConditionByMultiplicity(pathMap.get(entry.getKey())));
             tag.setStructureDocument(structureDocument);
             tag.setNodePath(entry.getKey());
             tag.setParentPath(xmlParser.getParentElementPath(entry.getKey()));

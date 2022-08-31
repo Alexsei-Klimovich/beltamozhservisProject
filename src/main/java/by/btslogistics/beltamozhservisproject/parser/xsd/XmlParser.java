@@ -1,6 +1,5 @@
 package by.btslogistics.beltamozhservisproject.parser.xsd;
 
-import by.btslogistics.beltamozhservisproject.model.StructureDocument;
 import by.btslogistics.beltamozhservisproject.service.XsdService;
 import org.w3c.dom.*;
 import org.xml.sax.SAXException;
@@ -304,6 +303,72 @@ public class XmlParser {
         pattern = patterns.get(elementName);
         return pattern;
     }
+
+    public String getConditionByMultiplicity(String elementName) throws IOException, ParserConfigurationException, SAXException {
+        Map<String, String> maxMultiplicityMap = getMaxMultiplicityForElementByName();
+        Map<String, String> minMultiplicityMap = getMinMultiplicityForElementByName();
+        String condition = null;
+        String minMultiplicity = minMultiplicityMap.get(elementName);
+        String maxMultiplicity = maxMultiplicityMap.get(elementName);
+        if (maxMultiplicity == null) {
+            if (minMultiplicity == null)
+                return "UNKNOWN";
+        }
+        else if (maxMultiplicity.equals("1") && minMultiplicity.equals("1")) {
+            condition = "1";
+        } else if (maxMultiplicity.equals("1") && minMultiplicity.equals("0")) {
+            condition = "0..1";
+        } else if (maxMultiplicity.equals("unbounded") && minMultiplicity.equals("0")) {
+            condition = "0..*";
+        } else if (maxMultiplicity.equals("unbounded") && minMultiplicity.equals("1")) {
+            condition = "1..*";
+        }
+        return condition;
+    }
+
+    public Map<String, String> getMaxMultiplicityForElementByName() throws IOException, ParserConfigurationException, SAXException {
+        Map<String, String> maxMultiplicityMap = new HashMap<>();
+        List<String> fileNames = getFileNames();
+        for (String fileName : fileNames) {
+            Document document = XsdParser.buildDocumentFromFile(new File(fileName));
+            NodeList multiplicities = document.getElementsByTagName("xs:element");
+            for (int i = 0; i < multiplicities.getLength(); i++) {
+                Element element = (Element) multiplicities.item(i);
+                String maxOccurs = element.getAttribute("maxOccurs");
+                Element parentElement = (Element) element.getParentNode().getParentNode();
+                String attributeName = parentElement.getAttribute("name").replace("Type", "");
+                if (attributeName.isEmpty()) {
+                    Element doubleParent = (Element) parentElement.getParentNode();
+                    attributeName = doubleParent.getAttribute("name").replace("Type", "");
+                }
+                maxMultiplicityMap.put(attributeName, maxOccurs);
+            }
+        }
+        return maxMultiplicityMap;
+    }
+
+
+    public Map<String, String> getMinMultiplicityForElementByName() throws IOException, ParserConfigurationException, SAXException {
+        Map<String, String> minMultiplicityMap = new HashMap<>();
+        List<String> fileNames = getFileNames();
+        for (String fileName : fileNames) {
+            Document document = XsdParser.buildDocumentFromFile(new File(fileName));
+            NodeList minMultiplicities = document.getElementsByTagName("xs:element");
+            for (int i = 0; i < minMultiplicities.getLength(); i++) {
+                Element element = (Element) minMultiplicities.item(i);
+                String minOccurs = element.getAttribute("minOccurs");
+                Element parentElement = (Element) element.getParentNode().getParentNode();
+                String attributeName = parentElement.getAttribute("name").replace("Type", "");
+                if (attributeName.isEmpty()) {
+                    Element doubleParent = (Element) parentElement.getParentNode();
+                    attributeName = doubleParent.getAttribute("name").replace("Type", "");
+                }
+                minMultiplicityMap.put(attributeName, minOccurs);
+            }
+        }
+        return minMultiplicityMap;
+    }
+
 
     public String getRootElementDocumentation() throws IOException, ParserConfigurationException, SAXException {
         Document document = buildDocumentFromFile(new File(rootXml.getName().replace(".xml", "")));

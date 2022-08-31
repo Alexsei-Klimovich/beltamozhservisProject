@@ -20,4 +20,5 @@ public class TagDto {
     private String parentPath;
     private String pattern;
     private Long patternId;
+    private String multiplicity;
 }
