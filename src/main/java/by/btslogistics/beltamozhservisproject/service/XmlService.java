@@ -90,27 +90,27 @@ public class XmlService {
             grafaService.saveGrafa(grafa);
             Tag tag = new Tag();
             tag.setPattern(xmlParser.getPatternForElementByName(pathMap.get(entry.getKey())));
-            tag.setMultiplicity(xmlParser.getConditionByMultiplicity(pathMap.get(entry.getKey())));
+            tag.setMultiplicity(xmlParser.getMinForElementByName(pathMap.get(entry.getKey())));
             tag.setStructureDocument(structureDocument);
             tag.setNodePath(entry.getKey());
             tag.setParentPath(xmlParser.getParentElementPath(entry.getKey()));
             tag.setNodeName(entry.getValue());
             tagService.saveTag(tag);
         }
-        for (Map.Entry<String, String> entry : pathMap.entrySet()) {
-            Tag child = tagService.getTagByNodePath(entry.getKey());
-            if (child != null) {
-                if (child.getParentPath().length() > 2) {
-                    Tag parent = tagService.getTagByNodePath(child.getParentPath());
-                    if (parent != null) {
-                        child.setParentName(parent.getNodeName());
-                        child.setParentId(parent.getId());
-                        tagService.updateTag(child);
-                    }
-                }
-            }
-
-        }
+//        for (Map.Entry<String, String> entry : pathMap.entrySet()) {
+//            Tag child = tagService.getTagByNodePath(entry.getKey());
+//            if (child != null) {
+//                if (child.getParentPath().length() > 2) {
+//                    Tag parent = tagService.getTagByNodePath(child.getParentPath());
+//                    if (parent != null) {
+//                        child.setParentName(parent.getNodeName());
+//                        child.setParentId(parent.getId());
+//                        tagService.updateTag(child);
+//                    }
+//                }
+//            }
+//
+//        }
     }
 
     public boolean isStructureDocumentExists(String schemaLocation) {
@@ -119,8 +119,14 @@ public class XmlService {
     }
 
 
+
+
     public void saveFlkGrafaAndTagDocument(File rootXml) throws IOException, ParserConfigurationException, SAXException {
         XmlParser xmlParser = new XmlParser(rootXml);
+         Map<String,String> testMin =  xmlParser.getMinAllMultMap();
+         Map<String,String> testMax =  xmlParser.getMaxAllMultMap();
+
+        xmlParser.getMinAllMultMap();
         List<String> resultPaths = new ArrayList<>();
         String rootElementWithPrefix = getRootElementWithPrefix(rootXml);
         List<String> childPaths = xmlParser.getChildrenPath();
@@ -153,7 +159,9 @@ public class XmlService {
             grafaService.saveGrafa(grafa);
             Tag tag = new Tag();
             tag.setPattern(xmlParser.getPatternForElementByName(pathMap.get(entry.getKey())));
-            tag.setMultiplicity(xmlParser.getConditionByMultiplicity(pathMap.get(entry.getKey())));
+            //pathMap.get(entry.getKey()) ELEMENT NAME
+            tag.setMultiplicity(xmlParser.getConditionByMultiplicity(testMin,testMax,(pathMap.get(entry.getKey()))));
+
             tag.setStructureDocument(structureDocument);
             tag.setNodePath(entry.getKey());
             tag.setParentPath(xmlParser.getParentElementPath(entry.getKey()));
