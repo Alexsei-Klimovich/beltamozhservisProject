@@ -125,6 +125,8 @@ public class XmlService {
         XmlParser xmlParser = new XmlParser(rootXml);
          Map<String,String> testMin =  xmlParser.getMinAllMultMap();
          Map<String,String> testMax =  xmlParser.getMaxAllMultMap();
+         Map<String,String> testUse =  xmlParser.getUseMap();
+         Map<String,String> testDefault =  xmlParser.getDefaultMap();
 
         xmlParser.getMinAllMultMap();
         List<String> resultPaths = new ArrayList<>();
@@ -160,7 +162,7 @@ public class XmlService {
             Tag tag = new Tag();
             tag.setPattern(xmlParser.getPatternForElementByName(pathMap.get(entry.getKey())));
             //pathMap.get(entry.getKey()) ELEMENT NAME
-            tag.setMultiplicity(xmlParser.getConditionByMultiplicity(testMin,testMax,(pathMap.get(entry.getKey()))));
+            tag.setMultiplicity(xmlParser.getConditionByMultiplicity(testMin, testMax, testUse, testDefault, (pathMap.get(entry.getKey()))));
 
             tag.setStructureDocument(structureDocument);
             tag.setNodePath(entry.getKey());

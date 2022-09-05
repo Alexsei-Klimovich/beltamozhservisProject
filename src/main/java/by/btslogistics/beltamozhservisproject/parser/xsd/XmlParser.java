@@ -297,29 +297,107 @@ public class XmlParser {
         return patternsMap;
     }
 
+
+    public Map<String, String> getUseMap() throws IOException, ParserConfigurationException, SAXException {
+        Map<String, String> useMap = new HashMap<>();
+        List<String> fileNames = getFileNames();
+        for (String fileName : fileNames) {
+            Document document = XsdParser.buildDocumentFromFile(new File(fileName));
+            NodeList patterns = document.getElementsByTagName("xs:attribute");
+            for (int i = 0; i < patterns.getLength(); i++) {
+                Element element = (Element) patterns.item(i);
+                if (element.hasAttribute("use")){
+                    String useAtr = element.getAttribute("use");
+                    if (useAtr.length()>0){
+                        System.out.println("HERE");
+                        String elementName = element.getAttribute("name");
+                        String finalName = List.of(elementName.split(":")).get(0);
+                        useMap.put(finalName, useAtr);
+                    }
+                }
+
+            }
+        }
+        System.out.println("SIZEMAP_USE "+ useMap.size());
+
+        for(Map.Entry<String, String> entry:useMap.entrySet()){
+            System.out.println(entry.getKey()+" " +entry.getValue());
+        }
+        return useMap;
+    }
+
+    public Map<String, String> getDefaultMap() throws IOException, ParserConfigurationException, SAXException {
+        Map<String, String> defaultMap = new HashMap<>();
+        List<String> fileNames = getFileNames();
+        for (String fileName : fileNames) {
+            Document document = XsdParser.buildDocumentFromFile(new File(fileName));
+            NodeList patterns = document.getElementsByTagName("xs:attribute");
+            for (int i = 0; i < patterns.getLength(); i++) {
+                Element element = (Element) patterns.item(i);
+                if (element.hasAttribute("default")){
+                    String useAtr = element.getAttribute("default");
+                    if (useAtr.length()>0){
+                        System.out.println("HERE");
+                        String elementName = element.getAttribute("name");
+                        String finalName = List.of(elementName.split(":")).get(0);
+                        defaultMap.put(finalName, useAtr);
+                    }
+                }
+
+            }
+        }
+        System.out.println("SIZEMAP_default "+ defaultMap.size());
+
+        for(Map.Entry<String, String> entry:defaultMap.entrySet()){
+            System.out.println(entry.getKey()+" " +entry.getValue());
+        }
+        return defaultMap;
+    }
+
+
+
     public String getPatternForElementByName(String elementName) throws IOException, ParserConfigurationException, SAXException {
         Map<String, String> patterns = getAllPatternsMap();
         String pattern = null;
         pattern = patterns.get(elementName);
         return pattern;
     }
-
-    public String getConditionByMultiplicity(Map<String,String> minMultiplicityMap,Map<String,String> maxMultiplicityMap,String elementName) throws IOException, ParserConfigurationException, SAXException {
+    //TODO ХУЕТА ПЕРЕДЕЛАТЬ
+    public String getConditionByMultiplicity(Map<String,String> minMultiplicityMap, Map<String,String> maxMultiplicityMap, Map<String,String> useMap, Map<String,String> defaultMap, String elementName) throws IOException, ParserConfigurationException, SAXException {
         String condition = null;
+
         String minMultiplicity = minMultiplicityMap.get(elementName);
         String maxMultiplicity = maxMultiplicityMap.get(elementName);
-
-        if (maxMultiplicity != null && minMultiplicity!=null ) {
-            if (maxMultiplicity.equals("1") && minMultiplicity.equals("1")) {
-                condition = "1";
-            } else if (maxMultiplicity.equals("1") && minMultiplicity.equals("0")) {
-                condition = "0..1";
-            } else if (maxMultiplicity.equals("unbounded") && minMultiplicity.equals("0")) {
-                condition = "0..*";
-            } else if (maxMultiplicity.equals("unbounded") && minMultiplicity.equals("1")) {
-                condition = "1..*";
+        String useMultiplicity = useMap.get(elementName);
+        String defaultMultiplicity = defaultMap.get(elementName);
+        if (maxMultiplicity == null && minMultiplicity == null && defaultMultiplicity == null && useMultiplicity == null) {
+            return "1";
+        } else if (maxMultiplicity == null && minMultiplicity == null) {
+            return "1";
+        } else if (minMultiplicity == null && maxMultiplicity.equals("unbounded")) {
+            return "0..*";
+        } else if (minMultiplicity != null && minMultiplicity.equals("0") && maxMultiplicity == null) {
+            return "0..*";
+        } else if (minMultiplicity != null && minMultiplicity.equals("0") && maxMultiplicity.equals("1")) {
+            return "0..1";
+        } else if (minMultiplicity != null && minMultiplicity.equals("0") && maxMultiplicity.equals("unbounded") || maxMultiplicity.matches("[2-9]{1,}")) {
+            if (maxMultiplicity.equals("unbounded")) {
+                return "0..*";
+            } else {
+                return "0.." + maxMultiplicity;
             }
-            return condition;
+        } else if (minMultiplicity != null && minMultiplicity.matches("[1-9]*") && maxMultiplicity.equals("unbounded") || maxMultiplicity.matches("[2-9]{1,}")) {
+            if (maxMultiplicity.equals("unbounded")) {
+                return minMultiplicity + "..*";
+            } else {
+                return minMultiplicity + ".." + maxMultiplicity;
+            }
+        } else if (useMultiplicity != null && useMultiplicity.equals("optional") && defaultMultiplicity == null) {
+            return "0..*" ;
+        } else if (useMultiplicity != null && useMultiplicity.equals("required") && defaultMultiplicity == null) {
+            return "1..*";
+        } else if (useMultiplicity != null && useMultiplicity.equals("required") && defaultMultiplicity.matches("[1-9]{1,}")) {
+            return defaultMultiplicity + "..*";
         }
         return condition;
     }
@@ -344,7 +422,7 @@ public class XmlParser {
 
             }
         }
-        System.out.println("SIZEMAP"+pathAndMinMap.size());
+        System.out.println("SIZEMAP "+ pathAndMinMap.size());
 
         for(Map.Entry<String, String> entry:pathAndMinMap.entrySet()){
             System.out.println(entry.getKey()+" " +entry.getValue());
