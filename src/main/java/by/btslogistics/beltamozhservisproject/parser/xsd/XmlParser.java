@@ -439,13 +439,13 @@ public class XmlParser {
             for (int i = 0; i < patterns.getLength(); i++) {
                 Element element = (Element) patterns.item(i);
                 if (element.hasAttribute("maxOccurs")){
-                    String minOccurs = element.getAttribute("maxOccurs");
-                    if (minOccurs.length()>0){
-                        System.out.println(minOccurs);
+                    String maxOccurs = element.getAttribute("maxOccurs");
+                    if (maxOccurs.length()>0){
+                        System.out.println(maxOccurs);
                         String elementName=element.getAttribute("ref");
                         String finalName= List.of(elementName.split(":")).get(1);
                         System.out.println(element.getAttribute("ref"));
-                        pathAndMinMap.put(finalName,minOccurs);
+                        pathAndMinMap.put(finalName,maxOccurs);
                     }
                 }
             }
@@ -459,48 +459,6 @@ public class XmlParser {
         result = min.get(elementName);
         return result;
     }
-
-
-
-
-    public Map<String, String> getMinMultiplicityForElementByName() throws IOException, ParserConfigurationException, SAXException {
-        Map<String, String> minMultiplicityMap = new HashMap<>();
-        List<String> fileNames = getFileNames();
-        for (String fileName : fileNames) {
-            Document document = XsdParser.buildDocumentFromFile(new File(fileName));
-            NodeList elements = document.getElementsByTagName("xs:element");
-            for (int i = 0; i < elements.getLength(); i++) {
-                Element element = (Element) elements.item(i);
-                String attributeName = element.getAttribute("name");
-                if (!attributeName.isEmpty()) {
-                    String minMultiplicity = element.getAttribute("minOccurs");
-                    minMultiplicityMap.put(attributeName, minMultiplicity);
-                }
-            }
-        }
-        return minMultiplicityMap;
-    }
-
-    public Map<String, String> getMaxMultiplicityForElementByName() throws IOException, ParserConfigurationException, SAXException {
-        Map<String, String> maxMultiplicityMap = new HashMap<>();
-        List<String> fileNames = getFileNames();
-        for (String fileName : fileNames) {
-            Document document = XsdParser.buildDocumentFromFile(new File(fileName));
-            NodeList elements = document.getElementsByTagName("xs:element");
-            for (int i = 0; i < elements.getLength(); i++) {
-                Element element = (Element) elements.item(i);
-                String attributeName = element.getAttribute("name");
-                if (!attributeName.isEmpty()) {
-                    String maxMultiplicity = element.getAttribute("manOccurs");
-                    maxMultiplicityMap.put(attributeName, maxMultiplicity);
-                }
-            }
-        }
-        return maxMultiplicityMap;
-    }
-
-
-
 
     public String getRootElementDocumentation() throws IOException, ParserConfigurationException, SAXException {
         Document document = buildDocumentFromFile(new File(rootXml.getName().replace(".xml", "")));
