@@ -61,7 +61,7 @@ public class Tag {
     private Long parentId;
 
     @Column(name = "sign_multiply")
-    private String sign_multiply;
+    private String Multiplicity;
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "tag", cascade = CascadeType.ALL)
     private List<Check> checks = new ArrayList<>();
