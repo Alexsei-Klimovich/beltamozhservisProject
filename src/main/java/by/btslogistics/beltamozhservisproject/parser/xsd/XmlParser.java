@@ -229,29 +229,6 @@ public class XmlParser {
         return XsdService.getPathPrefixFromFile(new File(rootXml.getName().replace(".xml", ""))) + getRootElementName();
     }
 
-//    public LinkedHashMap<String, String> getPathAndDocumentationMap(LinkedHashMap<String, String> elementsPathAndNameMap) throws IOException, ParserConfigurationException, SAXException {
-//        LinkedHashMap<String, String> pathAndDocumentationMap = new LinkedHashMap<>();
-//        List<String> fileNames = getFileNames();
-//        for (String fileName : fileNames) {
-//            Document document = XsdParser.buildDocumentFromFile(new File(fileName));
-//            NodeList documentations = document.getElementsByTagName("xs:documentation");
-//            for (int i = 0; i < documentations.getLength(); i++) {
-//                Element element = (Element) documentations.item(i);
-//                Element parentElement = (Element) element.getParentNode().getParentNode();
-//                String attributeName = parentElement.getAttribute("name");
-//                if (!attributeName.isEmpty()) {
-//                    for (Map.Entry<String, String> entry : elementsPathAndNameMap.entrySet()) {
-//                        String entryName = entry.getValue();
-//                        if (entryName.equals(attributeName)) {
-//                            pathAndDocumentationMap.put(entry.getKey(), element.getTextContent());
-//                        }
-//                    }
-//                }
-//            }
-//        }
-//        return pathAndDocumentationMap;
-//    }
-
     public LinkedHashMap<String, String> getPathAndDocumentationMap(LinkedHashMap<String, String> elementsPathAndNameMap) throws IOException, ParserConfigurationException, SAXException {
         LinkedHashMap<String, String> pathAndDocumentationMap = new LinkedHashMap<>();
         List<String> fileNames = getFileNames();
