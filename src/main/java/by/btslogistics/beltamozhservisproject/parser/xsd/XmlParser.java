@@ -150,12 +150,13 @@ public class XmlParser {
         return paths;
     }
 
+
     //TODO: REFACTOR THIS
     public List<String> changePathsPrefix(List<String> paths) throws IOException, ParserConfigurationException, SAXException {
         Document document = XsdParser.buildDocumentFromFile(rootXml);
         Node node = document.getDocumentElement();
         NamedNodeMap tags = node.getAttributes();
-        Map<String, String> prefixMap = new HashMap<>();
+        LinkedHashMap<String, String> prefixMap = new LinkedHashMap<>();
         for (int i = 0; i < tags.getLength(); i++) {
             if (tags.item(i).toString().contains("xmlns")) {
                 List<String> splitedTags = List.of(tags.item(i).toString().split("="));
@@ -165,7 +166,7 @@ public class XmlParser {
                 prefixMap.put(oldPrefix, fileName);
             }
         }
-        Map<String, String> newPrefixMap = new HashMap<>();
+        LinkedHashMap<String, String> newPrefixMap = new LinkedHashMap<>();
         List<String> keys = new ArrayList<>();
         for (Map.Entry<String, String> entry : prefixMap.entrySet()) {
             keys.add(entry.getKey());
@@ -204,8 +205,8 @@ public class XmlParser {
         return changesPrefixPaths;
     }
 
-    public Map<String, String> getElementsPathAndNameMap(List<String> elementsPaths) throws IOException, ParserConfigurationException, SAXException {
-        Map<String, String> pathAndNameMap = new HashMap<>();
+    public LinkedHashMap<String, String> getElementsPathAndNameMap(List<String> elementsPaths) throws IOException, ParserConfigurationException, SAXException {
+        LinkedHashMap<String, String> pathAndNameMap = new LinkedHashMap<>();
         for (String elementPath : elementsPaths) {
             List<String> splitedElementPath = List.of(elementPath.split("/"));
             if (!(splitedElementPath.get(splitedElementPath.size() - 1).contains("@"))) {
@@ -228,19 +229,42 @@ public class XmlParser {
         return XsdService.getPathPrefixFromFile(new File(rootXml.getName().replace(".xml", ""))) + getRootElementName();
     }
 
-    public Map<String, String> getPathAndDocumentationMap(Map<String, String> elementsPathAndNameMap) throws IOException, ParserConfigurationException, SAXException {
-        Map<String, String> pathAndDocumentationMap = new HashMap<>();
+//    public LinkedHashMap<String, String> getPathAndDocumentationMap(LinkedHashMap<String, String> elementsPathAndNameMap) throws IOException, ParserConfigurationException, SAXException {
+//        LinkedHashMap<String, String> pathAndDocumentationMap = new LinkedHashMap<>();
+//        List<String> fileNames = getFileNames();
+//        for (String fileName : fileNames) {
+//            Document document = XsdParser.buildDocumentFromFile(new File(fileName));
+//            NodeList documentations = document.getElementsByTagName("xs:documentation");
+//            for (int i = 0; i < documentations.getLength(); i++) {
+//                Element element = (Element) documentations.item(i);
+//                Element parentElement = (Element) element.getParentNode().getParentNode();
+//                String attributeName = parentElement.getAttribute("name");
+//                if (!attributeName.isEmpty()) {
+//                    for (Map.Entry<String, String> entry : elementsPathAndNameMap.entrySet()) {
+//                        String entryName = entry.getValue();
+//                        if (entryName.equals(attributeName)) {
+//                            pathAndDocumentationMap.put(entry.getKey(), element.getTextContent());
+//                        }
+//                    }
+//                }
+//            }
+//        }
+//        return pathAndDocumentationMap;
+//    }
+
+    public LinkedHashMap<String, String> getPathAndDocumentationMap(LinkedHashMap<String, String> elementsPathAndNameMap) throws IOException, ParserConfigurationException, SAXException {
+        LinkedHashMap<String, String> pathAndDocumentationMap = new LinkedHashMap<>();
         List<String> fileNames = getFileNames();
-        for (String fileName : fileNames) {
-            Document document = XsdParser.buildDocumentFromFile(new File(fileName));
-            NodeList documentations = document.getElementsByTagName("xs:documentation");
-            for (int i = 0; i < documentations.getLength(); i++) {
-                Element element = (Element) documentations.item(i);
-                Element parentElement = (Element) element.getParentNode().getParentNode();
-                String attributeName = parentElement.getAttribute("name");
-                if (!attributeName.isEmpty()) {
-                    for (Map.Entry<String, String> entry : elementsPathAndNameMap.entrySet()) {
-                        String entryName = entry.getValue();
+        for (Map.Entry<String, String> entry : elementsPathAndNameMap.entrySet()) {
+            String entryName = entry.getValue();
+            for (String fileName : fileNames) {
+                Document document = XsdParser.buildDocumentFromFile(new File(fileName));
+                NodeList documentations = document.getElementsByTagName("xs:documentation");
+                for (int i = 0; i < documentations.getLength(); i++) {
+                    Element element = (Element) documentations.item(i);
+                    Element parentElement = (Element) element.getParentNode().getParentNode();
+                    String attributeName = parentElement.getAttribute("name");
+                    if (!attributeName.isEmpty()) {
                         if (entryName.equals(attributeName)) {
                             pathAndDocumentationMap.put(entry.getKey(), element.getTextContent());
                         }
@@ -276,8 +300,8 @@ public class XmlParser {
         return parentElementPath;
     }
 
-    public Map<String, String> getAllPatternsMap() throws IOException, ParserConfigurationException, SAXException {
-        Map<String, String> patternsMap = new HashMap<>();
+    public LinkedHashMap<String, String> getAllPatternsMap() throws IOException, ParserConfigurationException, SAXException {
+        LinkedHashMap<String, String> patternsMap = new LinkedHashMap<>();
         List<String> fileNames = getFileNames();
         for (String fileName : fileNames) {
             Document document = XsdParser.buildDocumentFromFile(new File(fileName));
@@ -298,8 +322,8 @@ public class XmlParser {
     }
 
 
-    public Map<String, String> getUseMap() throws IOException, ParserConfigurationException, SAXException {
-        Map<String, String> useMap = new HashMap<>();
+    public LinkedHashMap<String, String> getUseMap() throws IOException, ParserConfigurationException, SAXException {
+        LinkedHashMap<String, String> useMap = new LinkedHashMap<>();
         List<String> fileNames = getFileNames();
         for (String fileName : fileNames) {
             Document document = XsdParser.buildDocumentFromFile(new File(fileName));
@@ -326,8 +350,8 @@ public class XmlParser {
         return useMap;
     }
 
-    public Map<String, String> getDefaultMap() throws IOException, ParserConfigurationException, SAXException {
-        Map<String, String> defaultMap = new HashMap<>();
+    public LinkedHashMap<String, String> getDefaultMap() throws IOException, ParserConfigurationException, SAXException {
+        LinkedHashMap<String, String> defaultMap = new LinkedHashMap<>();
         List<String> fileNames = getFileNames();
         for (String fileName : fileNames) {
             Document document = XsdParser.buildDocumentFromFile(new File(fileName));
@@ -357,13 +381,13 @@ public class XmlParser {
 
 
     public String getPatternForElementByName(String elementName) throws IOException, ParserConfigurationException, SAXException {
-        Map<String, String> patterns = getAllPatternsMap();
+        LinkedHashMap<String, String> patterns = getAllPatternsMap();
         String pattern = null;
         pattern = patterns.get(elementName);
         return pattern;
     }
     //TODO ХУЕТА ПЕРЕДЕЛАТЬ
-    public String getConditionByMultiplicity(Map<String,String> minMultiplicityMap, Map<String,String> maxMultiplicityMap, Map<String,String> useMap, Map<String,String> defaultMap, String elementName) throws IOException, ParserConfigurationException, SAXException {
+    public String getConditionByMultiplicity(LinkedHashMap<String,String> minMultiplicityMap, LinkedHashMap<String,String> maxMultiplicityMap, LinkedHashMap<String,String> useMap, LinkedHashMap<String,String> defaultMap, String elementName) throws IOException, ParserConfigurationException, SAXException {
         String condition = null;
 
         String minMultiplicity = minMultiplicityMap.get(elementName);
@@ -402,8 +426,8 @@ public class XmlParser {
         return condition;
     }
 
-    public Map<String, String> getMinAllMultMap() throws IOException, ParserConfigurationException, SAXException {
-        Map<String, String> pathAndMinMap = new HashMap<>();
+    public LinkedHashMap<String, String> getMinAllMultMap() throws IOException, ParserConfigurationException, SAXException {
+        LinkedHashMap<String, String> pathAndMinMap = new LinkedHashMap<>();
         List<String> fileNames = getFileNames();
         for (String fileName : fileNames) {
             Document document = XsdParser.buildDocumentFromFile(new File(fileName));
@@ -419,7 +443,6 @@ public class XmlParser {
                         pathAndMinMap.put(finalName,minOccurs);
                     }
                 }
-
             }
         }
         System.out.println("SIZEMAP "+ pathAndMinMap.size());
@@ -430,8 +453,8 @@ public class XmlParser {
         return pathAndMinMap;
     }
 
-    public Map<String,String> getMaxAllMultMap() throws IOException, ParserConfigurationException, SAXException {
-        Map<String, String> pathAndMinMap = new HashMap<>();
+    public LinkedHashMap<String,String> getMaxAllMultMap() throws IOException, ParserConfigurationException, SAXException {
+        LinkedHashMap<String, String> pathAndMinMap = new LinkedHashMap<>();
         List<String> fileNames = getFileNames();
         for (String fileName : fileNames) {
             Document document = XsdParser.buildDocumentFromFile(new File(fileName));
@@ -453,19 +476,19 @@ public class XmlParser {
         return pathAndMinMap;
     }
 
-    public String getMinForElementByName(String elementName) throws IOException, ParserConfigurationException, SAXException {
-        Map<String, String> min = getMinAllMultMap();
-        String result = null;
-        result = min.get(elementName);
-        return result;
-    }
-
-    public String getRootElementDocumentation() throws IOException, ParserConfigurationException, SAXException {
-        Document document = buildDocumentFromFile(new File(rootXml.getName().replace(".xml", "")));
-        NodeList documentations = document.getElementsByTagName("xs:documentation");
-        Element element = (Element) documentations.item(0);
-        return element.getTextContent();
-    }
+//    public String getMinForElementByName(String elementName) throws IOException, ParserConfigurationException, SAXException {
+//        Map<String, String> min = getMinAllMultMap();
+//        String result = null;
+//        result = min.get(elementName);
+//        return result;
+//    }
+//
+//    public String getRootElementDocumentation() throws IOException, ParserConfigurationException, SAXException {
+//        Document document = buildDocumentFromFile(new File(rootXml.getName().replace(".xml", "")));
+//        NodeList documentations = document.getElementsByTagName("xs:documentation");
+//        Element element = (Element) documentations.item(0);
+//        return element.getTextContent();
+//    }
 }
 
 
