@@ -124,7 +124,7 @@ public class XmlService {
     public void saveFlkGrafaAndTagDocument(File rootXml) throws IOException, ParserConfigurationException, SAXException {
         XmlParser xmlParser = new XmlParser(rootXml);
 
-        xmlParser.getMinAllMultMap();
+//        xmlParser.getMinAllMultMap();
         List<String> resultPaths = new ArrayList<>();
         String rootElementWithPrefix = getRootElementWithPrefix(rootXml);
         List<String> childPaths = xmlParser.getChildrenPath();
@@ -142,12 +142,15 @@ public class XmlService {
             }
             path = path.replaceAll("//", "/");
             path = path.replaceAll("::", ":");
+            path = path.replaceAll("cus:", "");
             resultPaths.add(rootElementWithPrefix+path);
         }
+        // аттрибуты множественности
         LinkedHashMap<String,String> testMin =  xmlParser.getMinAllMultMap();
         LinkedHashMap<String,String> testMax =  xmlParser.getMaxAllMultMap();
         LinkedHashMap<String,String> testUse =  xmlParser.getUseMap();
         LinkedHashMap<String,String> testDefault =  xmlParser.getDefaultMap();
+
         StructureDocument structureDocument = new StructureDocument();
         resultPaths.add(rootElementWithPrefix);
         resultPaths.forEach(System.out::println);
@@ -162,6 +165,7 @@ public class XmlService {
             Tag tag = new Tag();
             tag.setPattern(xmlParser.getPatternForElementByName(pathMap.get(entry.getKey())));
             //pathMap.get(entry.getKey()) ELEMENT NAME
+            // аттрибуты множественности
             tag.setMultiplicity(xmlParser.getConditionByMultiplicity(testMin, testMax, testUse, testDefault, (pathMap.get(entry.getKey()))));
 
             tag.setStructureDocument(structureDocument);
@@ -192,11 +196,6 @@ public class XmlService {
                 tagService.saveTag(tag);
             }
         }
-
-
-
-
-
     }
 
 
@@ -210,7 +209,7 @@ public class XmlService {
             if (tags.item(i).toString().contains("xmlns")) {
                 List<String> splitedTags = List.of(tags.item(i).toString().split("="));
                 String fileName = List.of(tags.item(i).toString().split("\"")).get(1).toString().
-                        replace(":", "_").replace("urn_", "") + ".xsd";
+                        replace(":", "_").replace("cus_", "") + ".xsd";
                 String oldPrefix = splitedTags.get(0).replace("xmlns:", "");
                 prefixMap.put(oldPrefix, fileName);
             }
@@ -221,11 +220,12 @@ public class XmlService {
             keys.add(entry.getKey());
             newPrefixMap.put(entry.getKey(), XsdService.getPathPrefixFromFile(new File(entry.getValue())));
         }
-        newPrefixMap.remove("urn");
+        newPrefixMap.remove("cus");
         return newPrefixMap;
     }
 
-    public String getRootElementWithPrefix(File rootXml) throws IOException, ParserConfigurationException, SAXException {
+    public String
+    getRootElementWithPrefix(File rootXml) throws IOException, ParserConfigurationException, SAXException {
         Document document = XsdParser.buildDocumentFromFile(rootXml);
         Node node = document.getDocumentElement();
         NamedNodeMap tags = node.getAttributes();
@@ -234,7 +234,7 @@ public class XmlService {
             if (tags.item(i).toString().contains("xmlns")) {
                 List<String> splitedTags = List.of(tags.item(i).toString().split("="));
                 String fileName = List.of(tags.item(i).toString().split("\"")).get(1).toString().
-                        replace(":", "_").replace("urn_", "") + ".xsd";
+                        replace(":", "_").replace("cus_", "") + ".xsd";
                 String oldPrefix = splitedTags.get(0).replace("xmlns:", "");
                 prefixMap.put(oldPrefix, fileName);
             }
@@ -246,7 +246,8 @@ public class XmlService {
             newPrefixMap.put(entry.getKey(), XsdService.getPathPrefixFromFile(new File(entry.getValue())));
         }
         XmlParser xmlParser = new XmlParser(rootXml);
-        return newPrefixMap.get("urn")+xmlParser.getRootElementName();
+        return xmlParser.getRootElementName();
+//        newPrefixMap.get("cus")+
     }
 
 

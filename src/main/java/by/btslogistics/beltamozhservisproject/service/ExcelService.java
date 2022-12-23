@@ -3,6 +3,7 @@ package by.btslogistics.beltamozhservisproject.service;
 import by.btslogistics.beltamozhservisproject.model.Check;
 import by.btslogistics.beltamozhservisproject.model.Grafa;
 import by.btslogistics.beltamozhservisproject.model.Tag;
+import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.CellType;
 import org.apache.poi.ss.usermodel.Row;
@@ -12,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -54,7 +56,7 @@ public class ExcelService {
         try {
             XSSFWorkbook workbook = new XSSFWorkbook(file);
             XSSFSheet sheet = workbook.getSheetAt(0);
-
+            String codeCheck = "CODE_CHECK";
             for (Row row : sheet) {
                 StringBuilder result = new StringBuilder();
                 Iterator<Cell> cellIterator = row.cellIterator();
@@ -68,6 +70,37 @@ public class ExcelService {
                         case STRING:
                             result.append(cell.getStringCellValue()).append("/split/");
                             break;
+                    }
+                }
+                if (result.toString().length() > 0) {
+                    parsedRows.add(result.toString());
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return parsedRows;
+    }
+
+    //метод для выборки только данных из столбца code_check
+    public static List<String> checksFromExcel(File file) {
+        List<String> parsedRows = new ArrayList<>();
+        try {
+            XSSFWorkbook workbook = new XSSFWorkbook(file);
+            XSSFSheet sheet = workbook.getSheetAt(0);
+            int cellNum = 0;
+            Boolean flag = false;
+            for (Row row : sheet) {
+                StringBuilder result = new StringBuilder();
+                Iterator<Cell> cellIterator = row.cellIterator();
+                while (cellIterator.hasNext()) {
+                    Cell cell = cellIterator.next();
+                    CellType cellType = cell.getCellType();
+                    if (cellType == CellType.STRING && cell.getStringCellValue().equals("CODE_CHECK")) {
+                        cellNum = cell.getColumnIndex();
+                        flag = true;
+                    } else if (cell.getColumnIndex() == cellNum && flag) {
+                        result.append(cell.getStringCellValue().trim());
                     }
                 }
                 if (result.toString().length() > 0) {

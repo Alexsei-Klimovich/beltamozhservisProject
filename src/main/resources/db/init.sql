@@ -5,6 +5,8 @@ drop table if exists FLK_CHECKS CASCADE ;
 drop table if exists KIND_DOCUMENT CASCADE;
 drop table if exists KIND_M2M_STRUCTURE CASCADE;
 drop table if exists FLK_TYPE_CONTROL CASCADE;
+drop table if exists CHECKS_FROM_EXCEL CASCADE;
+drop table if exists CHECKS_NOT_EXISTS CASCADE;
 
 drop sequence if exists seq_flk_checks cascade;
 drop sequence if exists seq_flk_grafa cascade;
@@ -13,6 +15,8 @@ drop sequence if exists seq_structure_document cascade;
 drop sequence if exists seq_kind_document cascade;
 drop sequence if exists seq_kind_m2m_structure cascade;
 drop sequence if exists seq_flk_type_control cascade;
+drop sequence if exists seq_compare_checks cascade;
+drop sequence if exists seq_not_exist cascade;
 
 create sequence if not exists seq_flk_checks start 100000;
 create table FLK_CHECKS (
@@ -90,6 +94,19 @@ create table FLK_TYPE_CONTROL (
                                     DATE_UPDATE date
 );
 
+create sequence if not exists seq_compare_checks start 100000;
+create table CHECKS_FROM_EXCEL (
+                                  ID numeric(19) primary key,
+                                  CODE_CHECK varchar(150)
+);
+
+create sequence if not exists seq_not_exist start 100000;
+create table CHECKS_NOT_EXISTS (
+                                   ID numeric(19) primary key,
+                                   NOT_IN_JAVA varchar(150) ,
+                                   NOT_IN_DIRECTORY varchar(150)
+);
+
 
 
 ALTER TABLE FLK_CHECKS ALTER COLUMN ID SET DEFAULT nextval('seq_flk_checks');
@@ -99,6 +116,8 @@ ALTER TABLE STRUCTURE_DOCUMENT ALTER COLUMN ID SET DEFAULT nextval('seq_structur
 ALTER TABLE FLK_TYPE_CONTROL ALTER COLUMN ID SET DEFAULT nextval('seq_flk_type_control');
 ALTER TABLE KIND_DOCUMENT ALTER COLUMN ID SET DEFAULT nextval('seq_kind_document');
 ALTER TABLE KIND_M2M_STRUCTURE ALTER COLUMN ID SET DEFAULT nextval('seq_kind_m2m_structure');
+ALTER TABLE CHECKS_FROM_EXCEL ALTER COLUMN ID SET DEFAULT nextval('seq_compare_checks');
+ALTER TABLE CHECKS_NOT_EXISTS ALTER COLUMN ID SET DEFAULT nextval('seq_not_exist');
 
 ALTER table FLK_CHECKS  ADD constraint FK_CHECKS_GRAFA_ID foreign key (ID_GRAFA)
     references FLK_GRAFA (ID)

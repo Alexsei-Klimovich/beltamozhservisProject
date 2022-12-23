@@ -34,6 +34,7 @@ public class CheckService {
     public void saveCheck(Check check) {
         checkRepository.save(check);
     }
+
     @Transactional
     public void updateCheck(Check check) {
         checkRepository.save(check);

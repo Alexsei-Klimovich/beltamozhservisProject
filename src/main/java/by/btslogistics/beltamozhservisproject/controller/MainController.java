@@ -33,11 +33,21 @@ public class MainController {
     @Autowired
     XmlService xmlService;
 
+    @Autowired
+    ActualByDirectoryService actualByDirectoryService;
+
 
     @GetMapping("/")
     public String hello() throws IOException, ParserConfigurationException, SAXException {
-        xmlService.saveFlkGrafaAndTagDocument(new File("EEC_R_036_GoodsDeclaration_v1.3.1.xsd.xml"));
+        xmlService.saveFlkGrafaAndTagDocument(new File("04CustomsDocumentCURiskObject.xsd.xml"));
         return "hello";
+    }
+
+    @GetMapping("/compare")
+    public String compare() {
+        actualByDirectoryService.comparingChecksByDirectory(new File("excel.xlsx"), //excel directory
+                                                            new File("java.txt")); //java code
+        return "compare is done!";
     }
 
 }
