@@ -89,7 +89,7 @@ public class ExcelService {
             XSSFWorkbook workbook = new XSSFWorkbook(file);
             XSSFSheet sheet = workbook.getSheetAt(0);
             int cellNum = 0;
-            Boolean flag = false;
+            boolean flag = false;
             for (Row row : sheet) {
                 StringBuilder result = new StringBuilder();
                 Iterator<Cell> cellIterator = row.cellIterator();
@@ -100,7 +100,7 @@ public class ExcelService {
                         cellNum = cell.getColumnIndex();
                         flag = true;
                     } else if (cell.getColumnIndex() == cellNum && flag) {
-                        result.append(cell.getStringCellValue().trim());
+                        result.append(cell.getStringCellValue().replace(" ", ""));
                     }
                 }
                 if (result.toString().length() > 0) {

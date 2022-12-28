@@ -8,7 +8,6 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Stream;
 
 @Service
 public class ActualByDirectoryService {
@@ -35,8 +34,6 @@ public class ActualByDirectoryService {
         ChecksNotExistsModel check = new ChecksNotExistsModel();
         if (checksNotExists.size() != 0) checksNotExists.forEach(System.out::println);
         else System.out.println("ALL CHECKS IN JAVA!");
-
         //checksNotExists.forEach(check::setNotInJava);
-
     }
 }

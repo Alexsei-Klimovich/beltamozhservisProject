@@ -27,6 +27,7 @@ public class MainController {
 
     @Autowired
     StructureDocumentService structureDocumentService;
+
     @Autowired
     XsdService xsdService;
 
@@ -36,6 +37,8 @@ public class MainController {
     @Autowired
     ActualByDirectoryService actualByDirectoryService;
 
+    @Autowired
+    ActualChecksByJava actualChecksByJava;
 
     @GetMapping("/")
     public String hello() throws IOException, ParserConfigurationException, SAXException {
@@ -43,11 +46,18 @@ public class MainController {
         return "hello";
     }
 
-    @GetMapping("/compare")
-    public String compare() {
+    @GetMapping("/compare/directory")
+    public String compareDirectory() {
         actualByDirectoryService.comparingChecksByDirectory(new File("excel.xlsx"), //excel directory
                                                             new File("java.txt")); //java code
-        return "compare is done!";
+        return "compare is directory-main done!";
+    }
+
+    @GetMapping("/compare/java")
+    public String compareJava() {
+        actualChecksByJava.comparingChecksByJava(new File("excel.xlsx"), //excel directory
+                                                 new File("java.txt")); //java code
+        return "compare java-main is done!";
     }
 
 }
