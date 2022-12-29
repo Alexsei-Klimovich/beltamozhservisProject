@@ -23,7 +23,7 @@ public class ActualChecksByJava {
     private int existsInDirectory = 0;
 
     // метод достает проверки из java кода и ищет их по справочнику
-    public void comparingChecksByJava(File excelFile, File javaFile) throws IOException {
+    public void comparingChecksByJava(File excelFile, File javaFile, File updatedFile) throws IOException {
         countChecks = 0;
         existsInDirectory = 0;
         LOGGER.info("starting parse and comparing");
@@ -45,7 +45,7 @@ public class ActualChecksByJava {
         LOGGER.info("starting save checks into DB");
         saveToNotExist(checksNotExists);
         LOGGER.info("staring deleting cases from java source code");
-        deleteCaseFromJava(checksNotExists, javaFileList);
+        deleteCaseFromJava(checksNotExists, javaFileList, updatedFile);
     }
 
     private List<String> parseChecksFromJava(List<String> javaFile) {
@@ -68,7 +68,7 @@ public class ActualChecksByJava {
         }
     }
 
-    private void deleteCaseFromJava(List<String> checksNotExists, List<String> javaFileList) {
+    private void deleteCaseFromJava(List<String> checksNotExists, List<String> javaFileList, File updatedFile) {
         List<Integer> numRowsDelete = new ArrayList<>();
         LOGGER.info("starting delete cases");
         for (int i = 0; i < checksNotExists.size(); i++) {
@@ -88,14 +88,14 @@ public class ActualChecksByJava {
             int delete = numRowsDelete.get(i);
             javaFileList.remove(delete);
         }
-        saveJavaFile(javaFileList);
+        saveJavaFile(javaFileList, updatedFile);
     }
 
-    private void saveJavaFile(List<String> javaFileList) {
+    private void saveJavaFile(List<String> javaFileList, File updatedFile) {
         LOGGER.info("staring save new file");
         try {
-            File file = new File("/Users/yarsh/Desktop/beltamozhservisProject/output.txt");
-            Files.write(Path.of("/Users/yarsh/Desktop/beltamozhservisProject/output.txt"), javaFileList);
+            File file = new File(String.valueOf(updatedFile));
+            Files.write(Path.of(String.valueOf(updatedFile)), javaFileList);
         } catch (IOException io) {
             io.printStackTrace();
         }
