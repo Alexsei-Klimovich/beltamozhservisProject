@@ -46,18 +46,29 @@ public class MainController {
         return "hello";
     }
 
+    /*
+    find checks which not exist in java code
+        @param file - excel directory file
+        @param file - java code file
+    */
     @GetMapping("/compare/directory")
     public String compareDirectory() {
-        actualByDirectoryService.comparingChecksByDirectory(new File("excel.xlsx"), //excel directory
-                                                            new File("java.txt")); //java code
+        actualByDirectoryService.comparingChecksByDirectory(new File("excel.xlsx"),
+                                                            new File("java.txt"));
         return "compare is directory-main done!";
     }
 
+    /*
+    find checks which not exist in directory and then deleting this checks from java code
+        @param file - excel directory file
+        @param file - java code file
+        @param file - result java code file
+    */
     @GetMapping("/compare/java")
     public String compareJava() throws IOException {
-        actualChecksByJava.comparingChecksByJava(new File("excel.xlsx"), //excel directory
-                                                 new File("java.txt"), //java code
-                                                 new File("/Users/yarsh/Desktop/beltamozhservisProject/output.txt")); //result java code
+        actualChecksByJava.comparingChecksByJava(new File("excel.xlsx"),
+                                                 new File("java.txt"),
+                                                 new File("/Users/yarsh/Desktop/beltamozhservisProject/output.txt"));
         return "compare java-main is done!";
     }
 
