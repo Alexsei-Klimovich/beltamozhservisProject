@@ -73,10 +73,10 @@ public class ActualChecksByJava {
     private void deleteCaseFromJava(List<String> checksNotExists, List<String> javaFileList, File updatedFile) {
         List<Integer> numRowsDelete = new ArrayList<>();
         LOGGER.info("starting delete cases");
-        for (int i = 0; i < checksNotExists.size(); i++) {
+        checksNotExists.forEach(check -> {
             for (int j = 0; j < javaFileList.size(); j++) {
-                if (javaFileList.get(j).contains(checksNotExists.get(i))) {
-                    LOGGER.info("find not exist case: " + checksNotExists.get(i));
+                if (javaFileList.get(j).contains(check)) {
+                    LOGGER.info("find not exist case: " + check);
                     numRowsDelete.add(j);
                     j++;
                     while(!javaFileList.get(j).contains("case")) {
@@ -85,7 +85,7 @@ public class ActualChecksByJava {
                     }
                 }
             }
-        }
+        });
         for (int i = numRowsDelete.size() - 1; i >= 0; i--) {
             int delete = numRowsDelete.get(i);
             javaFileList.remove(delete);
