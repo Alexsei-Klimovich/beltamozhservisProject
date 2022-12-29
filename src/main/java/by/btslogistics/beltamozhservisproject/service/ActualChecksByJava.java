@@ -101,6 +101,4 @@ public class ActualChecksByJava {
         }
         LOGGER.info("file saved!");
     }
-
-    //TODO write method which will backup source java file
 }
