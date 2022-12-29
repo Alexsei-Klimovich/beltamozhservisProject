@@ -107,6 +107,7 @@ public class ExcelService {
                     parsedRows.add(result.toString());
                 }
             }
+            workbook.close();
         } catch (Exception e) {
             e.printStackTrace();
         }
