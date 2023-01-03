@@ -73,8 +73,10 @@ public class MainController {
     }
 
     @GetMapping("/replace")
-    public String replaceCodeChecks() {
-        changeCodeCheckService.findCodeChecks(new File("testForReplace.xlsx"));
+    public String replaceCodeChecks() throws Exception {
+        changeCodeCheckService.findCodeChecks(new File("testForReplace.xlsx"),
+                                              new File("testForReplacing.txt"),
+                                              new File("C:\\Users\\kotik\\IdeaProjects\\beltamozhservisProject\\output.txt"));
         return "replace is done!";
     }
 
