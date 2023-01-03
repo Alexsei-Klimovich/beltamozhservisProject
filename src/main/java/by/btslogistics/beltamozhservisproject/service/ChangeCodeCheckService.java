@@ -12,10 +12,16 @@ public class ChangeCodeCheckService {
 
     private static Logger LOGGER = LoggerFactory.getLogger(ChangeCodeCheckService.class);
 
-    public void replaceCodeCheck(File excelFile) {
+    public void findCodeChecks(File excelFile) {
         Map<String, String> checks = ExcelService.oldAndNewChecksFromExcel(excelFile);
         for (Map.Entry<String, String> check: checks.entrySet()) {
             LOGGER.info(check.getKey() + " : " + check.getValue());
         }
+        LOGGER.info("------------------------------------------- : " + checks.size());
+        replaceCodeCheck(checks);
+    }
+
+    private void replaceCodeCheck(Map<String, String> checks) {
+
     }
 }

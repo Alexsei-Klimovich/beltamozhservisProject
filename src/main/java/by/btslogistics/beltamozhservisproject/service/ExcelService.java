@@ -112,7 +112,7 @@ public class ExcelService {
 
     //метод для выборки только данных из столбца code_check и столбца code_check_new
     public static Map<String, String> oldAndNewChecksFromExcel(File file) {
-        Map<String, String> parsedRows = new HashMap<>();
+        Map<String, String> parsedRows = new TreeMap<>();
         try {
             XSSFWorkbook workbook = new XSSFWorkbook(file);
             XSSFSheet sheet = workbook.getSheetAt(0);
@@ -124,6 +124,8 @@ public class ExcelService {
             for (Row row : sheet) {
                 StringBuilder result = new StringBuilder();
                 Iterator<Cell> cellIterator = row.cellIterator();
+                newCheckCode = null;
+                oldCheckCode = null;
                 while (cellIterator.hasNext()) {
                     Cell cell = cellIterator.next();
                     CellType cellType = cell.getCellType();
@@ -138,23 +140,19 @@ public class ExcelService {
                         }
                     }
 
-                    if ((cell.getColumnIndex() == cellNumOldChecks
-                            || cell.getColumnIndex() == cellNumNewChecks) && flag) {
-                        switch(cell.getColumnIndex()) {
-                            case cellNumOldChecks: {
+                    if (row.getRowNum() != 0) {
+
+                        if (cellType == CellType.STRING && !cell.getStringCellValue().trim().isEmpty()) {
+                            if (cell.getColumnIndex() == cellNumOldChecks && flag)
                                 oldCheckCode = cell.getStringCellValue().replace(" ", "");
-                                break;
-                            }
-                            case cellNumOldChecks: {
+
+                            if (cell.getColumnIndex() == cellNumNewChecks && flag)
                                 newCheckCode = cell.getStringCellValue().replace(" ", "");
-                                break;
-                            }
+
+                            if (oldCheckCode != null && newCheckCode != null)
+                                parsedRows.put(oldCheckCode, newCheckCode);
                         }
-                        if (oldCheckCode != null && newCheckCode != null) {
-                            parsedRows.put(oldCheckCode, newCheckCode);
-                        }
-                        oldCheckCode = null;
-                        newCheckCode = null;
+
                     }
                 }
             }
