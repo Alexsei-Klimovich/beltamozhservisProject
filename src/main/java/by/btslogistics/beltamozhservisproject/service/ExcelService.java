@@ -14,9 +14,7 @@ import org.springframework.stereotype.Service;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
+import java.util.*;
 
 @Service
 public class ExcelService {
@@ -103,8 +101,61 @@ public class ExcelService {
                         result.append(cell.getStringCellValue().replace(" ", ""));
                     }
                 }
-                if (result.toString().length() > 0) {
-                    parsedRows.add(result.toString());
+                if (result.toString().length() > 0) parsedRows.add(result.toString());
+            }
+            workbook.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return parsedRows;
+    }
+
+    //метод для выборки только данных из столбца code_check и столбца code_check_new
+    public static Map<String, String> oldAndNewChecksFromExcel(File file) {
+        Map<String, String> parsedRows = new HashMap<>();
+        try {
+            XSSFWorkbook workbook = new XSSFWorkbook(file);
+            XSSFSheet sheet = workbook.getSheetAt(0);
+            int cellNumOldChecks = -1;
+            int cellNumNewChecks = -1;
+            String oldCheckCode = null;
+            String newCheckCode = null;
+            boolean flag = false;
+            for (Row row : sheet) {
+                StringBuilder result = new StringBuilder();
+                Iterator<Cell> cellIterator = row.cellIterator();
+                while (cellIterator.hasNext()) {
+                    Cell cell = cellIterator.next();
+                    CellType cellType = cell.getCellType();
+
+                    if (row.getRowNum() == 0) {
+                        if (cellType == CellType.STRING && cell.getStringCellValue().equals("CODE_CHECK")) {
+                            cellNumOldChecks = cell.getColumnIndex();
+                        }
+                        if (cellType == CellType.STRING && cell.getStringCellValue().equals("CODE_CHECK_NEW")) {
+                            cellNumNewChecks = cell.getColumnIndex();
+                            flag = true;
+                        }
+                    }
+
+                    if ((cell.getColumnIndex() == cellNumOldChecks
+                            || cell.getColumnIndex() == cellNumNewChecks) && flag) {
+                        switch(cell.getColumnIndex()) {
+                            case cellNumOldChecks: {
+                                oldCheckCode = cell.getStringCellValue().replace(" ", "");
+                                break;
+                            }
+                            case cellNumOldChecks: {
+                                newCheckCode = cell.getStringCellValue().replace(" ", "");
+                                break;
+                            }
+                        }
+                        if (oldCheckCode != null && newCheckCode != null) {
+                            parsedRows.put(oldCheckCode, newCheckCode);
+                        }
+                        oldCheckCode = null;
+                        newCheckCode = null;
+                    }
                 }
             }
             workbook.close();

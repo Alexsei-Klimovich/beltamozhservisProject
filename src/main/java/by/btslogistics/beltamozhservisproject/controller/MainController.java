@@ -40,6 +40,9 @@ public class MainController {
     @Autowired
     ActualChecksByJava actualChecksByJava;
 
+    @Autowired
+    ChangeCodeCheckService changeCodeCheckService;
+
     @GetMapping("/")
     public String hello() throws IOException, ParserConfigurationException, SAXException {
         xmlService.saveFlkGrafaAndTagDocument(new File("04CustomsDocumentCURiskObject.xsd.xml"));
@@ -70,6 +73,12 @@ public class MainController {
                                                  new File("java.txt"),
                                                  new File("/Users/yarsh/Desktop/beltamozhservisProject/output.txt"));
         return "compare java-main is done!";
+    }
+
+    @GetMapping("/replace")
+    public String replaceCodeChecks() {
+        changeCodeCheckService.replaceCodeCheck(new File("testForReplace.xlsx"));
+        return "replace id done!";
     }
 
 }
