@@ -2,6 +2,7 @@ package by.btslogistics.beltamozhservisproject.service;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.io.File;
@@ -15,6 +16,9 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 @Service
 public class ActualChecksByJava {
+
+    @Autowired
+    SaveFileService saveFileService;
 
     private static Logger LOGGER = LoggerFactory.getLogger(ActualChecksByJava.class);
 
@@ -90,17 +94,7 @@ public class ActualChecksByJava {
             int delete = numRowsDelete.get(i);
             javaFileList.remove(delete);
         }
-        saveJavaFile(javaFileList, updatedFile);
+        saveFileService.saveJavaFile(javaFileList, updatedFile);
     }
 
-    private void saveJavaFile(List<String> javaFileList, File updatedFile) {
-        LOGGER.info("staring save new file");
-        try {
-            File file = new File(String.valueOf(updatedFile));
-            Files.write(Path.of(String.valueOf(updatedFile)), javaFileList);
-        } catch (IOException io) {
-            io.printStackTrace();
-        }
-        LOGGER.info("file saved!");
-    }
 }
