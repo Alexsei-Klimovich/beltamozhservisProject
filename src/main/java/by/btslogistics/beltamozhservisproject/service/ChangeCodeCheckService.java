@@ -11,6 +11,7 @@ import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 @Service
 public class ChangeCodeCheckService {
@@ -29,14 +30,29 @@ public class ChangeCodeCheckService {
 
     private void replaceCodeCheck(Map<String, String> checks, List<String> file, File updatedFile) {
         List<String> newFile = new ArrayList<>();
-        for (Map.Entry<String, String> check : checks.entrySet()) {
-            file.forEach(line -> {
+        AtomicBoolean fl = new AtomicBoolean(true);
+        file.forEach(line -> {
+            for (Map.Entry<String, String> check : checks.entrySet()) {
                 if (line.contains(check.getKey())) {
                     newFile.add(line.replace(line.split("\"")[1], check.getValue()));
+                    fl.set(false);
                     LOGGER.info("find check for replace: " + check.getKey() + " replacing on: " + check.getValue());
-                } else newFile.add(line);
-            });
-        }
+                }
+            }
+            if (fl.getAndSet(true)) {
+                newFile.add(line);
+            }
+        });
+
+
+//        for (Map.Entry<String, String> check : checks.entrySet()) {
+//            file.forEach(line -> {
+//                if (line.contains(check.getKey())) {
+//                    newFile.add(line.replace(line.split("\"")[1], check.getValue()));
+//                    LOGGER.info("find check for replace: " + check.getKey() + " replacing on: " + check.getValue());
+//                } else newFile.add(line);
+//            });
+//        }
         saveJavaFile(newFile, updatedFile);
     }
 

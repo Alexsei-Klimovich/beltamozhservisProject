@@ -76,7 +76,7 @@ public class MainController {
     public String replaceCodeChecks() throws Exception {
         changeCodeCheckService.findCodeChecks(new File("testForReplace.xlsx"),
                                               new File("testForReplacing.txt"),
-                                              new File("C:\\Users\\kotik\\IdeaProjects\\beltamozhservisProject\\output.txt"));
+                                              new File("/Users/yarsh/Desktop/beltamozhservisProject/output.txt"));
         return "replace is done!";
     }
 
