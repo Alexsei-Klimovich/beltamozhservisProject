@@ -17,7 +17,7 @@ public class SaveFileService {
 
     public void saveJavaFile(List<String> javaFileList, File updatedFile) {
         try {
-            LOGGER.info("\nstaring save new file");
+            LOGGER.info("staring save new file");
             File file = new File(String.valueOf(updatedFile));
             Files.write(Path.of(String.valueOf(updatedFile)), javaFileList);
             LOGGER.info("file saved!");
