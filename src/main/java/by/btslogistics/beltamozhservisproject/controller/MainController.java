@@ -40,7 +40,7 @@ public class MainController {
     @Autowired
     ChangeCodeCheckService changeCodeCheckService;
 
-    @GetMapping("/")
+    @GetMapping("/parseXsd")
     public String hello() throws IOException, ParserConfigurationException, SAXException {
         xmlService.saveFlkGrafaAndTagDocument(new File("04CustomsDocumentCURiskObject.xsd.xml"));
         return "hello";
@@ -74,9 +74,9 @@ public class MainController {
 
     @GetMapping("/replace")
     public String replaceCodeChecks() throws Exception {
-        changeCodeCheckService.findCodeChecks(new File("testForReplace.xlsx"),
-                                              new File("testForReplacing.txt"),
-                                              new File("/Users/yarsh/Desktop/beltamozhservisProject/output.txt"));
+        changeCodeCheckService.findCodeChecks(new File("DT131.xlsx"),
+                                              new File("CheckDT131ServiceImpl.java"),
+                                              new File("/Users/yarsh/Desktop/beltamozhservisProject/CheckDT131ServiceImplR.java"));
         return "replace is done!";
     }
 
