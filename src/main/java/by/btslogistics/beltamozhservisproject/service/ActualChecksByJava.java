@@ -57,7 +57,7 @@ public class ActualChecksByJava {
 
         List<String> parsedChecks = new ArrayList<>();
         javaFile.forEach(x -> {
-            if (x.contains("case") && x.contains("\"")) {
+            if (x.contains("case") && !x.contains("ВЫПОЛНЯЕТСЯ ПРОВЕРКА №") && x.contains("\"")) {
                 parsedChecks.add(x.split("\"")[1]);
                 countChecks++;
             }
@@ -68,7 +68,7 @@ public class ActualChecksByJava {
     private void saveToNotExist(List<String> checksNotExists) {
         if (checksNotExists.size() != 0) {
             LOGGER.info("count checks in java code: " + countChecks);
-            LOGGER.info("count checks which exists in directory: " + existsInDirectory);
+            LOGGER.info("count checks which not exists in directory: " + existsInDirectory);
             checksNotExists.forEach(LOGGER::info);
         }
     }

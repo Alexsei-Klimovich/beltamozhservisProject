@@ -66,9 +66,9 @@ public class MainController {
     */
     @GetMapping("/compare/java")
     public String compareJava() throws IOException {
-        actualChecksByJava.comparingChecksByJava(new File("excel.xlsx"),
-                                                 new File("java.txt"),
-                                                 new File("/Users/yarsh/Desktop/beltamozhservisProject/output.txt"));
+        actualChecksByJava.comparingChecksByJava(new File("DT131-07-1.xlsx"),
+                                                 new File("CheckDT131ServiceImplR.java"),
+                                                 new File("/Users/yarsh/Desktop/beltamozhservisProject/CheckDT131ServiceImplF.java"));
         return "compare java-main is done!";
     }
 
