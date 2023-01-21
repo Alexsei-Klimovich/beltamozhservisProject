@@ -8,11 +8,10 @@ import org.springframework.stereotype.Service;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
-import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.atomic.AtomicInteger;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 @Service
 public class ActualChecksByJava {
@@ -57,7 +56,7 @@ public class ActualChecksByJava {
 
         List<String> parsedChecks = new ArrayList<>();
         javaFile.forEach(x -> {
-            if (x.contains("case") && !x.contains("ВЫПОЛНЯЕТСЯ ПРОВЕРКА №") && x.contains("\"")) {
+            if (x.contains("case \"")) {
                 parsedChecks.add(x.split("\"")[1]);
                 countChecks++;
             }
@@ -77,16 +76,20 @@ public class ActualChecksByJava {
     private void deleteCaseFromJava(List<String> checksNotExists, List<String> javaFileList, File updatedFile) {
         List<Integer> numRowsDelete = new ArrayList<>();
         LOGGER.info("starting delete cases");
+        AtomicBoolean flag = new AtomicBoolean(false);
         checksNotExists.forEach(check -> {
-            for (int j = 0; j < javaFileList.size(); j++) {
+            for (int j = 0; j < javaFileList.size()-1; j++) {
                 if (javaFileList.get(j).contains(check)) {
                     LOGGER.info("find not exist case: " + check);
                     numRowsDelete.add(j);
                     j++;
-                    while(!javaFileList.get(j).contains("case")) {
+                    while(!javaFileList.get(j).contains("case \"") || flag.get()) {
+                        if (javaFileList.get(j).contains("default:"))
+                            flag.set(true);
                         numRowsDelete.add(j);
                         j++;
                     }
+                    flag.set(false);
                 }
             }
         });

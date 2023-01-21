@@ -66,17 +66,17 @@ public class MainController {
     */
     @GetMapping("/compare/java")
     public String compareJava() throws IOException {
-        actualChecksByJava.comparingChecksByJava(new File("DT131-07-1.xlsx"),
-                                                 new File("CheckDT131ServiceImplR.java"),
-                                                 new File("/Users/yarsh/Desktop/beltamozhservisProject/CheckDT131ServiceImplF.java"));
+        actualChecksByJava.comparingChecksByJava(new File("DT131.xlsx"),
+                                                 new File("CheckDT131ServiceImpl.java"),
+                                                 new File("/Users/yarsh/Desktop/beltamozhservisProject/CheckDT131ServiceImplrr.java"));
         return "compare java-main is done!";
     }
 
     @GetMapping("/replace")
     public String replaceCodeChecks() throws Exception {
-        changeCodeCheckService.findCodeChecks(new File("DT131.xlsx"),
-                                              new File("CheckDT131ServiceImpl.java"),
-                                              new File("/Users/yarsh/Desktop/beltamozhservisProject/CheckDT131ServiceImplR.java"));
+        changeCodeCheckService.findCodeChecks(new File("DT131-07-1.xlsx"),
+                                              new File("CheckDT131ServiceImplrr.java"),
+                                              new File("/Users/yarsh/Desktop/beltamozhservisProject/CheckDT131ServiceImplrrr.java"));
         return "replace is done!";
     }
 
