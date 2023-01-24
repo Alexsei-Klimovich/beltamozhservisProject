@@ -209,7 +209,7 @@ public class XmlParser {
         LinkedHashMap<String, String> pathAndNameMap = new LinkedHashMap<>();
         for (String elementPath : elementsPaths) {
             List<String> splitedElementPath = List.of(elementPath.split("/"));
-            if (!(splitedElementPath.get(splitedElementPath.size() - 1).contains("@"))) {
+            if (!(splitedElementPath.get(splitedElementPath.size() - 1).contains("@")) && splitedElementPath.size() > 1) {
                 pathAndNameMap.put(elementPath, List.of(splitedElementPath.get(splitedElementPath.size() - 1).split(":")).get(1));
             } else {
                 pathAndNameMap.put(elementPath, splitedElementPath.get(splitedElementPath.size() - 1).replace("@", ""));
@@ -243,7 +243,8 @@ public class XmlParser {
                     String attributeName = parentElement.getAttribute("name");
                     if (!attributeName.isEmpty()) {
                         if (entryName.equals(attributeName)) {
-                            pathAndDocumentationMap.put(entry.getKey(), element.getTextContent());
+                            if (element.getTextContent() == null) pathAndDocumentationMap.put(entry.getKey(), "");
+                            else pathAndDocumentationMap.put(entry.getKey(), element.getTextContent());
                         }
                     }
                 }
@@ -273,6 +274,7 @@ public class XmlParser {
         for (int i = 0; i < splitedPath.size() - 1; i++) {
             parentElementPath = parentElementPath + splitedPath.get(i) + "/";
         }
+        if (parentElementPath.length() > 0)
         parentElementPath = parentElementPath.substring(0, parentElementPath.length() - 1);
         return parentElementPath;
     }
@@ -381,7 +383,7 @@ public class XmlParser {
             return "0..*";
         } else if (minMultiplicity != null && minMultiplicity.equals("0") && maxMultiplicity.equals("1")) {
             return "0..1";
-        } else if (minMultiplicity != null && minMultiplicity.equals("0") && maxMultiplicity.equals("unbounded") || maxMultiplicity.matches("[2-9]{1,}")) {
+        } else if (minMultiplicity != null && minMultiplicity.equals("0") && maxMultiplicity.equals("unbounded") || Objects.requireNonNull(maxMultiplicity).matches("[2-9]{1,}")) {
             if (maxMultiplicity.equals("unbounded")) {
                 return "0..*";
             } else {
@@ -416,7 +418,7 @@ public class XmlParser {
                     if (minOccurs.length()>0){
                         System.out.println("HERE");
                         String elementName=element.getAttribute("ref");
-                        String finalName= List.of(elementName.split(":")).get(1);
+                        String finalName= List.of(elementName.split(":")).get(0);
                         pathAndMinMap.put(finalName,minOccurs);
                     }
                 }
@@ -443,7 +445,7 @@ public class XmlParser {
                     if (maxOccurs.length()>0){
                         System.out.println(maxOccurs);
                         String elementName=element.getAttribute("ref");
-                        String finalName= List.of(elementName.split(":")).get(1);
+                        String finalName= List.of(elementName.split(":")).get(0);
                         System.out.println(element.getAttribute("ref"));
                         pathAndMinMap.put(finalName,maxOccurs);
                     }

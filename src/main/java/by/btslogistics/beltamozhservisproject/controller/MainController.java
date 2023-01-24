@@ -36,7 +36,7 @@ public class MainController {
 
     @GetMapping("/")
     public String hello() throws IOException, ParserConfigurationException, SAXException {
-        xmlService.saveFlkGrafaAndTagDocument(new File("EEC_R_036_GoodsDeclaration_v1.3.1.xsd.xml"));
+        xmlService.saveFlkGrafaAndTagDocument(new File("Stat_CU_v5.3.0.xsd.xml"));
         return "hello";
     }
 

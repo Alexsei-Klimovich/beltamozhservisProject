@@ -209,7 +209,7 @@ public class XmlService {
         for (int i = 0; i < tags.getLength(); i++) {
             if (tags.item(i).toString().contains("xmlns")) {
                 List<String> splitedTags = List.of(tags.item(i).toString().split("="));
-                String fileName = List.of(tags.item(i).toString().split("\"")).get(1).toString().
+                String fileName = List.of(tags.item(i).toString().split("\"")).get(1).
                         replace(":", "_").replace("urn_", "") + ".xsd";
                 String oldPrefix = splitedTags.get(0).replace("xmlns:", "");
                 prefixMap.put(oldPrefix, fileName);
@@ -233,7 +233,7 @@ public class XmlService {
         for (int i = 0; i < tags.getLength(); i++) {
             if (tags.item(i).toString().contains("xmlns")) {
                 List<String> splitedTags = List.of(tags.item(i).toString().split("="));
-                String fileName = List.of(tags.item(i).toString().split("\"")).get(1).toString().
+                String fileName = List.of(tags.item(i).toString().split("\"")).get(1).
                         replace(":", "_").replace("urn_", "") + ".xsd";
                 String oldPrefix = splitedTags.get(0).replace("xmlns:", "");
                 prefixMap.put(oldPrefix, fileName);
@@ -243,7 +243,10 @@ public class XmlService {
         List<String> keys = new ArrayList<>();
         for (Map.Entry<String, String> entry : prefixMap.entrySet()) {
             keys.add(entry.getKey());
-            newPrefixMap.put(entry.getKey(), XsdService.getPathPrefixFromFile(new File(entry.getValue())));
+            if (XsdService.getPathPrefixFromFile(new File(entry.getValue())) == null)
+                newPrefixMap.put(entry.getKey(), "");
+            else
+                newPrefixMap.put(entry.getKey(), XsdService.getPathPrefixFromFile(new File(entry.getValue())));
         }
         XmlParser xmlParser = new XmlParser(rootXml);
         return newPrefixMap.get("urn")+xmlParser.getRootElementName();
