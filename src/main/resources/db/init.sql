@@ -45,7 +45,8 @@ create table TAG_DOCUMENT (
                               PARENT_PATH varchar(1000),
                               PATTERN varchar(255),
                               PARENT_ID numeric(19),
-                              sign_multiply varchar(50)
+                              sign_multiply varchar(50),
+                              ROOT_PATH varchar(1000)
 );
 
 create sequence if not exists seq_structure_document start 100000;

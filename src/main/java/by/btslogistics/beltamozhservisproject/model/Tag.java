@@ -61,7 +61,10 @@ public class Tag {
     private Long parentId;
 
     @Column(name = "sign_multiply")
-    private String Multiplicity;
+    private String multiplicity;
+
+    @Column(name = "root_path")
+    private String rootPath;
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "tag", cascade = CascadeType.ALL)
     private List<Check> checks = new ArrayList<>();

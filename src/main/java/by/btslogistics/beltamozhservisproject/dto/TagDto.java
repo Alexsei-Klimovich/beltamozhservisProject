@@ -19,6 +19,7 @@ public class TagDto {
     private String parentName;
     private String parentPath;
     private String pattern;
-    private Long patternId;
-    private String sign_multiply;
+    private Long parentId;
+    private String multiplicity;
+    private String rootPath;
 }
