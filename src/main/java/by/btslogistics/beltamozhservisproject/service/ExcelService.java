@@ -12,9 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.io.File;
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
+import java.util.*;
 
 @Service
 public class ExcelService {
@@ -79,4 +77,104 @@ public class ExcelService {
         }
         return parsedRows;
     }
+
+    public static LinkedHashMap<String, Integer> checksFromExcel(File file) {
+        LinkedHashMap<String, Integer> parsedRows = new LinkedHashMap<>();
+        try {
+            XSSFWorkbook workbook = new XSSFWorkbook(file);
+            XSSFSheet sheet = workbook.getSheetAt(0);
+            int cellNum = 0;
+            boolean flag = false;
+            for (Row row : sheet) {
+                StringBuilder result = new StringBuilder();
+                Iterator<Cell> cellIterator = row.cellIterator();
+                while (cellIterator.hasNext()) {
+                    Cell cell = cellIterator.next();
+                    CellType cellType = cell.getCellType();
+                    if (cellType == CellType.STRING && cell.getStringCellValue().equals("ROOT_PATH")) {
+                        cellNum = cell.getColumnIndex();
+                        flag = true;
+                    } else if (cell.getColumnIndex() == cellNum && flag) {
+                        result.append(cell.getStringCellValue().replace(" ", ""));
+                    }
+                }
+                if (result.toString().length() > 0) parsedRows.put(result.toString(), Arrays.asList(result.toString().split("/")).size() - 1);
+            }
+            workbook.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return parsedRows;
+    }
+
+    public static LinkedHashMap<String, Integer> pathFromExcel(File file) {
+        LinkedHashMap<String, Integer> parsedRows = new LinkedHashMap<>();
+        try {
+            XSSFWorkbook workbook = new XSSFWorkbook(file);
+            XSSFSheet sheet = workbook.getSheetAt(0);
+            int cellNum = 0;
+            boolean flag = false;
+            for (Row row : sheet) {
+                StringBuilder result = new StringBuilder();
+                Iterator<Cell> cellIterator = row.cellIterator();
+                while (cellIterator.hasNext()) {
+                    Cell cell = cellIterator.next();
+                    CellType cellType = cell.getCellType();
+                    if (cellType == CellType.STRING && cell.getStringCellValue().equals("NODE_PATH")) {
+                        cellNum = cell.getColumnIndex();
+                        flag = true;
+                    } else if (cell.getColumnIndex() == cellNum && flag) {
+                        result.append(cell.getStringCellValue().replace(" ", ""));
+                    }
+                }
+                if (result.toString().length() > 0) parsedRows.put(result.toString(), Arrays.asList(result.toString().split("/")).size());
+            }
+            workbook.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return parsedRows;
+    }
+
+    public void setRootByPath(File tags, File root) {
+        LinkedHashMap<String, Integer> pathes = pathFromExcel(tags);
+        LinkedHashMap<String, Integer> roots = checksFromExcel(root);
+        List<String> areaToConsole = new ArrayList<>();
+
+        for (Map.Entry<String, Integer> path : pathes.entrySet()) {
+            String rootPath = findRootPath(roots, path.getKey());
+            areaToConsole.add("UPDATE TTS_CONFIGURATION.TAG_DOCUMENT SET ROOT_PATH = '" + rootPath +"' WHERE TO_STRDOC_ID = 37 AND NODE_PATH = '" + path.getKey() + "';");
+        }
+        areaToConsole.forEach(System.out::println);
+    }
+
+    private String findRootPath(LinkedHashMap<String, Integer> areas, String path) {
+        String area = null;
+        int size = Arrays.asList(path.split("/")).size() - 2;
+        if (size == 1 || size == 2) {
+            return checkForRootPath(areas, path, 1);
+        } else if (size == 3) {
+            return checkForRootPath(areas, path, 2);
+        } else {
+            return checkForRootPath(areas, path, size);
+        }
+    }
+
+    private String checkForRootPath(LinkedHashMap<String, Integer> areas, String path, int i) {
+        if (i == 1 || i == 2){
+            for (Map.Entry<String, Integer> ar : areas.entrySet()) {
+                if (Objects.equals(ar.getValue(), i) && path.contains(ar.getKey()) && !ar.getKey().trim().isEmpty())
+                    return ar.getKey();
+            }
+        } else {
+            for (Map.Entry<String, Integer> ar : areas.entrySet()) {
+                if (i >= 4 && ar.getValue() >= 3 && path.contains(ar.getKey()) && !ar.getKey().trim().isEmpty())
+                    return ar.getKey();
+            }
+        }
+        return "customsDocumentCURiskObject";
+    }
+
+
+
 }
